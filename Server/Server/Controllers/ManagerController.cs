@@ -29,8 +29,7 @@ namespace Server.Controllers
         }
 
         [HttpGet("{managerId}")]
-        [ProducesResponseType(200, Type = typeof(Manager))]
-        [ProducesResponseType(400)]
+      
         public IActionResult GetByManagerId(int id)
         {
             var manager = _managerRepository.GetManagerById(id);
@@ -38,8 +37,7 @@ namespace Server.Controllers
         }
 
         [HttpGet("{blockId}/block")]
-        [ProducesResponseType(200, Type = typeof(IEnumerable<Manager>))]
-        [ProducesResponseType(400)]
+      
         public IActionResult GetByBlockId(int id)
         {
             var manager = _managerRepository.GetManagerByIdBock(id);

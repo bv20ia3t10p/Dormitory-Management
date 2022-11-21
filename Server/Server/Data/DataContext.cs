@@ -19,6 +19,9 @@ namespace Server.Data
         public DbSet<RoomType> RoomTypes { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<University> Universities { get; set; }
+        public DbSet<Room>Rooms { get; set; }
+
+       
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             modelBuilder.Entity<BlockManagement>()
@@ -42,7 +45,6 @@ namespace Server.Data
                 .HasOne(rr => rr.Student)
                 .WithMany(s => s.RegisterRooms)
                 .HasForeignKey(rr => rr.RoomId);
-
            
         }
 

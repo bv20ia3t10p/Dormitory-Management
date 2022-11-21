@@ -40,6 +40,7 @@ builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSet
 builder.Services.AddScoped<IJwtUtils, JwtUtils>();
 builder.Services.AddScoped<IAccountService, AccountRepository>();
 builder.Services.AddScoped<IManager, ManagerRepository>();
+builder.Services.AddScoped<IStudent, StudentRepository>();
 
 var app = builder.Build();
 if (args.Length == 1 && args[0].ToLower() == "seeddata")

@@ -9,5 +9,8 @@
         public Block Block { get; set; }       
         public RoomType RoomType { get; set; }
         public ICollection<RegisterRoom> RegisterRooms { get; set; }
+        public ICollection<ElectricWaterlog> ElectricWaterlogs { get; set; }
+        public ICollection<RepairDetail> RepairDetails { get; set; }
+
     }
 }

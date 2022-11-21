@@ -71,12 +71,12 @@ namespace Server.Repository
 
         public void UpdateManager(int id,UpdateManager model)
         {
-            var manager =  GetManagerById(id);
-            if (model.Email != manager.Email && _context.Managers.Any(x => x.Email == model.Email))
+            var student =  GetManagerById(id);
+            if (model.Email != student.Email && _context.Managers.Any(x => x.Email == model.Email))
                 throw new AppException("User with the email '" + model.Email + "' already exists");
 
-            _mapper.Map(model, manager);
-            _context.Managers.Update(manager);
+            _mapper.Map(model, student);
+            _context.Managers.Update(student);
             _context.SaveChanges();
         }
        
