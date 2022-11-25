@@ -68,8 +68,14 @@ namespace Server.Repository
         public void UpdateStudent(int studentId, UpdateStudent model)
         {
             var student = GetStudentById(studentId);
-    
-           
+            var school = _context.Universities.Find(model.UniversityId);
+            if (school == null)
+            {
+                throw new KeyNotFoundException("University not exist");
+            }
+            
+
+
             _mapper.Map(model, student);
             _context.Students.Update(student);
             _context.SaveChanges();
