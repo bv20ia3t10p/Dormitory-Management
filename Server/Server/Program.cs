@@ -17,6 +17,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<Seed>();
+builder.Services.AddCors();
 
 builder.Services.AddDbContext<DataContext>(options =>
 {
@@ -66,7 +67,10 @@ if (app.Environment.IsDevelopment())
 }
 // global error handler
 app.UseMiddleware<ErrorHandlerMiddleware>();
-
+app.UseCors(x => x
+        .AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader());
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

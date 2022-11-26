@@ -30,9 +30,9 @@ namespace Server.Controllers
 
         [HttpGet("{managerId}")]
       
-        public IActionResult GetByManagerId(int id)
+        public IActionResult GetByManagerId(int managerId)
         {
-            var manager = _managerRepository.GetManagerById(id);
+            var manager = _managerRepository.GetManagerById(managerId);
             return Ok(manager);
         }
 
