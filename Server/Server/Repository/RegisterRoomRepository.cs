@@ -122,7 +122,7 @@ namespace Server.Repository
                 var slotRemain = room.SlotRemain;
                 if (slotRemain <= 0)
                     throw new AppException("room full, please select another room");
-
+                    
                 room.SlotRemain = slotRemain - 1;
                 _context.Rooms.Update(oldRoom);
                 _context.Rooms.Update(room);

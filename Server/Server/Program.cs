@@ -43,6 +43,7 @@ builder.Services.AddScoped<IAccountService, AccountRepository>();
 builder.Services.AddScoped<IManager, ManagerRepository>();
 builder.Services.AddScoped<IStudent, StudentRepository>();
 builder.Services.AddScoped<IRegisterRoom, RegisterRoomRepository>();
+builder.Services.AddScoped<IElectricWaterLog, ElectricWaterLogRepository>();
 
 var app = builder.Build();
 if (args.Length == 1 && args[0].ToLower() == "seeddata")
