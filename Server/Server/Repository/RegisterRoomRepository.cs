@@ -28,6 +28,12 @@ namespace Server.Repository
             if (room == null)
                 throw new KeyNotFoundException("Room not exist");
 
+            if (_context.RegisterRooms
+                .Where(r => r.StudentId == model.StudentId && r.Status == true)
+                .Count() > 1) {
+                throw new AppException(" A Student can only register one rooom");
+           }
+
             // check slotremain
             var slotRemain = room.SlotRemain;
             if (slotRemain <= 0)
@@ -37,11 +43,12 @@ namespace Server.Repository
 
 
             var feePerMotnh = _context.Rooms.Where(r => r.Id == model.RoomId)
-                .Select(r => r.RoomType.DomitoryFee).Single();
+                .Select(r => r.RoomType.DomitoryFee).SingleOrDefault();
 
             var registerRoom = _mapper.Map<RegisterRoom>(model);
             var feeTotal = feePerMotnh * registerRoom.NumberOfMonth;
 
+            registerRoom.DomitoryFee = feeTotal;
             registerRoom.DateBegin = DateTime.Today;
             registerRoom.DateEnd = AddMonthToEndOfMonth(DateTime.Today,registerRoom.NumberOfMonth);
             registerRoom.Status = true;
@@ -91,6 +98,20 @@ namespace Server.Repository
                 int addDays = DateTime.DaysInMonth(nextMonth.Year, nextMonth.Month) - nextMonth.Day;
                 return nextMonth.AddDays(addDays);
             }
+        }
+
+        //helper
+        private  void ValidateRoom(RegisterRoom model) {
+            if (DateTime.Compare(model.DateBegin, model.DateEnd) >= 0 && model.Status == true) {
+                model.Status = false;
+                //var room = _context.Rooms.Where(r => r.Id == model.RoomId).FirstOrDefault();
+                //model.Room.SlotRemain -= 1;
+            
+                _context.RegisterRooms.Update(model);
+                _context.SaveChanges();
+                
+            }
+            
         }
 
         public RegisterRoom GetRegisterRoom(int roomId, int studentId)
@@ -147,6 +168,10 @@ namespace Server.Repository
 
         public IEnumerable<RegisterRoom> GetAllRegisterRoom()
         {
+            //var rsrList = _context.RegisterRooms;
+            //foreach (var rsr in rsrList) {
+            //    ValidateRoom(rsr);
+            //}
             return _context.RegisterRooms;
         }
     }

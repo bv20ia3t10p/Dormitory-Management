@@ -44,7 +44,7 @@ namespace Server.Data
             modelBuilder.Entity<RegisterRoom>()
                 .HasOne(rr => rr.Student)
                 .WithMany(s => s.RegisterRooms)
-                .HasForeignKey(rr => rr.RoomId);
+                .HasForeignKey(rr => rr.StudentId);
            
         }
 

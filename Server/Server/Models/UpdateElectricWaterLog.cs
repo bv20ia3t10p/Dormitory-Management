@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace Server.Models
 {
-    public class CreateElectricWaterLog
+    public class UpdateElectricWaterLog
     {
         [JsonIgnore]
         public int Id { get; set; }
@@ -25,7 +25,6 @@ namespace Server.Models
         public int WaterFee { get; set; }
         [JsonIgnore]
         public int TotalFee { get; set; }
-        [JsonIgnore]
         public bool FeeStatus { get; set; }
         [JsonIgnore]
         public Room Room { get; set; }
