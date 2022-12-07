@@ -30,7 +30,7 @@ namespace Server.Repository
 
             if (_context.RegisterRooms
                 .Where(r => r.StudentId == model.StudentId && r.Status == true)
-                .Count() > 1) {
+                .Count() >= 1) {
                 throw new AppException(" A Student can only register one rooom");
            }
 
@@ -166,13 +166,25 @@ namespace Server.Repository
             _context.SaveChanges();
         }
 
-        public IEnumerable<RegisterRoom> GetAllRegisterRoom()
+        public IEnumerable<RegisterRoomDTO> GetAllRegisterRoom()
         {
-            //var rsrList = _context.RegisterRooms;
-            //foreach (var rsr in rsrList) {
-            //    ValidateRoom(rsr);
-            //}
-            return _context.RegisterRooms;
+            var rsrList = _context.RegisterRooms.ToList();
+            foreach (var model in rsrList)
+            {
+                if (DateTime.Compare(model.DateBegin, model.DateEnd) >= 0 && model.Status == true)
+                {
+                    model.Status = false;
+                    var room = _context.Rooms.Where(r => r.Id == model.RoomId).FirstOrDefault();
+                    //model.Room.SlotRemain -= 1;
+                    room.SlotRemain += 1;
+                    _context.Rooms.Update(room);
+                    _context.RegisterRooms.Update(model);
+                    _context.SaveChanges();
+
+                }
+
+            }
+            return _mapper.Map<List<RegisterRoomDTO>>(rsrList)  ;
         }
     }
 }
