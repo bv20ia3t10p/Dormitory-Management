@@ -15,9 +15,8 @@ function Login(props) {
     let history = useHistory()
     const login = async (data) => {
         try {
-            alert("Nghia");
             let res = await axios.post(`https://localhost:7184/Account/Authenticate`, data);
-            alert("nghia");
+            console.log('check res: ', res);
             if (res.data.role == "Student") {
                 localStorage.setItem(res.data.token, res.data.role);
                 props.Token(res.data.token);
@@ -38,7 +37,8 @@ function Login(props) {
                 alert('nhap sai tk va mk')
             }
         } catch (error) {
-            console.log(error);
+            console.log("check erorr: ", error.reponse.body.message);
+            return error;
         }
     }
     const checkLogin = (event, item) => {

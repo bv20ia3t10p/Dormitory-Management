@@ -12,6 +12,12 @@ import Notify from './Student/Notify';
 import Receipt from './Student/Receipt';
 import Stay from './Student/Stay';
 import Staff from './Staff/Staff';
+import DetailStaff from './Admin/DetailStaff';
+import UpdateStaff from './Admin/UpdateStaff';
+import Room from './Admin/Room';
+import RegisterRoom from './Admin/RegisterRoom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   BrowserRouter as Router,
   Switch,
@@ -34,7 +40,7 @@ const App = () => {
     <Router>
       <div className="App">
         <header className="App-header">
-          {console.log('check state: ', state.token)}
+          <ToastContainer />
           <Switch>
             <Route path="/" exact render={() => {
               return localStorage.getItem("accessToken") == "user" ? <Home /> : <Redirect to="/Login" />
@@ -56,6 +62,14 @@ const App = () => {
               return localStorage.getItem(localStorage.getItem("account")) == "Admin" ? <Admin /> : <Redirect to="/Login" />
             }}>
             </Route>
+            <Route path="/room" render={() => {
+              return localStorage.getItem(localStorage.getItem("account")) == "Admin" ? <Room /> : <Redirect to="/Login" />
+            }}>
+            </Route>
+            <Route path="/registerRoom" render={() => {
+              return localStorage.getItem(localStorage.getItem("account")) == "Admin" ? <RegisterRoom /> : <Redirect to="/Login" />
+            }}>
+            </Route>
             <Route path="/student" render={() => {
               return localStorage.getItem(localStorage.getItem("account")) == "Student" ? <Student /> : <Redirect to="/Login" />
             }}>
@@ -64,6 +78,10 @@ const App = () => {
               return localStorage.getItem(localStorage.getItem("account")) == "Manager" ? <Staff /> : <Redirect to="/Login" />
             }}>
             </Route>
+            <Route path="/DetailStaff/:id" render={() => {
+              return localStorage.getItem(localStorage.getItem("account")) == "Admin" ? <DetailStaff /> : <Redirect to="/Login" />
+            }}></Route>
+
             <Route path="/Login" >
               <Login
                 Token={check}
