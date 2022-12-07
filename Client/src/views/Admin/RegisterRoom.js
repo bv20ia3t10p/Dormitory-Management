@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState } from "react";
 import SidebarAdmin from '../Sidebar/SidebarAdmin';
 import { useEffect } from 'react';
+import moment from 'moment';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -122,8 +123,8 @@ function RegisterRoom(props) {
                                             <td >{item.studentId}</td>
                                             <td >{item.roomId}</td>
                                             {/* <td>{item.dateBegin}</td> */}
-                                            <td>{item.dateBegin}</td>
-                                            <td >{item.dateEnd}</td>
+                                            <td>{moment(item.dateBegin).format("DD-MM-YYYY")}</td>
+                                            <td >{moment(item.dateEnd).format("DD-MM-YYYY")}</td>
                                             <td >{item.domitoryFeeStatus ? <div class="text-success">True</div> : <div class="text-danger">false</div>}</td>
                                             <td >{item.status ? <div class="text-success">True</div> : <div class="text-danger">false</div>}</td>
                                             <td>

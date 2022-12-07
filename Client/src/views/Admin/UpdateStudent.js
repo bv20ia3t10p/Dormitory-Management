@@ -76,7 +76,7 @@ function UpdateStudent(props) {
     return (
         <div>
             <Modal isOpen={props.modal} fade={false} toggle={props.toggle}>
-                <ModalHeader >Update Staff</ModalHeader>
+                <ModalHeader >Update Student</ModalHeader>
                 <ModalBody>
                     <Form >
                         <FormGroup>
