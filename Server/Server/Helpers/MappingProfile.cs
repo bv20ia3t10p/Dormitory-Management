@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Routing.Constraints;
 using Server.Models;
 
 namespace Server.Helpers
@@ -32,7 +33,19 @@ namespace Server.Helpers
             CreateMap<CreateElectricWaterLog, ElectricWaterlog>().ReverseMap();
             CreateMap<UpdateElectricWaterLog, ElectricWaterlog>().ReverseMap();
             CreateMap<RoomDTO, Room>().ReverseMap();
-
+            CreateMap<RegisterRoom, RegisterRoomDTO>()
+                .ForMember(des => des.RoomName,
+                           act => act.MapFrom(src => src.Room.Name));
+                
+            CreateMap<Student, StudentDTO>()
+            .ForMember(des => des.UniversityName,
+                       act => act.MapFrom(src => src.University.Name))
+                    
+            .ForMember(des => des.RegisterRoomsDTO,
+                       act => act.MapFrom(src => src.RegisterRooms));
+           
+                     
+                      
         }
 
     }

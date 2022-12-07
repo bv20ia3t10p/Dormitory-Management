@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.Interface;
 using Server.Models;
@@ -38,9 +39,16 @@ namespace Server.Repository
             _context.SaveChanges();
         }
 
-        public IEnumerable<Student> GetAllStudents()
+        public IEnumerable<StudentDTO> GetAllStudents()
         {
-            return _context.Students;
+            var students = _context.Students
+                .Include(s => s.University)
+                .Include(s => s.RegisterRooms.Where(r => r.Status == true))
+                .Include(s=>s.RegisterRooms)
+                    .ThenInclude(r => r.Room)
+                .ToList();
+
+            return _mapper.Map<List<StudentDTO>>(students);
         }
 
         //public IEnumerable<Student> GetStudentByBlock(int blockId)

@@ -4,7 +4,7 @@ namespace Server.Interface
 {
     public interface IStudent
     {
-        IEnumerable<Student> GetAllStudents();
+        IEnumerable<StudentDTO> GetAllStudents();
         Student GetStudentById(int id);
         IEnumerable<Student> GetStudentByRoom(int roomId);
         //IEnumerable<Student> GetStudentByBlock(int blockId);
