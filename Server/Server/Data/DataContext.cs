@@ -36,7 +36,7 @@ namespace Server.Data
                .HasForeignKey(b => b.BlockId);
 
             modelBuilder.Entity<RegisterRoom>()
-                .HasKey(rr => new { rr.StudentId, rr.RoomId });
+                .HasKey(rr => new { rr.StudentId, rr.RoomId});
             modelBuilder.Entity<RegisterRoom>()
                 .HasOne(rr => rr.Room)
                 .WithMany(r => r.RegisterRooms)
