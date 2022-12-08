@@ -12,8 +12,8 @@ using Server.Data;
 namespace Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221207115050_mr01")]
-    partial class mr01
+    [Migration("20221207131220_RR")]
+    partial class RR
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -213,11 +213,11 @@ namespace Server.Migrations
 
             modelBuilder.Entity("Server.Models.RegisterRoom", b =>
                 {
-                    b.Property<int>("StudentId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("RoomId")
-                        .HasColumnType("int");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("DateBegin")
                         .HasColumnType("datetime2");
@@ -234,12 +234,20 @@ namespace Server.Migrations
                     b.Property<int>("NumberOfMonth")
                         .HasColumnType("int");
 
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
-                    b.HasKey("StudentId", "RoomId");
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("RoomId");
+
+                    b.HasIndex("StudentId");
 
                     b.ToTable("RegisterRooms");
                 });

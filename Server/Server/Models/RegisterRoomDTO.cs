@@ -2,6 +2,7 @@
 {
     public class RegisterRoomDTO
     {
+        public int Id { get; set; }
         public int StudentId { get; set; }
         public int RoomId { get; set; }
         public DateTime DateBegin { get; set; }

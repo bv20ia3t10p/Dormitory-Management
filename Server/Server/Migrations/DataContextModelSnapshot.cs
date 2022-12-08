@@ -210,11 +210,11 @@ namespace Server.Migrations
 
             modelBuilder.Entity("Server.Models.RegisterRoom", b =>
                 {
-                    b.Property<int>("StudentId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("RoomId")
-                        .HasColumnType("int");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("DateBegin")
                         .HasColumnType("datetime2");
@@ -231,12 +231,20 @@ namespace Server.Migrations
                     b.Property<int>("NumberOfMonth")
                         .HasColumnType("int");
 
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
-                    b.HasKey("StudentId", "RoomId");
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("RoomId");
+
+                    b.HasIndex("StudentId");
 
                     b.ToTable("RegisterRooms");
                 });

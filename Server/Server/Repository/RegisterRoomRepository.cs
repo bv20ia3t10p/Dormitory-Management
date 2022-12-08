@@ -39,6 +39,11 @@ namespace Server.Repository
             if (slotRemain <= 0)
                 throw new AppException("room full, please select another room");
 
+            if (model.NumberOfMonth <= 0)
+            {
+                throw new AppException("Number of month error");
+            }
+
             room.SlotRemain = slotRemain - 1;
 
 
@@ -114,22 +119,23 @@ namespace Server.Repository
             
         }
 
-        public RegisterRoom GetRegisterRoom(int roomId, int studentId)
+        public RegisterRoom GetRegisterRoom(int Id)
         {
-            var registerRoom = _context.RegisterRooms.Find(roomId, studentId);
-            if(registerRoom == null)
-                throw  new KeyNotFoundException("register room not found");
+            var registerRoom = _context.RegisterRooms.Find(Id);
+            if (registerRoom == null)
+                throw new KeyNotFoundException("Register Room not exist");
             return registerRoom;
         }
 
-        public void UpdateRegisterRoom(int studentId, int roomId, UpdateRegisterRoom model)
+        public void UpdateRegisterRoom(int Id, UpdateRegisterRoom model)
         {
-            var regigterRoom = GetRegisterRoom(studentId, roomId);
+            var regigterRoom = GetRegisterRoom(Id);
+          
 
-            //Change Room for student
-            if (roomId != model.RoomId) {
+            //Change student room
+            if (regigterRoom.RoomId != model.RoomId) {
                 //Old room
-                var oldRoom = _context.Rooms.Find(model.RoomId);
+                var oldRoom = _context.Rooms.Find(regigterRoom.RoomId);
                 if (oldRoom == null)
                     throw new KeyNotFoundException("Room not exist");
                 var slotRemainOldRoom = oldRoom.SlotRemain;
@@ -137,28 +143,24 @@ namespace Server.Repository
                 oldRoom.SlotRemain = slotRemainOldRoom + 1;
 
                 //New room
-                var room = _context.Rooms.Find(roomId);
+                var room = _context.Rooms.Find(model.RoomId);
                 if (room == null)
                     throw new KeyNotFoundException("Room not exist");
                 var slotRemain = room.SlotRemain;
                 if (slotRemain <= 0)
-                    throw new AppException("room full, please select another room");
+                    throw new AppException("Room full, please select another room");
                     
                 room.SlotRemain = slotRemain - 1;
                 _context.Rooms.Update(oldRoom);
                 _context.Rooms.Update(room);
+            }          
+                     
+            if (model.NumberOfMonth <= 0) {
+                throw new AppException("Number of month error");
             }
-           
-
-
-
-
             var feePerMotnh = _context.Rooms.Where(r => r.Id == model.RoomId)
                .Select(r => r.RoomType.DomitoryFee).Single();
-
-            var feeTotal = feePerMotnh * model.NumberOfMonth;
-
-          
+            var feeTotal = feePerMotnh * model.NumberOfMonth;                
             regigterRoom.DateEnd = AddMonthToEndOfMonth(DateTime.Today, regigterRoom.NumberOfMonth);
             regigterRoom.DomitoryFee = feeTotal;
             _mapper.Map(model, regigterRoom);
@@ -185,6 +187,21 @@ namespace Server.Repository
 
             }
             return _mapper.Map<List<RegisterRoomDTO>>(rsrList)  ;
+        }
+
+        public IEnumerable<RegisterRoomDTO> GetRegisterRoomByRoomIdStudentId(int RoomId, int StudentId)
+        {
+            if (_context.Rooms.Find(RoomId) == null) {
+                throw new KeyNotFoundException("Room not exist");
+            }
+            if (_context.Students.Find(StudentId) == null)
+            {
+                throw new KeyNotFoundException("Student not exist");
+            }
+
+            var rr = _context.RegisterRooms.Where(rr=>rr.RoomId == RoomId && rr.StudentId == StudentId)
+                .ToList();
+            return _mapper.Map<List<RegisterRoomDTO>>(rr);
         }
     }
 }
