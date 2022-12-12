@@ -21,7 +21,7 @@ namespace Server.Helpers
                    // ignore null role
                    //if (x.DestinationMember.Name == "Role" && src.Role == null) return false;
 
-                   return true;
+                   return true; 
                }
             ));
 

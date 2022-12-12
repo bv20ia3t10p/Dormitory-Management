@@ -6,6 +6,7 @@ namespace Server.Interface
     {
         IEnumerable<StudentDTO> GetAllStudents();
         Student GetStudentById(int id);
+        StudentDTO GetStudentByAccountId(int accountId);
         IEnumerable<Student> GetStudentByRoom(int roomId);
         //IEnumerable<Student> GetStudentByBlock(int blockId);
         void CreateStudent(CreateStudent model);
