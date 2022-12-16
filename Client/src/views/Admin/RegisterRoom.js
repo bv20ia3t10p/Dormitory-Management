@@ -52,7 +52,7 @@ function RegisterRoom(props) {
             try {
                 let res = await axios.get(`https://localhost:7184/RegisterRoom/${id.idRoom}/${id.idStudent}`);
                 setState({
-                    ListRegisterRooms: res.data ? [res.data] : []
+                    ListRegisterRooms: res.data ? res.data : []
                 })
             } catch (error) {
                 toast.error("Không có dữ liệu")
@@ -107,12 +107,12 @@ function RegisterRoom(props) {
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th scope="col">studentId</th>
-                                <th scope="col">roomId</th>
-                                <th scope="col">dateBegin</th>
-                                <th scope="col">dateEnd</th>
-                                <th scope="col">domitoryFeeStatus</th>
-                                <th scope="col">Status</th>
+                                <th scope="col">Mã sinh viên</th>
+                                <th scope="col">Mã phòng</th>
+                                <th scope="col">Ngày bắt đầu</th>
+                                <th scope="col">Ngày kết thúc</th>
+                                <th scope="col">Trạng thái tiền phòng</th>
+                                <th scope="col">Thời hạn</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -125,8 +125,8 @@ function RegisterRoom(props) {
                                             {/* <td>{item.dateBegin}</td> */}
                                             <td>{moment(item.dateBegin).format("DD-MM-YYYY")}</td>
                                             <td >{moment(item.dateEnd).format("DD-MM-YYYY")}</td>
-                                            <td >{item.domitoryFeeStatus ? <div class="text-success">True</div> : <div class="text-danger">false</div>}</td>
-                                            <td >{item.status ? <div class="text-success">True</div> : <div class="text-danger">false</div>}</td>
+                                            <td >{item.domitoryFeeStatus ? <div class="text-success">Đã thanh toán</div> : <div class="text-danger">Chưa thanh toán</div>}</td>
+                                            <td >{item.status ? <div class="text-success">Còn hạn</div> : <div class="text-danger">Hết hạn</div>}</td>
                                             <td>
                                                 <button class="btn btn-success" ><i class="fa fa-pencil" aria-hidden="true"></i></button>
                                                 <button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>

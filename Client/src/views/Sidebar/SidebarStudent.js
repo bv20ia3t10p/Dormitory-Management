@@ -3,16 +3,61 @@ import './SidebarStudent.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import { Link } from 'react-router-dom';
+import { useState } from "react";
+import componentDidMount from 'react';
+import Student from "../Student/Student";
 
 class SidebarStudent extends React.Component {
+    // state = {
+    //     theposition: 0
+    // }
+    // componentDidMount() {
+    //     window.addEventListener('scroll', this.listenToScroll)
+    // }
+
+    // // componentWillUnmount() {
+    // //     window.removeEventListener('scroll', this.listenToScroll)
+    // // }
+
+    // listenToScroll = () => {
+    //     const winScroll =
+    //         document.body.scrollTop || document.documentElement.scrollTop
+
+    //     const height =
+    //         document.documentElement.scrollHeight -
+    //         document.documentElement.clientHeight
+
+    //     const scrolled = winScroll / height
+
+    //     this.setState({
+    //         theposition: scrolled,
+    //     })
+    // }
     render() {
+        // const divStyle = {
+        //     position: "",
+        //     top: "",
+        //     // background: "blue"
+        // }
+        // const winScroll =
+        //     document.body.scrollTop || document.documentElement.scrollTop
+
+        // const height =
+        //     document.documentElement.scrollHeight -
+        //     document.documentElement.clientHeight
+
+        // const scrolled = winScroll / height
         const toggle = () => {
             var menu = document.querySelector('.sidebar')
             menu.classList.toggle("fliph");
         }
-
+        // console.log(this.state.theposition)
+        // if (this.state.theposition == scrolled && this.state.theposition != 0) {
+        //     divStyle.position = "absolute";
+        //     divStyle.top = "0";
+        // }
         return (
-            <div>
+            <div class="Fixed-sidebar">
                 <header class="header">
                     <nav class="navbar navbar-toggleable-md navbar-light pt-0 pb-0 ">
                         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -169,42 +214,39 @@ class SidebarStudent extends React.Component {
 
                                 <div class="pull-left info">
                                     <p>Sinh viên</p>
-
                                 </div>
                             </div>
                             <ul class="list-sidebar bg-info">
 
                                 <li><Link to="/student" activeClassName="active" exact={true}><i class="fa fa-address-book"></i> <span class="nav-label">Thông tin sinh viên</span></Link></li>
-                                <li><Link to="/student" activeClassName="active" exact={true}><i class="fa fa-list-alt"></i> <span class="nav-label">Thông tin lưu trú</span></Link> </li>
-                                <li><Link to="/student" activeClassName="active" exact={true}><i class="fa fa-money"></i> <span class="nav-label">Hóa đơn, biên lai</span></Link> </li>
-                                <li> <a href="#" data-toggle="collapse" data-target="#Request" class="collapsed active" ><i class="fa fa-files-o"></i> <span class="nav-label">Yêu cầu</span><span class="fa fa-chevron-left pull-right"></span></a>
+                                <li><Link to="/accommodation" activeClassName="active" exact={true}><i class="fa fa-list-alt"></i> <span class="nav-label">Thông tin lưu trú</span></Link> </li>
+                                <li> <a href="#" data-toggle="collapse" data-target="#Request" class="collapsed active" ><i class="fa fa-money"></i> <span class="nav-label">Hóa đơn, biên lai</span><span class="fa fa-chevron-left pull-right"></span></a>
                                     <ul class="sub-menu collapse" id="Request" >
-                                        <li><Link to="/student" activeClassName="active" exact={true}> Yêu cầu trả phòng</Link></li>
-                                        <li><Link to="/student" activeClassName="active" exact={true}> Yêu cầu tạm ngưng</Link></li>
-                                        <li><Link to="/student" activeClassName="active" exact={true}> Yêu cầu sửa chữa</Link></li>
-                                    </ul>
-                                </li>
-                                <li> <a href="#" data-toggle="collapse" data-target="#Declare" class="collapsed active" ><i class="fa fa-files-o"></i> <span class="nav-label">Khai báo y tế</span><span class="fa fa-chevron-left pull-right"></span></a>
-                                    <ul class="sub-menu collapse" id="Declare" >
-                                        <li><Link to="/student" activeClassName="active" exact={true}> Khai báo y tế trở lại KTX</Link></li>
-                                        <li><Link to="/student" activeClassName="active" exact={true}> Khai báo y tế hàng ngày</Link></li>
-                                        <li><Link to="/student" activeClassName="active" exact={true}> Đồ dùng có giá trị trong phòng</Link></li>
-                                    </ul>
-                                </li>
-                                <li> <a href="#" data-toggle="collapse" data-target="#DeclareBH" class="collapsed active" ><i class="fa fa-files-o"></i> <span class="nav-label">Khai báo y tế</span><span class="fa fa-chevron-left pull-right"></span></a>
-                                    <ul class="sub-menu collapse" id="DeclareBH" >
-                                        <li><Link to="/student" activeClassName="active" exact={true}> Khai báo BHYT sinh viên</Link></li>
-                                        <li><Link to="/student" activeClassName="active" exact={true}> Khai báo hộ gia đình</Link></li>
+                                        <li><Link to="/Invoice" activeClassName="active" exact={true}>Hóa đơn lưu trú</Link></li>
+                                        <li><Link to="/student" activeClassName="active" exact={true}> Hóa đơn tiền điện</Link></li>
                                     </ul>
                                 </li>
                                 <li><Link to="/student" activeClassName="active" exact={true}><i class="fa fa-files-o"></i> <span class="nav-label">Khảo sát</span></Link> </li>
                                 <li><Link to="/student" activeClassName="active" exact={true}><i class="fa fa-bell"></i> <span class="nav-label">Thông báo</span></Link> </li>
                                 <li><Link to="/Login" activeClassName="active" exact={true}><i class="fa fa-sign-out"></i> <span class="nav-label">Log out</span></Link> </li>
+                                <li class="text-info">.</li>
+                                <li class="text-info">.</li>
+                                <li class="text-info">.</li>
+                                <li class="text-info">.</li>
+                                <li class="text-info">.</li>
+                                <li class="text-info">.</li>
+                                <li class="text-info">.</li>
+                                <li class="text-info">.</li>
+                                <li class="text-info">.</li>
+                                <li class="text-info">.</li>
+                                <li class="text-info">.</li>
+                                <li class="text-info">.</li>
+                                <li class="text-info">.</li>
                             </ul>
                         </div>
                     </aside>
                 </div>
-            </div>
+            </div >
         )
     }
 }
