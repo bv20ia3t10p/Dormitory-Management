@@ -6,8 +6,8 @@ namespace Server.Interface
     {
         IEnumerable<ElectricWaterlog> GetElectricWaterLog();
         IEnumerable<ElectricWaterlog> GetElectricWaterLogByRoom(int roomId);
-        void CreateElectricWaterLog(CreateElectricWaterLog model);
-        void UpdateElectricWaterLog(int ElectricwaterLogId, UpdateElectricWaterLog model );
+        void CreateElectricWaterLog(int roomId,CreateElectricWaterLog model);
+        void UpdateElectricWaterLog(int ElectricwaterLogId,int RoomId, UpdateElectricWaterLog model );
 
 
     }

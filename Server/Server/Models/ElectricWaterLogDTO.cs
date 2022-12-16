@@ -3,10 +3,9 @@ using System.Text.Json.Serialization;
 
 namespace Server.Models
 {
-    public class UpdateElectricWaterLog
+    public class ElectricWaterLogDTO
     {
-      
-   
+        [JsonIgnore]
         [DataType(DataType.Date)]
         public DateTime LogDate { get; set; }
         public int ElectricNew { get; set; }
@@ -23,8 +22,8 @@ namespace Server.Models
         public int WaterFee { get; set; }
         [JsonIgnore]
         public int TotalFee { get; set; }
-        public bool FeeStatus { get; set; }
         [JsonIgnore]
-        public Room? Room { get; set; }
+        public bool FeeStatus { get; set; }
+        public RoomDTO Room{ get; set; }
     }
 }

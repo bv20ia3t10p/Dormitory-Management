@@ -44,8 +44,8 @@ namespace Server.Controllers
             return Ok(new { message = "Register Room Success"});
         }
         [HttpPut("{registerRoomId}")]
-        public IActionResult UpdateRegisterRoom(int registerRoomId,UpdateRegisterRoom model) {
-            _registerRoom.UpdateRegisterRoom(registerRoomId,model);
+        public IActionResult UpdateRegisterRoom(int registerRoomId, UpdateRegisterRoom model) {
+            _registerRoom.UpdateRegisterRoom(registerRoomId, model);
             return Ok(new { message = "Update success"});
         } 
 

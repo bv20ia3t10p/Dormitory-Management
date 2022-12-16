@@ -5,9 +5,7 @@ namespace Server.Models
 {
     public class CreateElectricWaterLog
     {
-        [JsonIgnore]
-        public int Id { get; set; }
-        public int RoomId { get; set; }
+        
         [JsonIgnore]
         [DataType(DataType.Date)]
         public DateTime LogDate { get; set; }
@@ -28,6 +26,8 @@ namespace Server.Models
         [JsonIgnore]
         public bool FeeStatus { get; set; }
         [JsonIgnore]
-        public Room Room { get; set; }
+        public RoomDTO ? Room{ get; set; }
+
+
     }
 }

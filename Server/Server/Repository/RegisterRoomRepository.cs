@@ -160,9 +160,9 @@ namespace Server.Repository
             }
             var feePerMotnh = _context.Rooms.Where(r => r.Id == model.RoomId)
                .Select(r => r.RoomType.DomitoryFee).Single();
-            var feeTotal = feePerMotnh * model.NumberOfMonth;                
-            regigterRoom.DateEnd = AddMonthToEndOfMonth(DateTime.Today, regigterRoom.NumberOfMonth);
-            regigterRoom.DomitoryFee = feeTotal;
+            var feeTotal = feePerMotnh * model.NumberOfMonth;
+            model.DateEnd = AddMonthToEndOfMonth(DateTime.Today, model.NumberOfMonth);
+            model.DomitoryFee = feeTotal;
             _mapper.Map(model, regigterRoom);
             _context.Update(regigterRoom);
             _context.SaveChanges();

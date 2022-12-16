@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.Helpers;
 using Server.Interface;
@@ -16,30 +17,34 @@ namespace Server.Repository
             _mapper = mapper;
 
         }
-        public void CreateElectricWaterLog(CreateElectricWaterLog model)
+        public void CreateElectricWaterLog(int roomId, CreateElectricWaterLog model)
         {
-            var room = _context.Rooms.Find(model.RoomId);
+            var room = _context.Rooms.Find(roomId);
             if ( room== null) {
                 throw new KeyNotFoundException("room not exist");
             }
+            var roomDTO = _mapper.Map<RoomDTO>(room);
+           
+            model.LogDate = DateTime.Today;
 
-            var EWL = model;
-            EWL.LogDate = DateTime.Today;
+     
 
-            if ((EWL.ElectricNew - EWL.ElectricOld < 0)
-                || (EWL.WaterNew -EWL.WaterOld <0 )) {
+            if ((model.ElectricNew - model.ElectricOld < 0)
+                || (model.WaterNew - model.WaterOld <0 )) {
                 throw new AppException("Input water or electric error");
             }
 
-            EWL.ElectricUse = EWL.ElectricNew - EWL.ElectricOld;
-            EWL.WaterUse = EWL.WaterNew - EWL.ElectricOld;
-            EWL.ElectricFee = 1200 * EWL.ElectricUse;
-            EWL.WaterFee = 800 *EWL.WaterUse;
-            EWL.TotalFee = EWL.ElectricFee+EWL.WaterFee;
-            EWL.FeeStatus = false;
-            EWL.Room = room;
+            model.ElectricUse = model.ElectricNew - model.ElectricOld;
+            model.WaterUse = model.WaterNew - model.ElectricOld;
+            model.ElectricFee = 1200 * model.ElectricUse;
+            model.WaterFee = 800 * model.WaterUse;
+            model.TotalFee = model.ElectricFee+ model.WaterFee;
+            model.FeeStatus = false;
+            model.Room = roomDTO;
+           
 
-            var EWLMap = _mapper.Map<ElectricWaterlog>(EWL);
+            var EWLMap = _mapper.Map<ElectricWaterlog>(model);
+
             _context.ElectricWaterlogs.Add(EWLMap);
             _context.SaveChanges();
 
@@ -49,7 +54,8 @@ namespace Server.Repository
 
         public IEnumerable<ElectricWaterlog> GetElectricWaterLog()
         {
-            return _context.ElectricWaterlogs;
+            var EWL = _context.ElectricWaterlogs.Include(e => e.Room).ToList();
+            return EWL;
         }
 
         public IEnumerable<ElectricWaterlog> GetElectricWaterLogByRoom(int roomId)
@@ -64,37 +70,37 @@ namespace Server.Repository
 
         }
 
-        public void UpdateElectricWaterLog(int ElectricwaterLogId, UpdateElectricWaterLog model)
+        public void UpdateElectricWaterLog(int ElectricwaterLogId,int RoomId, UpdateElectricWaterLog model)
         {
             var EWL = _context.ElectricWaterlogs.Find(ElectricwaterLogId);
             if (EWL == null) {
                 throw new KeyNotFoundException("Electric water log not exist");
             }
 
-            var room = _context.Rooms.Find(model.RoomId);
+            var room = _context.Rooms.Find(RoomId);
             if (room == null)
             {
                 throw new KeyNotFoundException("room not exist");
             }
 
-            EWL.LogDate = DateTime.Today;
+       
 
-            if ((EWL.ElectricNew - EWL.ElectricOld < 0)
-                || (EWL.WaterNew - EWL.WaterOld < 0))
+            if ((model.ElectricNew - model.ElectricOld < 0)
+                || (model.WaterNew - model.WaterOld < 0))
             {
                 throw new AppException("Input water or electric error");
             }
 
-            EWL.ElectricUse = EWL.ElectricNew - EWL.ElectricOld;
-            EWL.WaterUse = EWL.WaterNew - EWL.ElectricOld;
-            EWL.ElectricFee = 1200 * EWL.ElectricUse;
-            EWL.WaterFee = 800 * EWL.WaterUse;
-            EWL.TotalFee = EWL.ElectricFee + EWL.WaterFee;
-            EWL.FeeStatus = false;
-            EWL.Room = room;
+            model.ElectricUse = model.ElectricNew - model.ElectricOld;
+            model.WaterUse = model.WaterNew - model.ElectricOld;
+            model.ElectricFee = 1200 * model.ElectricUse;
+            model.WaterFee = 800 * model.WaterUse;
+            model.TotalFee = model.ElectricFee + model.WaterFee;
 
-            var EWLMap = _mapper.Map<ElectricWaterlog>(EWL);
-            _context.ElectricWaterlogs.Update(EWLMap);
+            model.Room = room;
+
+            _mapper.Map(model, EWL);
+            _context.ElectricWaterlogs.Update(EWL);
             _context.SaveChanges();
 
         }
