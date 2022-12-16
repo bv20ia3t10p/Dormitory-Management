@@ -6,6 +6,8 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import Checklogin from './CheckLogin';
 import './Login.scss';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+
 
 function Login(props) {
     const [loginn, setLogin] = useState({
@@ -19,6 +21,7 @@ function Login(props) {
             console.log('check res: ', res);
             if (res.data.role == "Student") {
                 localStorage.setItem(res.data.token, res.data.role);
+                localStorage.setItem("id", res.data.id);
                 props.Token(res.data.token);
                 history.replace("/student")
             }
@@ -37,8 +40,8 @@ function Login(props) {
                 alert('nhap sai tk va mk')
             }
         } catch (error) {
-            console.log("check erorr: ", error.reponse.body.message);
-            return error;
+            toast.error("Tài khoản hoặc mật khẩu không đúng")
+
         }
     }
     const checkLogin = (event, item) => {
@@ -51,6 +54,7 @@ function Login(props) {
     return <div className="login">
         {localStorage.removeItem(localStorage.getItem("account"))}
         {localStorage.removeItem("account")}
+        {localStorage.removeItem("id")}
         <div class="container">
             <div class="d-flex justify-content-center h-100">
                 <div class="card">

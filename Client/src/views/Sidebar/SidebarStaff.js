@@ -181,6 +181,17 @@ class SidebarStaff extends React.Component {
                                 <li><Link to="/staff" activeClassName="active" exact={true}><i class="fa fa-wrench"></i> <span class="nav-label">Danh sách sửa chửa</span></Link> </li>
                                 <li><Link to="/staff" activeClassName="active" exact={true}><i class="fa fa-exclamation-circle"></i> <span class="nav-label">Danh sách vi phạm</span></Link> </li>
                                 <li><Link to="/Login" activeClassName="active" exact={true}><i class="fa fa-sign-out"></i> <span class="nav-label">Log out</span></Link> </li>
+                                <li class="text-info">.</li>
+                                <li class="text-info">.</li>
+                                <li class="text-info">.</li>
+                                <li class="text-info">.</li>
+                                <li class="text-info">.</li>
+                                <li class="text-info">.</li>
+                                <li class="text-info">.</li>
+                                <li class="text-info">.</li>
+                                <li class="text-info">.</li>
+                                <li class="text-info">.</li>
+                                <li class="text-info">.</li>
                             </ul>
                         </div>
                     </aside>

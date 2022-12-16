@@ -5,9 +5,11 @@ import SidebarAdmin from '../Sidebar/SidebarAdmin';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import moment from 'moment';
 import { toast } from 'react-toastify';
 function Room(props) {
     const [state, setState] = useState({ ListRooms: [] });
+    const [student, setStudent] = useState([]);
     useEffect(() => {
         async function fetchMyAPI() {
             let res = await axios.get(`https://localhost:7184/Rooms`);
@@ -40,6 +42,14 @@ function Room(props) {
             })
         }
     }
+    const handleListStudent = async (id) => {
+        // alert(id);
+        let res = await axios.get(`https://localhost:7184/RegisterRoom/${id}/room`);
+        setStudent(
+            res.data
+        )
+        console.log("check student: ", res.data)
+    }
     return (
         <>
             <SidebarAdmin />
@@ -60,8 +70,8 @@ function Room(props) {
                     {state.ListRooms && state.ListRooms.length > 0 &&
                         state.ListRooms.map((item, index) => {
                             return (
-                                <div className="col " key={item.id} >
-                                    {item.slotRemain != 0 ? <div class="col text-primary" style={{ padding: "1px" }}><i class="fa fa-home fa-2x" aria-hidden="true"></i>{item.name}</div> : <div class="col text-danger"><i class="fa fa-home fa-2x" aria-hidden="true"></i>{item.name}</div>}
+                                <div className="col " key={item.id}>
+                                    {item.slotRemain != 0 ? <div class="col text-primary" style={{ padding: "1px" }} onClick={() => handleListStudent(item.id)}><i class="fa fa-home fa-2x" aria-hidden="true"></i>{item.name}</div> : <div class="col text-danger" onClick={() => handleListStudent(item.id)}><i class="fa fa-home fa-2x" aria-hidden="true"></i>{item.name}</div>}
                                 </div>
                             )
                             // </div>
@@ -69,6 +79,37 @@ function Room(props) {
                     }
                 </div>
 
+            </div>
+            <div >
+                <table class="table table-hover mt-5 w-75" >
+                    <thead class="bg-success">
+                        <tr class="border">
+                            <td>Mã sinh viên</td>
+                            <td>Ngày bắt đầu</td>
+                            <td>Ngày kết thúc</td>
+                            <td>Số tháng</td>
+                            <td>Phí thanh toán</td>
+                            <td>Trạng thái đóng phí</td>
+                            <td>Trạng thái</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {student && student.length > 0 &&
+                            student.map((item, index) => {
+                                return (
+                                    <tr key={item.id} class="border">
+                                        <td>{item.studentId}</td>
+                                        <td>{moment(item.dateBegin).format("DD-MM-YYYY")}</td>
+                                        <td>{moment(item.dateEnd).format("DD-MM-YYYY")}</td>
+                                        <td>{item.numberOfMonth}</td>
+                                        <td>{item.domitoryFee}</td>
+                                        <td>{item.domitoryFeeStatus ? <div class="text-success">Đã thanh toán</div> : <div class="text-danger">Chưa thanh toán</div>}</td>
+                                        <td>{item.status ? <div class="text-success">Còn ở</div> : <div class="text-danger">Đã chuyển</div>}</td>
+                                    </tr>
+                                )
+                            })}
+                    </tbody>
+                </table>
             </div>
             <div class="clear-fix">
             </div>

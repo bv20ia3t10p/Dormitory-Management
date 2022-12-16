@@ -17,6 +17,8 @@ import UpdateStaff from './Admin/UpdateStaff';
 import Room from './Admin/Room';
 import ManagerStudent from './Admin/ManagerStudent';
 import RegisterRoom from './Admin/RegisterRoom';
+import Accommodation from './Student/Accommodation';
+import Invoice from './Student/Invoice';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {
@@ -76,6 +78,14 @@ const App = () => {
             }}></Route>
             <Route path="/student" render={() => {
               return localStorage.getItem(localStorage.getItem("account")) == "Student" ? <Student /> : <Redirect to="/Login" />
+            }}>
+            </Route>
+            <Route path="/accommodation" render={() => {
+              return localStorage.getItem(localStorage.getItem("account")) == "Student" ? <Accommodation /> : <Redirect to="/Login" />
+            }}>
+            </Route>
+            <Route path="/Invoice" render={() => {
+              return localStorage.getItem(localStorage.getItem("account")) == "Student" ? <Invoice /> : <Redirect to="/Login" />
             }}>
             </Route>
             <Route path="/staff" render={() => {

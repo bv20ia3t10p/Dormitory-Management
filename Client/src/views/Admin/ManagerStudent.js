@@ -123,10 +123,10 @@ function ManagerStudent(props) {
                         <thead>
                             <tr>
                                 <th scope="col">Stt</th>
-                                <th scope="col">FirstName</th>
-                                <th scope="col">Gender</th>
-                                <th scope="col">PhoneNumber</th>
-                                <th scope="col">Status</th>
+                                <th scope="col">Họ và tên</th>
+                                <th scope="col">Giới tính</th>
+                                <th scope="col">Số điện thoại</th>
+                                <th scope="col">Trạng thái</th>
                             </tr>
                         </thead>
                         <tbody>

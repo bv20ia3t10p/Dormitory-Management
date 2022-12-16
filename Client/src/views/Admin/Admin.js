@@ -109,10 +109,10 @@ function Admin(props) {
                         <thead>
                             <tr>
                                 <th scope="col">Stt</th>
-                                <th scope="col">FirstName</th>
-                                <th scope="col">Gender</th>
-                                <th scope="col">PhoneNumber</th>
-                                <th scope="col">Status</th>
+                                <th scope="col">Họ và tên</th>
+                                <th scope="col">Giới tính</th>
+                                <th scope="col">Số điện thoại</th>
+                                <th scope="col">Trạng thái</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -123,7 +123,7 @@ function Admin(props) {
                                             {item.status ?
                                                 <>
                                                     <td onClick={() => handleViewDetailUser(item)}>{item.id}</td>
-                                                    <td onClick={() => handleViewDetailUser(item)}>{item.firstName}</td>
+                                                    <td onClick={() => handleViewDetailUser(item)}>{item.lastName + " " + item.firstName}</td>
                                                     <td onClick={() => handleViewDetailUser(item)}>{item.gender ? "Nam" : "Nữ"}</td>
                                                     <td onClick={() => handleViewDetailUser(item)}>{item.phoneNumber}</td>
                                                     <td onClick={() => handleViewDetailUser(item)}>{item.status ? <div class="text-success">True</div> : <div class="text-danger">false</div>}</td>
