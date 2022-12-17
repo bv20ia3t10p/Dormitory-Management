@@ -5,9 +5,13 @@ import SidebarStudent from "../Sidebar/SidebarStudent";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import moment from "moment";
+import Payment from "./Payment";
 import { toast } from 'react-toastify';
 function Invoice(props) {
+    const [modal, setModal] = useState(false);
+    const [CurrentInvoice, setCurrentInvoice] = useState({});
     const [Invoice, setInvoice] = useState([]);
+    const toggle = () => setModal(!modal);
     var id = localStorage.getItem("id");
     console.log("check id: ", id);
     useEffect(() => {
@@ -19,14 +23,17 @@ function Invoice(props) {
         }
         fetchMyAPI()
     }, [])
-    const handlePayFeeRoom = async (item) => {
+
+    const PaymentRoom = async (item) => {
+        toggle()
+        console.log('check updateUser in parent: ', item)
         try {
             let res = await axios.put(`https://localhost:7184/RegisterRoom/${item.id}`, {
                 studentId: item.studentId,
                 roomId: item.roomId,
                 dateBegin: item.dateBegin,
                 numberOfMonth: item.numberOfMonth,
-                domitoryFeeStatus: true,
+                domitoryFeeStatus: item.domitoryFeeStatus,
                 status: item.status
             });
             console.log('response create user: ', res)
@@ -36,8 +43,23 @@ function Invoice(props) {
             console.log(error)
         }
     }
+    const handlePayFeeRoom = (data) => {
+        toggle()
+        setCurrentInvoice(
+            data
+        )
+    }
     return <div>
         <SidebarStudent />
+        {
+            modal && <Payment
+                modal={modal}
+                toggle={toggle}
+                CurrentInvoice={CurrentInvoice}
+                handlePayFeeRoom={PaymentRoom}
+            />
+        }
+
         <h3 class="text-center p-3 text-danger">Hóa đơn tiền phòng</h3>
         <div class="section row" >
             <div class="w-100" >
@@ -45,7 +67,7 @@ function Invoice(props) {
                     Invoice.map((item, index) => {
                         return (
                             <>
-                                <div class=" mb-2 border border-primary w-75" style={{ "margin-left": "10%" }}>
+                                <div class=" mb-2 border border-primary w-75 shadow" style={{ "margin-left": "10%" }}>
                                     <div class="bg-primary text-white p-1"><i class="fa fa-table ml-2 text-white" aria-hidden="true"></i> Số biên lai: {item.id}</div>
                                     <div class="ml-2 p-1">Số tháng: {item.numberOfMonth}</div>
                                     <div class="ml-2 p-1">Năm học: {moment(item.dateBegin).format("YYYY") + " - " + moment(item.dateEnd).format("YYYY")}</div>
@@ -64,8 +86,8 @@ function Invoice(props) {
                                     </table>
                                     <table class="w-100">
                                         <tr>
-                                            <td class="text-left"><input type="button" class="btn btn-success m-2" value="Thanh toán" onClick={() => handlePayFeeRoom(item)} /></td>
-                                            <td class="text-right pr-5"><span class="font-weight-bold text-danger"> Tổng cộng: </span> <span>{item.domitoryFee}</span></td>
+                                            <td class="text-left">{item.domitoryFeeStatus ? <></> : <input type="button" class="btn btn-success m-2" value="Thanh toán" onClick={() => handlePayFeeRoom(item)} />}</td>
+                                            <td class="text-right pr-5 pb-3 pt-3"><span class="font-weight-bold text-danger"> Tổng cộng: </span> <span>{item.domitoryFee}</span></td>
                                         </tr>
                                     </table>
 

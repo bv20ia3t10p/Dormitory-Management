@@ -223,7 +223,7 @@ class SidebarStudent extends React.Component {
                                 <li> <a href="#" data-toggle="collapse" data-target="#Request" class="collapsed active" ><i class="fa fa-money"></i> <span class="nav-label">Hóa đơn, biên lai</span><span class="fa fa-chevron-left pull-right"></span></a>
                                     <ul class="sub-menu collapse" id="Request" >
                                         <li><Link to="/Invoice" activeClassName="active" exact={true}>Hóa đơn lưu trú</Link></li>
-                                        <li><Link to="/student" activeClassName="active" exact={true}> Hóa đơn tiền điện</Link></li>
+                                        <li><Link to="/payElicWar" activeClassName="active" exact={true}> Hóa đơn tiền điện</Link></li>
                                     </ul>
                                 </li>
                                 <li><Link to="/student" activeClassName="active" exact={true}><i class="fa fa-files-o"></i> <span class="nav-label">Khảo sát</span></Link> </li>

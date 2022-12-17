@@ -30,7 +30,7 @@ function RegisterRoom(props) {
             console.log("check res get: ", res)
         }
         fetchMyAPI()
-    }, [])
+    }, [state.ListRegisterRooms])
     const createNewRegisRoom = async (data) => {
         try {
             let res = await axios.post(`https://localhost:7184/RegisterRoom`, data);
@@ -135,6 +135,17 @@ function RegisterRoom(props) {
             console.log(error)
         }
     }
+    let history = useHistory()
+    const handleViewDetailUser = (id) => {
+        history.replace(`/DetailStudent/${id}`)
+    }
+
+    function mouseOver(id) {
+        document.getElementById(`${id}`).setAttribute("class", "font-weight-bold text-danger");
+    }
+    function mouseOut(id) {
+        document.getElementById(`${id}`).setAttribute("class", "font-weight-bold text-primary");
+    }
     return (
         <>
             <SidebarAdmin />
@@ -153,10 +164,10 @@ function RegisterRoom(props) {
                 />
             }
 
-            <div class="section row">
-                <h3 class="col-12">Danh sách Đăng ký</h3>
+            <div class="section row" >
+                <h3 class="w-100" >Danh sách Đăng ký</h3>
                 <nav class="navbar navbar-light  col-6 ml-5">
-                    <div class="row">
+                    <div class="row ml-1">
                         <input class="col-3 form-control mr-sm-2 ml-3" type="search" placeholder="Id Student" aria-label="Search" value={id.idStudent} onChange={(event) => handleIdRegisterRoom(event, "idStudent")}></input>
                         <input class="col-3 form-control mr-sm-2" type="search" placeholder="Id Room" aria-label="Search" value={id.idRoom} onChange={(event) => handleIdRegisterRoom(event, "idRoom")}></input>
                         <button class="col-3 btn btn-outline-success my-2 my-sm-0" type="submit" onClick={() => handleOnclickSearch()}>Search</button>
@@ -164,17 +175,19 @@ function RegisterRoom(props) {
                 </nav>
                 <button style={{ marginLeft: "auto" }} class="col-2 mb-2 btn btn-primary pull-right mr-5" onClick={toggle}>Đăng ký</button>
                 <div class="ml-4 text-white">...</div>
-                <div id="collapse1" class="col-12">
-                    <table class="table table-hover shadow">
+                <div id="" class="align-item-center" style={{ "margin": "auto" }}>
+                    <table class="table shadow w-100 " >
                         <thead>
-                            <tr class="border bg-light ">
-                                <th scope="col">Mã sinh viên</th>
-                                <th scope="col">Mã phòng</th>
-                                <th scope="col">Ngày bắt đầu</th>
-                                <th scope="col">Ngày kết thúc</th>
-                                <th scope="col">Trạng thái tiền phòng</th>
-                                <th scope="col">Thời hạn</th>
-                                <th scope="col">Sửa</th>
+                            <tr class="border bg-light " >
+                                <th style={{ "font-size": "17px" }} >MASV</th>
+                                <th style={{ "font-size": "17px" }}>MAP</th>
+                                <th style={{ "font-size": "17px" }}>Ngày bắt đầu</th>
+                                <th style={{ "font-size": "17px" }}>Ngày kết thúc</th>
+                                <th style={{ "font-size": "17px" }}>Số tháng</th>
+                                <th style={{ "font-size": "17px" }}>Số tiền</th>
+                                <th style={{ "font-size": "17px" }}>Trạng thái tiền phòng</th>
+                                <th style={{ "font-size": "17px" }}>Thời hạn</th>
+                                <th style={{ "font-size": "17px" }}>Sửa / Hủy</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -182,16 +195,20 @@ function RegisterRoom(props) {
                                 state.ListRegisterRooms.map((item, index) => {
                                     return (
                                         <tr className="child" key={item.id} class="border">
-                                            <td >{item.studentId}</td>
-                                            <td >{item.roomId}</td>
-                                            {/* <td>{item.dateBegin}</td> */}
-                                            <td>{moment(item.dateBegin).format("DD-MM-YYYY")}</td>
-                                            <td >{moment(item.dateEnd).format("DD-MM-YYYY")}</td>
-                                            <td >{item.domitoryFeeStatus ? <div class="text-success">Đã thanh toán</div> : <div class="text-danger">Chưa thanh toán</div>}</td>
-                                            <td >{item.status ? <div class="text-success">Còn hạn</div> : <div class="text-danger">Hết hạn</div>}</td>
-                                            <td>
+                                            <td class="font-weight-bold text-primary" style={{ "font-size": "17px" }} id={item.studentId} onMouseOut={() => mouseOut(item.studentId)} onMouseOver={() => mouseOver(item.studentId)} onClick={() => handleViewDetailUser(item.id)}>{item.studentId}</td>
+                                            <td class="" style={{ "font-size": "17px" }} >{item.roomId}</td>
+
+                                            {/* <td style={{ "font-size": "17px" }}>{item.dateBegin}</td> */}
+                                            <td style={{ "font-size": "17px" }}>{moment(item.dateBegin).format("DD-MM-YYYY")}</td>
+                                            <td style={{ "font-size": "17px" }} >{moment(item.dateEnd).format("DD-MM-YYYY")}</td>
+
+                                            <td style={{ "font-size": "17px" }} >{item.numberOfMonth}</td>
+                                            <td style={{ "font-size": "17px" }} >{item.domitoryFee} VNĐ</td>
+                                            <td style={{ "font-size": "17px" }} >{item.domitoryFeeStatus ? <div class="text-success">Đã thanh toán</div> : <div class="text-danger">Chưa thanh toán</div>}</td>
+                                            <td style={{ "font-size": "17px" }} >{item.status ? <div class="text-success">Còn hạn</div> : <div class="text-danger">Hết hạn</div>}</td>
+                                            <td style={{ "font-size": "17px" }}>
                                                 <button class="btn btn-success mr-1" onClick={() => handleUpdateRegister(item)}><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                                                <button class="btn btn-danger" onClick={() => handleDeleteRegister(item)}><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                <button class="btn btn-danger" onClick={() => handleDeleteRegister(item)}><i class="fa fa-calendar-times-o" aria-hidden="true"></i></button>
                                             </td>
                                         </tr>
                                     )

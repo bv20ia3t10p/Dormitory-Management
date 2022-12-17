@@ -19,6 +19,9 @@ import ManagerStudent from './Admin/ManagerStudent';
 import RegisterRoom from './Admin/RegisterRoom';
 import Accommodation from './Student/Accommodation';
 import Invoice from './Student/Invoice';
+import DetailStudent from './Admin/DetailStudent';
+import ManageReceipt from './Admin/ManageReceipt';
+import PayElicWar from './Student/PayElicWar';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {
@@ -76,8 +79,15 @@ const App = () => {
             <Route path="/ManagerStudent" render={() => {
               return localStorage.getItem(localStorage.getItem("account")) == "Admin" ? <ManagerStudent /> : <Redirect to="/Login" />
             }}></Route>
+            <Route path="/ManageReceipt" render={() => {
+              return localStorage.getItem(localStorage.getItem("account")) == "Admin" ? <ManageReceipt /> : <Redirect to="/Login" />
+            }}></Route>
             <Route path="/student" render={() => {
               return localStorage.getItem(localStorage.getItem("account")) == "Student" ? <Student /> : <Redirect to="/Login" />
+            }}>
+            </Route>
+            <Route path="/payElicWar" render={() => {
+              return localStorage.getItem(localStorage.getItem("account")) == "Student" ? <PayElicWar /> : <Redirect to="/Login" />
             }}>
             </Route>
             <Route path="/accommodation" render={() => {
@@ -95,7 +105,9 @@ const App = () => {
             <Route path="/DetailStaff/:id" render={() => {
               return localStorage.getItem(localStorage.getItem("account")) == "Admin" ? <DetailStaff /> : <Redirect to="/Login" />
             }}></Route>
-
+            <Route path="/DetailStudent/:id" render={() => {
+              return localStorage.getItem(localStorage.getItem("account")) == "Admin" ? <DetailStudent /> : <Redirect to="/Login" />
+            }}></Route>
             <Route path="/Login" >
               <Login
                 Token={check}
