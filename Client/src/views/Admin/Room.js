@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 function Room(props) {
     const [state, setState] = useState({ ListRooms: [] });
     const [student, setStudent] = useState([]);
+    const [storeId, setStoreId] = useState(1);
     useEffect(() => {
         async function fetchMyAPI() {
             let res = await axios.get(`https://localhost:7184/Rooms`);
@@ -22,28 +23,44 @@ function Room(props) {
     }, [])
     // https://localhost:7184/Rooms/1/Block
     const handleSearchListRoom = async (data) => {
-        console.log('check data: ', data)
+        document.getElementById(storeId).setAttribute("class", "text-primary");
         if (data == 0) {
             let res = await axios.get(`https://localhost:7184/Rooms`);
             setState({
                 ListRooms: res.data ? res.data : []
             })
+
         }
         else if (data == 1) {
             let res = await axios.get(`https://localhost:7184/Rooms/${1}/Block`);
             setState({
                 ListRooms: res.data ? res.data : []
             })
+            setStoreId(
+                1
+            )
         }
         else {
             let res = await axios.get(`https://localhost:7184/Rooms/${2}/Block`);
             setState({
                 ListRooms: res.data ? res.data : []
             })
+            setStoreId(
+                5
+            )
+
         }
     }
     const handleListStudent = async (id) => {
-        // alert(id);
+        document.getElementById(id).setAttribute("class", "text-success")
+        console.log("id: ", id)
+        console.log("storeId: ", storeId)
+        if (id != storeId) {
+            document.getElementById(storeId).setAttribute("class", "text-primary");
+            setStoreId(
+                id
+            )
+        }
         let res = await axios.get(`https://localhost:7184/RegisterRoom/${id}/room`);
         setStudent(
             res.data
@@ -71,7 +88,7 @@ function Room(props) {
                         state.ListRooms.map((item, index) => {
                             return (
                                 <div className="col " key={item.id}>
-                                    {item.slotRemain != 0 ? <div class="col text-primary" style={{ padding: "1px" }} onClick={() => handleListStudent(item.id)}><i class="fa fa-home fa-2x" aria-hidden="true"></i>{item.name}</div> : <div class="col text-danger" onClick={() => handleListStudent(item.id)}><i class="fa fa-home fa-2x" aria-hidden="true"></i>{item.name}</div>}
+                                    {item.slotRemain != 0 ? <div class="col text-primary room" id={item.id} style={{ padding: "1px" }} onClick={() => handleListStudent(item.id)}><i class="fa fa-home fa-2x" aria-hidden="true"></i>{item.name}</div> : <div class="col text-danger room" onClick={() => handleListStudent(item.id)}><i class="fa fa-home fa-2x" aria-hidden="true"></i>{item.name}</div>}
                                 </div>
                             )
                             // </div>
@@ -81,9 +98,9 @@ function Room(props) {
 
             </div>
             <div >
-                <table class="table table-hover mt-5 w-75" >
+                <table class="table table-hover mt-5 w-75 shadow" >
                     <thead class="bg-success">
-                        <tr class="border">
+                        <tr class="border ">
                             <td>Mã sinh viên</td>
                             <td>Ngày bắt đầu</td>
                             <td>Ngày kết thúc</td>
@@ -104,7 +121,7 @@ function Room(props) {
                                         <td>{item.numberOfMonth}</td>
                                         <td>{item.domitoryFee}</td>
                                         <td>{item.domitoryFeeStatus ? <div class="text-success">Đã thanh toán</div> : <div class="text-danger">Chưa thanh toán</div>}</td>
-                                        <td>{item.status ? <div class="text-success">Còn ở</div> : <div class="text-danger">Đã chuyển</div>}</td>
+                                        <td>{item.status ? <div class="text-success">Còn hạn</div> : <div class="text-danger">Hết hạn</div>}</td>
                                     </tr>
                                 )
                             })}

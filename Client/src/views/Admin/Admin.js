@@ -89,7 +89,7 @@ function Admin(props) {
             <div class="section row">
                 <h3 class="col-12">Danh sách nhân viên</h3>
                 <button style={{ marginLeft: "auto" }} class="col-2 mb-2 btn btn-primary pull-right mr-5" onClick={toggle}>Thêm nhân viên</button>
-
+                <div class="mr-4 text-white">...</div>
                 <Addstaff
                     modal={modal}
                     toggle={toggle}
@@ -105,35 +105,34 @@ function Admin(props) {
                     />
                 }
                 <div id="collapse1" class="col-12">
-                    <table class="table table-hover ">
+                    <table class="table table-hover shadow">
                         <thead>
-                            <tr>
+                            <tr class="border bg-light">
                                 <th scope="col">Stt</th>
                                 <th scope="col">Họ và tên</th>
                                 <th scope="col">Giới tính</th>
+                                <th scope="col">Email</th>
                                 <th scope="col">Số điện thoại</th>
                                 <th scope="col">Trạng thái</th>
+                                <th scope="col">Sửa</th>
                             </tr>
                         </thead>
                         <tbody>
                             {state.ListUsers && state.ListUsers.length > 0 &&
                                 state.ListUsers.map((item, index) => {
                                     return (
-                                        <tr className="child " key={item.id} >
-                                            {item.status ?
-                                                <>
-                                                    <td onClick={() => handleViewDetailUser(item)}>{item.id}</td>
-                                                    <td onClick={() => handleViewDetailUser(item)}>{item.lastName + " " + item.firstName}</td>
-                                                    <td onClick={() => handleViewDetailUser(item)}>{item.gender ? "Nam" : "Nữ"}</td>
-                                                    <td onClick={() => handleViewDetailUser(item)}>{item.phoneNumber}</td>
-                                                    <td onClick={() => handleViewDetailUser(item)}>{item.status ? <div class="text-success">True</div> : <div class="text-danger">false</div>}</td>
-                                                    <td>
-                                                        <button class="btn btn-success" onClick={() => handleEditStaff(item)}><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                                                        <button class="btn btn-danger" onClick={() => handleDeleteStaff(item)}><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                                    </td></>
-                                                :
-                                                <></>
-                                            }
+                                        <tr className="child " key={item.id} class="border">
+
+                                            <td onClick={() => handleViewDetailUser(item)}>{item.id}</td>
+                                            <td onClick={() => handleViewDetailUser(item)}>{item.lastName + " " + item.firstName}</td>
+                                            <td onClick={() => handleViewDetailUser(item)}>{item.gender ? "Nam" : "Nữ"}</td>
+                                            <td onClick={() => handleViewDetailUser(item)}>{item.email}</td>
+                                            <td onClick={() => handleViewDetailUser(item)}>{item.phoneNumber}</td>
+                                            <td onClick={() => handleViewDetailUser(item)}>{item.status ? <div class="text-success">True</div> : <div class="text-danger">false</div>}</td>
+                                            <td>
+                                                <button class="btn btn-success mr-1" onClick={() => handleEditStaff(item)}><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                                <button class="btn btn-danger" onClick={() => handleDeleteStaff(item)}><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                            </td>
                                         </tr>
                                     )
                                 })

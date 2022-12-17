@@ -21,11 +21,11 @@ function Accommodation(props) {
     console.log("check Accommodation: ", Accommodation);
     return <div>
         <SidebarStudent />
-        <h3 class="text-center p-3 text-danger">Lịch sử thuê phòng</h3>
+        <h3 class="text-center p-3 text-danger ">Lịch sử thuê phòng</h3>
         <div class="section row" >
             <div class="col-12" >
                 <table class="table table-hover ">
-                    <thead>
+                    <thead class="bg-success">
                         <tr>
                             <td class="font-weight-bold" scope="col">Mã phòng</td>
                             <td class="font-weight-bold" scope="col">Ngày bắt đầu</td>

@@ -240,8 +240,7 @@ class SidebarStudent extends React.Component {
                                 <li class="text-info">.</li>
                                 <li class="text-info">.</li>
                                 <li class="text-info">.</li>
-                                <li class="text-info">.</li>
-                                <li class="text-info">.</li>
+                                <li class="text-info pb-2">.</li>
                             </ul>
                         </div>
                     </aside>

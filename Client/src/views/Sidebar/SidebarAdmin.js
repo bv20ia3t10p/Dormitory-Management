@@ -162,7 +162,7 @@ class SidebarAdmin extends React.Component {
                         </div>
                     </nav>
                 </header>
-                <div class="main">
+                <div class="main pr-2">
                     <aside>
                         <div class="sidebar left ">
                             <div class="user-panel">
@@ -173,17 +173,12 @@ class SidebarAdmin extends React.Component {
                                 </div>
                             </div>
                             <ul class="list-sidebar bg-info">
-                                {/* <li> <a href="#" data-toggle="collapse" data-target="#tables" class="collapsed active" ><i class="fa fa-table"></i> <span class="nav-label">Tables</span><span class="fa fa-chevron-left pull-right"></span></a>
-                                    <ul class="sub-menu collapse" id="tables" >
-                                        <li><a href=""> Tables item</a></li>
-                                        <li><a href=""> Tables item</a></li>
-                                        <li><a href=""> Tables item</a></li>
-                                    </ul>
-                                </li> */}
+
                                 <li><Link to="/admin" activeClassName="active" exact={true}><i class="fa fa-address-book"></i> <span class="nav-label">Danh sách nhân viên</span></Link> </li>
+                                <li><Link to="/ManagerStudent" activeClassName="active" exact={true}><i class="fa fa-graduation-cap"></i> <span class="nav-label">Danh sách sinh viên</span></Link> </li>
                                 <li><Link to="/room" activeClassName="active" exact={true}><i class="fa fa-list-alt"></i> <span class="nav-label">Danh sách phòng</span></Link> </li>
-                                <li><Link to="/ManagerStudent" activeClassName="active" exact={true}><i class="fa fa-files-o"></i> <span class="nav-label">Danh sách sinh viên</span></Link> </li>
                                 <li><Link to="/registerRoom" activeClassName="active" exact={true}><i class="fa fa-laptop"></i> <span class="nav-label">Danh sách đăng ký</span></Link> </li>
+                                <li><Link to="/registerRoom" activeClassName="active" exact={true}><i class="fa fa-money"></i> <span class="nav-label">Tiền điện, tiền nước</span></Link> </li>
                                 {/* <li><Link to="/admin" activeClassName="active" exact={true}><i class="fa fa-money"></i> <span class="nav-label">Phí nội trú năm mới</span></Link> </li> */}
                                 <li><Link to="/Login" activeClassName="active" exact={true}><i class="fa fa-sign-out"></i> <span class="nav-label">Log out</span></Link> </li>
                                 <li class="text-info">.</li>
@@ -197,8 +192,7 @@ class SidebarAdmin extends React.Component {
                                 <li class="text-info">.</li>
                                 <li class="text-info">.</li>
                                 <li class="text-info">.</li>
-                                <li class="text-info">.</li>
-                                <li class="text-info">.</li>
+                                <li class="text-info pb-2">.</li>
                             </ul>
                         </div>
                     </aside>
