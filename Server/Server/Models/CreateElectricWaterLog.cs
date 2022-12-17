@@ -26,8 +26,9 @@ namespace Server.Models
         [JsonIgnore]
         public bool FeeStatus { get; set; }
         [JsonIgnore]
-        public RoomDTO ? Room{ get; set; }
+        public Room? Room{ get; set; }
 
 
     }
 }
+    

@@ -40,7 +40,7 @@ namespace Server.Repository
             model.WaterFee = 800 * model.WaterUse;
             model.TotalFee = model.ElectricFee+ model.WaterFee;
             model.FeeStatus = false;
-            model.Room = roomDTO;
+            model.Room = room;
            
 
             var EWLMap = _mapper.Map<ElectricWaterlog>(model);
@@ -52,10 +52,10 @@ namespace Server.Repository
             
         }
 
-        public IEnumerable<ElectricWaterlog> GetElectricWaterLog()
+        public IEnumerable<ElectricWaterLogDTO> GetElectricWaterLog()
         {
             var EWL = _context.ElectricWaterlogs.Include(e => e.Room).ToList();
-            return EWL;
+            return _mapper.Map<List<ElectricWaterLogDTO>>(EWL);
         }
 
         public IEnumerable<ElectricWaterlog> GetElectricWaterLogByRoom(int roomId)
