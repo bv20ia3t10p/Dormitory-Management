@@ -28,14 +28,14 @@ namespace Server.Controllers
             return Ok(manager);
         }
 
-        [HttpGet("{managerId}")]
+        [HttpGet("{managerId}/manager")]
 
         public IActionResult GetByManagerId(int managerId)
         {
             var manager = _managerRepository.GetManagerById(managerId);
             return Ok(manager);
         }
-        [HttpGet("{acoountId}")]
+        [HttpGet("{accountId}")]
         public IActionResult GetManangerByAccount(int accountId) { 
            var manager = _managerRepository.GetManagerByAccount(accountId);
             return Ok(manager);

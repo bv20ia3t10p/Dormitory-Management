@@ -33,6 +33,7 @@ namespace Server.Helpers
             CreateMap<CreateElectricWaterLog, ElectricWaterlog>().ReverseMap();
             CreateMap<UpdateElectricWaterLog, ElectricWaterlog>().ReverseMap();
             CreateMap<ElectricWaterLogDTO, ElectricWaterlog>().ReverseMap();
+            CreateMap<ElectricWaterLogResponse, ElectricWaterlog>().ReverseMap();
             CreateMap<RoomDTO, Room>().ReverseMap();
             CreateMap<RegisterRoom, RegisterRoomDTO>()
                 .ForMember(des => des.RoomName,

@@ -52,10 +52,10 @@ namespace Server.Repository
             
         }
 
-        public IEnumerable<ElectricWaterLogDTO> GetElectricWaterLog()
+        public IEnumerable<ElectricWaterLogResponse> GetElectricWaterLog()
         {
             var EWL = _context.ElectricWaterlogs.Include(e => e.Room).ToList();
-            return _mapper.Map<List<ElectricWaterLogDTO>>(EWL);
+            return _mapper.Map<List<ElectricWaterLogResponse>>(EWL);
         }
 
         public IEnumerable<ElectricWaterlog> GetElectricWaterLogByRoom(int roomId)
