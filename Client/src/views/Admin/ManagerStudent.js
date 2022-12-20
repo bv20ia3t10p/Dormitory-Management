@@ -25,7 +25,7 @@ function ManagerStudent(props) {
             })
         }
         fetchMyAPI()
-    }, [])
+    }, [state.ListUsers])
     const createNewStudent = async (data) => {
         try {
             console.log('check data child: ', data)
