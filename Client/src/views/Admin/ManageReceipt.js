@@ -56,6 +56,24 @@ function ManageReceipt(props) {
             console.log('check data from child: ', data)
         }
     }
+    const handleDeleteReceipt = async (data) => {
+        console.log("check data delete: ", data)
+        try {
+            let res = await axios.put(`https://localhost:7184/ElectricWaterLog/${data.id}?RoomId=${data.room.id}`, {
+                electricNew: data.electricNew,
+                electricOld: data.electricOld,
+                waterOld: data.waterOld,
+                waterNew: data.waterNew,
+                feeStatus: false
+            });
+            console.log('response create receipt: ', res)
+            setModalEdit(false);
+            toast.success("Xóa hóa đơn thành công");
+        } catch (error) {
+            toast.error("Xóa hóa đơn thất bại")
+            console.log('check data from child: ', data)
+        }
+    }
     return (
         <>
             <SidebarAdmin />
@@ -116,7 +134,7 @@ function ManageReceipt(props) {
                                         <td>{item.feeStatus ? <div class="text-success">Đã thanh toán</div> : <div class="text-danger">Chưa thanh toán</div>}</td>
                                         <td>
                                             <button class="btn btn-success mr-1" onClick={() => handleUpdateReceipt(item)}><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                                            <button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                            <button class="btn btn-danger" onClick={() => handleDeleteReceipt(item)}><i class="fa fa-trash" aria-hidden="true"></i></button>
                                         </td>
                                     </tr>
                                 )

@@ -15,7 +15,7 @@ function ManagerStudent(props) {
     const [modal, setModal] = useState(false);
     const [editStudent, setEditstudent] = useState({ StudentEdit: {} })
     const [modalEdit, setModalEdit] = useState(false);
-    const [idStudent, setStudent] = useState("")
+    const [id, setId] = useState({ idStudent: "" })
     const toggleEdit = () => setModalEdit(!modalEdit);
     const toggle = () => setModal(!modal);
     useEffect(() => {
@@ -99,18 +99,18 @@ function ManagerStudent(props) {
         }
     }
     const handleOnclickSearch = async () => {
-        if (idStudent != "") {
+        if (id.idStudent != "") {
             try {
-                let res = await axios.get(`https://localhost:7184/Student/${idStudent}`);
+                let res = await axios.get(`https://localhost:7184/Student/${id.idStudent}`);
+                console.log("check state id in onclic", res.data)
                 setState({
-                    ListUsers: res.data ? res.data : []
+                    ListUsers: res.data
                 })
-                console.log(state.ListUsers)
             } catch (error) {
                 toast.error("Không có dữ liệu")
             }
         }
-        else if (idStudent == "") {
+        else if (id.idStudent == "") {
             try {
                 let res = await axios.get(`https://localhost:7184/Student`);
                 setState({
@@ -121,10 +121,12 @@ function ManagerStudent(props) {
             }
         }
     }
-    const handleOnChangeInput = (event) => {
-        setStudent(
-            event.target.value
-        )
+    const handleOnChangeInput = async (event, item) => {
+        let coppy = { ...id };
+        coppy[item] = event.target.value;
+        setId({
+            ...coppy
+        })
     }
     return (
         <>
@@ -134,7 +136,7 @@ function ManagerStudent(props) {
                 <h3 class="w-100 ">Quản lý sinh viên</h3>
                 <nav class="navbar navbar-light ml-5">
                     <div class="row ml-1">
-                        <input class="col form-control mr-sm-2 " type="text" placeholder="Id Student" value={idStudent} aria-label="Search" onChange={(event) => handleOnChangeInput(event)}></input>
+                        <input class="col form-control mr-sm-2 " type="text" placeholder="Id Student" value={id.idStudent} aria-label="Search" onChange={(event) => handleOnChangeInput(event, "idStudent")}></input>
                         <button class="col btn btn-outline-success my-2 my-sm-0" type="submit" onClick={() => handleOnclickSearch()}>Search</button>
                         {/* <div class="col-6"></div> */}
                     </div>
