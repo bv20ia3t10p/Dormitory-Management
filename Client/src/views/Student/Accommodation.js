@@ -25,7 +25,7 @@ function Accommodation(props) {
         <div class="section row" >
             <div class="col-12" >
                 <table class="table table-hover ">
-                    <thead class="bg-success">
+                    <thead class="bg-info">
                         <tr>
                             <td class="font-weight-bold" scope="col">Mã phòng</td>
                             <td class="font-weight-bold" scope="col">Ngày bắt đầu</td>

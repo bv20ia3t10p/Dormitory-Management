@@ -6,147 +6,156 @@ import {
 function UpdateReceipt(props) {
     let Receipt = props.CurrentReceipt;
     console.log("check prop receipt in child: ", Receipt)
-    // const [state, setState] = useState({
-    //     id: RegisterRoom.id,
-    //     studentId: RegisterRoom.studentId,
-    //     roomId: RegisterRoom.roomId,
-    //     dateBegin: RegisterRoom.dateBegin,
-    //     numberOfMonth: RegisterRoom.numberOfMonth,
-    //     domitoryFeeStatus: RegisterRoom.domitoryFeeStatus,
-    //     status: RegisterRoom.status,
-    // });
-    // console.log("check state in children: ", state);
-    // const handleOnchangeInput = (event, item) => {
-    //     let copyState = { ...state }
-    //     console.log('check event: ', event);
-    //     if (event.target.value == "true" && item == "domitoryFeeStatus") {
-    //         copyState["domitoryFeeStatus"] = true;
-    //     }
-    //     else if (event.target.value == "false" && item == "domitoryFeeStatus") {
-    //         copyState["domitoryFeeStatus"] = false;
-    //     }
-    //     else if (event.target.value == "true" && item == "status") {
-    //         copyState["status"] = true;
-    //     }
-    //     else if (event.target.value == "false" && item == "status") {
-    //         copyState["status"] = false;
-    //     }
-    //     else {
-    //         copyState[item] = event.target.value;
-    //     }
-    //     setState({
-    //         ...copyState
-    //     })
-    // }
-    // const checkValideInput = () => {
-    //     let isValid = true;
-    //     let arrInput = ['studentId', 'roomId', 'dateBegin', 'numberOfMonth']
-    //     for (let i = 0; i < arrInput.length; i++) {
-    //         console.log('check inside loop', state[arrInput[i]], arrInput[i])
-    //         if (!state[arrInput[i]]) {
-    //             isValid = false;
-    //             alert('Missing parameter: ' + arrInput[i]);
-    //             break;
-    //         }
-    //     }
-    //     return isValid;
-    // }
-    // const handleUpdateRegister = () => {
-    //     let isValid = checkValideInput();
-    //     if (isValid === true) {
-    //         props.updateRegister(state);
-    //         console.log("check data modalUpdate: ", state);
-    //     }
-    // }
+    // https://localhost:7184/ElectricWaterLog/1?RoomId=1
+    // RoomId
+    // ElectricWaterLogId 
+    // "electricNew": 0,
+    // "electricOld": 0,
+    // "waterOld": 0,
+    // "waterNew": 0,
+    // "feeStatus": true
+    const [state, setState] = useState({
+        ElectricWaterLogId: Receipt.id,
+        RoomId: Receipt.room.id,
+        electricNew: Receipt.electricNew,
+        electricOld: Receipt.electricOld,
+        waterNew: Receipt.waterNew,
+        waterOld: Receipt.waterOld,
+        feeStatus: Receipt.feeStatus,
+    });
+    console.log("check state in children: ", state);
+    const handleOnchangeInput = (event, item) => {
+        let copyState = { ...state }
+        console.log('check event: ', event);
+        if (event.target.value == "true" && item == "feeStatus") {
+            copyState["feeStatus"] = true;
+        }
+        else if (event.target.value == "false" && item == "feeStatus") {
+            copyState["feeStatus"] = false;
+        }
+        else {
+            copyState[item] = event.target.value;
+        }
+        setState({
+            ...copyState
+        })
+    }
+    const checkValideInput = () => {
+        let isValid = true;
+        let arrInput = ['ElectricWaterLogId', 'RoomId', 'electricNew', 'electricOld', 'waterNew', 'waterOld']
+        for (let i = 0; i < arrInput.length; i++) {
+            console.log('check inside loop', state[arrInput[i]], arrInput[i])
+            if (!state[arrInput[i]]) {
+                isValid = false;
+                alert('Missing parameter: ' + arrInput[i]);
+                break;
+            }
+        }
+        return isValid;
+    }
+    const handleUpdateReceipt = () => {
+        let isValid = checkValideInput();
+        if (isValid === true) {
+            props.UpdateDataReceipt(state);
+            // console.log("check data modalUpdate : ", state);
+        }
+    }
     return (
         <div>
             <Modal isOpen={props.modal} fade={false} toggle={props.toggle}>
                 <ModalHeader >Update Receipt</ModalHeader>
-                {/* <ModalBody>
+                <ModalBody>
                     <Form >
                         <FormGroup>
-                            <Label for="studentId">
-                                studentId
+                            <Label for="electricNew">
+                                electricNew
                             </Label>
                             <Input
-                                id="studentId"
-                                name="studentId"
-                                onChange={(event) => handleOnchangeInput(event, "studentId")}
-                                value={state.studentId}
+                                id="electricNew"
+                                name="electricNew"
+                                onChange={(event) => handleOnchangeInput(event, "electricNew")}
+                                value={state.electricNew}
                             />
                         </FormGroup>
                         <FormGroup>
-                            <Label for="roomId">
-                                roomId
+                            <Label for="electricOld">
+                                electricOld
                             </Label>
                             <Input
-                                id="roomId"
-                                name="roomId"
-                                onChange={(event) => handleOnchangeInput(event, "roomId")}
-                                value={state.roomId}
+                                id="electricOld"
+                                name="electricOld"
+                                onChange={(event) => handleOnchangeInput(event, "electricOld")}
+                                value={state.electricOld}
                             />
                         </FormGroup>
                         <FormGroup>
-                            <Label for="dateBegin">
-                                date of Begin
+                            <Label for="waterNew">
+                                waterNew
                             </Label>
                             <Input
-                                id="dateBegin"
-                                name="dateBegin"
-                                type="date"
-                                onChange={(event) => handleOnchangeInput(event, "dateBegin")}
-                                value={state.dateBegin}
+                                id="waterNew"
+                                name="waterNew"
+                                onChange={(event) => handleOnchangeInput(event, "waterNew")}
+                                value={state.waterNew}
                             />
                         </FormGroup>
                         <FormGroup>
-                            <Label for="numberOfMonth">
-                                number Of Month
+                            <Label for="waterOld">
+                                waterOld
                             </Label>
                             <Input
-                                id="numberOfMonth"
-                                name="numberOfMonth"
-                                onChange={(event) => handleOnchangeInput(event, "numberOfMonth")}
-                                value={state.numberOfMonth}
+                                id="waterOld"
+                                name="waterOld"
+                                onChange={(event) => handleOnchangeInput(event, "waterOld")}
+                                value={state.waterOld}
                             />
                         </FormGroup>
-                        <Label for="gender">
-                            gender
+
+                        <Label for="feeStatus">
+                            feeStatus
                         </Label>
 
                         <FormGroup>
-                            <select onChange={(event) => handleOnchangeInput(event, "domitoryFeeStatus")}>
-                                <option >--Choose domitoryFeeStatus--</option>
+                            <select onChange={(event) => handleOnchangeInput(event, "feeStatus")}>
+                                <option >--Choose feeStatus--</option>
                                 <option value={true}>Đã thanh toán</option>
                                 <option value={false}>Chưa thanh toán</option>
                             </select>
                         </FormGroup>
-                        <Label for="status">
-                            status
-                        </Label>
                         <FormGroup>
-                            <select onChange={(event) => handleOnchangeInput(event, "status")}>
-                                <option>--Choose status--</option>
-                                <option value={true}>Còn hạn</option>
-                                <option value={false}>Hết hạn</option>
-                            </select>
+                            {/* <Label for="ElectricWaterLogId">
+                                ElectricWaterLogId
+                            </Label> */}
+                            <Input
+                                id="ElectricWaterLogId"
+                                name="ElectricWaterLogId"
+                                type="hidden"
+                                onChange={(event) => handleOnchangeInput(event, "ElectricWaterLogId")}
+                                value={state.ElectricWaterLogId}
+                            />
                         </FormGroup>
-                        <Button color="primary" onClick={() => handleUpdateRegister()}>
+                        <FormGroup>
+                            {/* <Label for="RoomId">
+                                RoomId
+                            </Label> */}
+                            <Input
+                                id="RoomId"
+                                name="RoomId"
+                                type="hidden"
+                                onChange={(event) => handleOnchangeInput(event, "RoomId")}
+                                value={state.RoomId}
+                            />
+                        </FormGroup>
+
+                        <Button color="primary" onClick={() => handleUpdateReceipt()}>
                             Update
                         </Button>{' '}
                         <Button color="secondary" onClick={props.toggle}>
                             Cancel
                         </Button>
                     </Form>
-                </ModalBody> */}
-                {/* Nút tắt phần modal */}
-                {/* <ModalFooter>
-                    <Button color="primary" onClick={props.toggle}>
-                        Create
-                    </Button>{' '}
-                    <Button color="secondary" onClick={props.toggle}>
-                        Cancel
-                    </Button>
-                </ModalFooter> */}
+                </ModalBody>
+
             </Modal>
         </div>
     );

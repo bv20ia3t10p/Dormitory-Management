@@ -56,12 +56,8 @@ function Payment(props) {
                             </Label>
 
                         </FormGroup>
-                        <Button color="danger" onClick={() => handlePayment()}>
-                            Xác nhận
-                        </Button>
-                        <Button color="secondary" onClick={props.toggle}>
-                            Hủy
-                        </Button>
+                        <input type="button" class="btn btn-danger" onClick={() => handlePayment()} value="Xác nhận" />
+                        <input type="button" class="btn btn-secondary" onClick={props.toggle} value="Hủy" />
                     </Form>
                 </ModalBody>
             </Modal>

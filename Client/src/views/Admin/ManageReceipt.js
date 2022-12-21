@@ -22,7 +22,6 @@ function ManageReceipt(props) {
             setListReceipt(
                 res.data
             )
-            console.log("check res:", ListReceipt)
         }
         fetchMyAPI()
     }, [ListReceipt])
@@ -32,9 +31,9 @@ function ManageReceipt(props) {
             let res = await axios.post(`https://localhost:7184/ElectricWaterLog?roomId=${id}`, data);
             console.log('response create receipt: ', res)
             setModal(false);
-            toast.success("Add new receipt success");
+            toast.success("Thêm hóa đơn thành công");
         } catch (error) {
-            toast.error("Add new receipt fail")
+            toast.error("Thêm hóa đơn thất bại")
             console.log('check data from child: ', data)
         }
     }
@@ -44,6 +43,18 @@ function ManageReceipt(props) {
             item
         )
         // console.log("check edit receipt in parent: ", CurrentReceipt);
+    }
+    const UpdateDataReceipt = async (data) => {
+        console.log("check data from parent: ", data)
+        try {
+            let res = await axios.put(`https://localhost:7184/ElectricWaterLog/${data.ElectricWaterLogId}?RoomId=${data.RoomId}`, data);
+            console.log('response create receipt: ', res)
+            setModalEdit(false);
+            toast.success("Cập nhật hóa đơn thành công");
+        } catch (error) {
+            toast.error("Cập nhật hóa đơn thất bại")
+            console.log('check data from child: ', data)
+        }
     }
     return (
         <>
@@ -59,11 +70,11 @@ function ManageReceipt(props) {
                     modal={modalEdit}
                     toggle={toggleEdit}
                     CurrentReceipt={CurrentReceipt}
-
+                    UpdateDataReceipt={UpdateDataReceipt}
                 />
             }
             <div class="section">
-                <h3 class="text-danger">Danh sách tiền điện, tiền nước</h3>
+                <h3 class="">Quản lý tiền điện, tiền nước</h3>
                 <button style={{ marginLeft: "auto" }} class=" mb-2 btn btn-primary pull-right mr-5" onClick={toggle}>Thêm hóa đơn</button>
             </div>
             <div >
@@ -74,6 +85,7 @@ function ManageReceipt(props) {
                             <td>Còn trống</td>
                             <td>Chỉ số điện</td>
                             <td>Chỉ Số nước</td>
+                            <td>Tổng tiền</td>
                             <td>Trạng thái thanh toán</td>
                             <td>Sửa / xóa</td>
                         </tr>
@@ -89,13 +101,19 @@ function ManageReceipt(props) {
                                             <div>Chỉ số đầu:  <span class="font-weight-bold">{item.electricNew} Kwh</span> </div>
                                             <div>Chỉ số cuối:  <span class="font-weight-bold">{item.electricOld} Kwh</span> </div>
                                             <div>Sử dụng:  <span class="font-weight-bold">{item.electricNew - item.electricOld} Kwh</span> </div>
+                                            <div>Tiền điện:  <span class="font-weight-bold">{item.electricFee} VNĐ</span> </div>
                                         </td>
                                         <td>
                                             <div>Chỉ số đầu:  <span class="font-weight-bold">{item.waterNew} m<sup>3</sup></span></div>
                                             <div>Chỉ số cuối:<span class="font-weight-bold">{item.waterOld} m<sup>3</sup></span></div>
                                             <div>Sử dụng:  <span class="font-weight-bold">{item.waterNew - item.waterOld} m<sup>3</sup></span> </div>
+                                            <div>Tiền nước:  <span class="font-weight-bold">{item.waterFee} VNĐ</span> </div>
                                         </td>
-                                        <td>{item.room.status ? <div class="text-success">Đã thanh toán</div> : <div class="text-danger">Chưa thanh toán</div>}</td>
+                                        <td>
+                                            <div class="font-weight-bold ">{item.totalFee} VNĐ</div>
+                                            <div>(4 sinh viên)</div>
+                                        </td>
+                                        <td>{item.feeStatus ? <div class="text-success">Đã thanh toán</div> : <div class="text-danger">Chưa thanh toán</div>}</td>
                                         <td>
                                             <button class="btn btn-success mr-1" onClick={() => handleUpdateReceipt(item)}><i class="fa fa-pencil" aria-hidden="true"></i></button>
                                             <button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>

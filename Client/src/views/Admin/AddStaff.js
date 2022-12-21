@@ -12,7 +12,8 @@ function Addstaff(props) {
         identiFyCardNumber: '',
         phoneNumber: '',
         address: '',
-        gender: true
+        gender: true,
+        idCard: '',
     });
     const handleOnchangeInput = (event, item) => {
         let copyState = { ...state }
@@ -31,7 +32,7 @@ function Addstaff(props) {
     }
     const checkValideInput = () => {
         let isValid = true;
-        let arrInput = ['lastName', 'firstName', 'dateOfBirth', 'identiFyCardNumber', 'phoneNumber', 'address']
+        let arrInput = ['lastName', 'firstName', 'dateOfBirth', 'identiFyCardNumber', 'phoneNumber', 'address', 'idCard']
         for (let i = 0; i < arrInput.length; i++) {
             console.log('check inside loop', state[arrInput[i]], arrInput[i])
             if (!state[arrInput[i]]) {
@@ -132,6 +133,19 @@ function Addstaff(props) {
                                 name="address"
                                 onChange={(event) => handleOnchangeInput(event, "address")}
                                 value={state.address}
+                            />
+                        </FormGroup>
+                        {/* idCard */}
+                        <FormGroup>
+                            <Label for="gender">
+                                idCard
+                            </Label>
+                            <Input
+                                id="idCard"
+                                name="idCard"
+                                type="text"
+                                onChange={(event) => handleOnchangeInput(event, "idCard")}
+                                value={state.idCard}
                             />
                         </FormGroup>
                         <Label for="gender">

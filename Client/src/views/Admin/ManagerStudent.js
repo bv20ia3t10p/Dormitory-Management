@@ -52,16 +52,16 @@ function ManagerStudent(props) {
             let res = await axios.put(`https://localhost:7184/Student/${data.id}`, data);
             console.log('response create user: ', res)
             toggleEdit()
-            toast.success("Update success");
+            toast.success("Cập nhật thành công");
         } catch (error) {
-            toast.error("Update don't success");
+            toast.error("Cập nhật không thành công");
             console.log(error)
         }
         console.log('check data from child: ', data)
     }
     let history = useHistory()
     const handleViewDetailUser = (student) => {
-        history.replace(`/DetailStaff/${student.id}`)
+        history.replace(`/DetailStudent/${student.id}`)
     }
     const handleDeleteStudent = async (data) => {
         console.log('check status: ', data)
@@ -91,9 +91,9 @@ function ManagerStudent(props) {
             }
             );
             console.log('response create user: ', res)
-            toast.success("Delete success")
+            toast.success("Xóa thành công")
         } catch (error) {
-            toast.error("Delete don't success")
+            toast.error("Xóa không thành công")
             console.log(error)
         }
     }
@@ -102,8 +102,8 @@ function ManagerStudent(props) {
             {/* <NavStudent /> */}
             <SidebarAdmin />
             <div class="section row">
-                <h3 class="col-12">Danh sách sinh viên</h3>
-                <button style={{ marginLeft: "auto" }} class="col-2 mb-2 btn btn-primary pull-right mr-5" onClick={toggle}>Thêm sinh viên</button>
+                <h3 class="w-100 ">Quản lý sinh viên</h3>
+                <button style={{ marginLeft: "auto" }} class="pl-3 pr-3 mb-2 btn btn-primary pull-right mr-5" onClick={toggle}>Thêm sinh viên</button>
                 <div class="mr-4 text-white">...</div>
                 <Addstudent
                     modal={modal}
@@ -119,17 +119,18 @@ function ManagerStudent(props) {
                         UpdateStudent={UpdateStudentId}
                     />
                 }
-                <div id="collapse1" class="col-12">
+                <div id="" class="col-12">
                     <table class="table table-hover shadow">
                         <thead>
                             <tr class="border bg-light">
-                                <th scope="col">Stt</th>
-                                <th scope="col">Họ và tên</th>
-                                <th scope="col">Giới tính</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Số điện thoại</th>
-                                <th scope="col">Trạng thái</th>
-                                <th scope="col">Sửa</th>
+                                <th style={{ "font-size": "16px" }} scope="col">Stt</th>
+                                <th style={{ "font-size": "16px" }} scope="col">Họ và tên</th>
+                                <th style={{ "font-size": "16px" }} scope="col">Giới tính</th>
+                                <th style={{ "font-size": "16px" }} scope="col">Email</th>
+                                <th style={{ "font-size": "16px" }} scope="col">Trường</th>
+                                <th style={{ "font-size": "16px" }} scope="col">Số điện thoại</th>
+                                <th style={{ "font-size": "16px" }} scope="col">Trạng thái</th>
+                                <th style={{ "font-size": "16px" }} scope="col">Sửa</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -138,12 +139,13 @@ function ManagerStudent(props) {
                                     return (
                                         <tr className="child" key={item.id} class="border">
                                             {/* <td>{index + 1}</td> */}
-                                            <td onClick={() => handleViewDetailUser(item)}>{item.id}</td>
-                                            <td onClick={() => handleViewDetailUser(item)}>{item.firstName}</td>
-                                            <td onClick={() => handleViewDetailUser(item)}>{item.gender ? "Nam" : "Nữ"}</td>
-                                            <td onClick={() => handleViewDetailUser(item)}>{item.email}</td>
-                                            <td onClick={() => handleViewDetailUser(item)}>{item.phoneNumber}</td>
-                                            <td onClick={() => handleViewDetailUser(item)}>{item.status ? <div class="text-success">True</div> : <div class="text-danger">false</div>}</td>
+                                            <td style={{ "font-size": "16px" }} onClick={() => handleViewDetailUser(item)}>{item.id}</td>
+                                            <td style={{ "font-size": "16px" }} onClick={() => handleViewDetailUser(item)}>{item.firstName}</td>
+                                            <td style={{ "font-size": "16px" }} onClick={() => handleViewDetailUser(item)}>{item.gender ? "Nam" : "Nữ"}</td>
+                                            <td style={{ "font-size": "16px" }} onClick={() => handleViewDetailUser(item)}>{item.email}</td>
+                                            <td style={{ "font-size": "16px" }} onClick={() => handleViewDetailUser(item)}>{item.universityName}</td>
+                                            <td style={{ "font-size": "16px" }} onClick={() => handleViewDetailUser(item)}>{item.phoneNumber}</td>
+                                            <td style={{ "font-size": "16px" }} onClick={() => handleViewDetailUser(item)}>{item.status ? <div class="text-success">Còn hạn</div> : <div class="text-danger">Hết hạn</div>}</td>
                                             <td>
                                                 <button class="btn btn-success mr-1" onClick={() => handleEditstudent(item)}><i class="fa fa-pencil" aria-hidden="true"></i></button>
                                                 <button class="btn btn-danger" onClick={() => handleDeleteStudent(item)}><i class="fa fa-trash" aria-hidden="true"></i></button>

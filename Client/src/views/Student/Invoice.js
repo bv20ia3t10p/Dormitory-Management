@@ -22,7 +22,7 @@ function Invoice(props) {
             )
         }
         fetchMyAPI()
-    }, [])
+    }, [Invoice])
 
     const PaymentRoom = async (item) => {
         toggle()

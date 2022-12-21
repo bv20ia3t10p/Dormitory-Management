@@ -11,6 +11,7 @@ function Room(props) {
     const [state, setState] = useState({ ListRooms: [] });
     const [student, setStudent] = useState([]);
     const [storeId, setStoreId] = useState(1);
+    const [roles, setRoles] = useState("primary");
     const [room, SetRoom] = useState({});
     useEffect(() => {
         async function fetchMyAPI() {
@@ -21,8 +22,16 @@ function Room(props) {
             console.log("check res: ", res)
         }
         fetchMyAPI()
-    }, [state.ListRooms])
-    // https://localhost:7184/Rooms/1/Block
+    }, [])
+    state.ListRooms && state.ListRooms.length > 0 &&
+        state.ListRooms.map((item, index) => {
+            return (
+                <>
+                    {item.slotRemain == 0 && item.id == storeId ? setStoreId(item.id + 1) : <></>}
+                </>
+            )
+        })
+
     const handleSearchListRoom = async (data) => {
         document.getElementById(storeId).setAttribute("class", "text-primary");
         if (data == 0) {
@@ -52,16 +61,22 @@ function Room(props) {
 
         }
     }
-    const handleListStudent = async (id) => {
-        document.getElementById(id).setAttribute("class", "text-success")
-        console.log("id: ", id)
+    const handleListStudent = async (id, role) => {
+        if (role == "danger") {
+            document.getElementById(storeId).setAttribute("class", "text-primary");
+        }
+        if (role == "primary") {
+            document.getElementById(id).setAttribute("class", "text-success")
+        }
         console.log("storeId: ", storeId)
-        if (id != storeId) {
+
+        if (id != storeId && role == "primary" && roles == "primary") {
             document.getElementById(storeId).setAttribute("class", "text-primary");
             setStoreId(
                 id
             )
         }
+
         let res = await axios.get(`https://localhost:7184/RegisterRoom/${id}/room`);
         setStudent(
             res.data
@@ -76,7 +91,7 @@ function Room(props) {
         <>
             <SidebarAdmin />
             <div class="section">
-                <h3>Danh sách phòng</h3>
+                <h3 class="">Quản lý phòng</h3>
                 <select class="rounded ml-2 text-center" onClick={(event) => handleSearchListRoom(event.target.value)}>
                     <option value={0}>Tất cả</option>
                     <option value={1}>Tòa A1</option>
@@ -93,7 +108,7 @@ function Room(props) {
                         state.ListRooms.map((item, index) => {
                             return (
                                 <div className="row ml-2" key={item.id} style={{ width: "14%" }}>
-                                    {item.slotRemain != 0 ? <div class=" text-primary room" id={item.id} style={{ padding: "1px" }} onClick={() => handleListStudent(item.id)}><i class="fa fa-home fa-2x" aria-hidden="true"></i>{item.name}</div> : <div class="col text-danger room" onClick={() => handleListStudent(item.id)}><i class="fa fa-home fa-2x" aria-hidden="true"></i>{item.name}</div>}
+                                    {item.slotRemain != 0 ? <div class=" text-primary room" id={item.id} style={{ padding: "1px" }} onClick={() => handleListStudent(item.id, "primary")}><i class="fa fa-home fa-2x" aria-hidden="true"></i>{item.name}</div> : <div class="col text-danger room" id={item.id} style={{ padding: "1px" }} onClick={() => handleListStudent(item.id, "danger")}><i class="fa fa-home fa-2x" aria-hidden="true"></i>{item.name}</div>}
                                 </div>
                             )
                             // </div>
@@ -138,7 +153,7 @@ function Room(props) {
                     <thead class="bg-info text-white">
                         <tr>
                             <td style={{ "font-size": "16px" }}>Mã phòng</td>
-                            <td style={{ "font-size": "16px" }}>Số lượng</td>
+                            <td style={{ "font-size": "16px" }}>Phòng</td>
                             <td style={{ "font-size": "16px" }}>Đồ đặc</td>
                             <td style={{ "font-size": "16px" }}>Phí phòng</td>
                         </tr>

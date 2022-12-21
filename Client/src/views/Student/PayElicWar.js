@@ -5,61 +5,51 @@ import SidebarStudent from "../Sidebar/SidebarStudent";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import moment from "moment";
-import Payment from "./Payment";
+import PaymentEW from "./PaymentEW";
 import { toast } from 'react-toastify';
 function PayElicWar(props) {
-    // const [modal, setModal] = useState(false);
-    // const [CurrentInvoice, setCurrentInvoice] = useState({});
+    const [modal, setModal] = useState(false);
+    const [CurrentElicWar, setCurrentElicWar] = useState({});
     const [payElicWar, setPayElicWar] = useState({});
-    // const toggle = () => setModal(!modal);
-    // var id = localStorage.getItem("id");
-    // console.log("check id: ", id);
+    const toggle = () => setModal(!modal);
     useEffect(() => {
         async function fetchMyAPI() {
             let res = await axios.get(`https://localhost:7184/ElectricWaterLog/${localStorage.getItem("id")}`);
             setPayElicWar(
                 res.data
             )
-            console.log(payElicWar)
         }
 
         fetchMyAPI()
-    }, [])
-    // const PaymentRoom = async (item) => {
-    //     toggle()
-    //     console.log('check updateUser in parent: ', item)
-    //     try {
-    //         let res = await axios.put(`https://localhost:7184/RegisterRoom/${item.id}`, {
-    //             studentId: item.studentId,
-    //             roomId: item.roomId,
-    //             dateBegin: item.dateBegin,
-    //             numberOfMonth: item.numberOfMonth,
-    //             domitoryFeeStatus: item.domitoryFeeStatus,
-    //             status: item.status
-    //         });
-    //         console.log('response create user: ', res)
-    //         toast.success("Thanh toán thành công");
-    //     } catch (error) {
-    //         toast.error("Thanh toán không thành công");
-    //         console.log(error)
-    //     }
-    // }
-    // const handlePayFeeRoom = (data) => {
-    //     toggle()
-    //     setCurrentInvoice(
-    //         data
-    //     )
-    // }
+    }, [payElicWar])
+
+    const handlePayElecWar = (item) => {
+        toggle()
+        setCurrentElicWar(item)
+    }
+    const handlePayFeeEW = async (data) => {
+        console.log('check payment in parent: ', data)
+        try {
+            let res = await axios.put(`https://localhost:7184/ElectricWaterLog/${data.ElectricWaterLogId}?RoomId=${data.RoomId}`, data);
+            console.log('response create user: ', res)
+            toggle()
+            toast.success("Thanh toán thành công");
+        } catch (error) {
+            toast.error("Thanh toán không thành công");
+            console.log(error)
+        }
+        console.log('check data from child: ', data)
+    }
     return <div>
         <SidebarStudent />
-        {/* {
-            modal && <Payment
+        {
+            modal && <PaymentEW
                 modal={modal}
                 toggle={toggle}
-                CurrentInvoice={CurrentInvoice}
-                handlePayFeeRoom={PaymentRoom}
+                CurrentElicWar={CurrentElicWar}
+                handlePayFeeEW={handlePayFeeEW}
             />
-        } */}
+        }
 
         <h3 class="text-center p-3 text-danger">Tiền điện tiền nước</h3>
         <div class="section row" >
@@ -100,8 +90,8 @@ function PayElicWar(props) {
                                             <div>(4 sinh viên)</div>
                                         </td>
                                         <td>
-                                            {item.room.status ? <div class="text-success">Đã thanh toán</div> : <div class="text-danger">Chưa thanh toán</div>}
-                                            <input type="button" class="btn btn-success" value="Thanh toán"></input>
+                                            {item.feeStatus ? <div class="text-success">Đã thanh toán</div> : <div class="text-danger">Chưa thanh toán</div>}
+                                            {item.feeStatus === false ? <input type="button" class="btn btn-success" value="Thanh toán" onClick={() => handlePayElecWar(item)}></input> : <></>}
                                         </td>
 
                                     </tr>

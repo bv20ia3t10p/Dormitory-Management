@@ -36,9 +36,9 @@ function RegisterRoom(props) {
             let res = await axios.post(`https://localhost:7184/RegisterRoom`, data);
             console.log('response create staff: ', res)
             setModal(false);
-            toast.success("Add new register success");
+            toast.success("Đăng ký thành công");
         } catch (error) {
-            toast.error("Add new staff fail")
+            toast.error("Đăng ký thất bại")
             console.log('check data from child: ', data)
         }
     }
@@ -103,9 +103,9 @@ function RegisterRoom(props) {
             let res = await axios.put(`https://localhost:7184/RegisterRoom/${data.id}`, data);
             console.log('response create user: ', res)
             toggleEdit()
-            toast.success("Update success");
+            toast.success("Cập nhật thành công");
         } catch (error) {
-            toast.error("Update don't success");
+            toast.error("Cập nhật không thành công");
             console.log(error)
         }
         console.log('check data from child: ', data)
@@ -129,9 +129,9 @@ function RegisterRoom(props) {
                 status: false,
             });
             // console.log('response create user: ', res)
-            toast.success("Delete success");
+            toast.success("Xóa thành công");
         } catch (error) {
-            toast.error("Delete don't success");
+            toast.error("Xóa không thành công");
             console.log(error)
         }
     }
@@ -141,10 +141,13 @@ function RegisterRoom(props) {
     }
 
     function mouseOver(id) {
-        document.getElementById(`${id}`).setAttribute("class", "font-weight-bold text-danger");
+        document.getElementById(`${id}`).setAttribute("class", "font-weight-bold text-primary");
+        document.getElementById(`${id}`).setAttribute("style", "text-decoration: underline;");
     }
     function mouseOut(id) {
         document.getElementById(`${id}`).setAttribute("class", "font-weight-bold text-primary");
+        document.getElementById(`${id}`).setAttribute("style", "text-decoration: none;");
+
     }
     return (
         <>
@@ -165,7 +168,7 @@ function RegisterRoom(props) {
             }
 
             <div class="section row" >
-                <h3 class="w-100" >Danh sách Đăng ký</h3>
+                <h3 class="w-100 " >Quản lý Đăng ký</h3>
                 <nav class="navbar navbar-light  col-6 ml-5">
                     <div class="row ml-1">
                         <input class="col-3 form-control mr-sm-2 ml-3" type="search" placeholder="Id Student" aria-label="Search" value={id.idStudent} onChange={(event) => handleIdRegisterRoom(event, "idStudent")}></input>
@@ -195,7 +198,7 @@ function RegisterRoom(props) {
                                 state.ListRegisterRooms.map((item, index) => {
                                     return (
                                         <tr className="child" key={item.id} class="border">
-                                            <td class="font-weight-bold text-primary" style={{ "font-size": "17px" }} id={item.studentId} onMouseOut={() => mouseOut(item.studentId)} onMouseOver={() => mouseOver(item.studentId)} onClick={() => handleViewDetailUser(item.id)}>{item.studentId}</td>
+                                            <td class="font-weight-bold text-primary" style={{ "font-size": "17px" }} id={item.studentId} onMouseOut={() => mouseOut(item.studentId)} onMouseOver={() => mouseOver(item.studentId)} onClick={() => handleViewDetailUser(item.studentId)}>{item.studentId}</td>
                                             <td class="" style={{ "font-size": "17px" }} >{item.roomId}</td>
 
                                             {/* <td style={{ "font-size": "17px" }}>{item.dateBegin}</td> */}
