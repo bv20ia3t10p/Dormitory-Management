@@ -21,16 +21,16 @@ function RegisterRoom(props) {
     })
     const toggleEdit = () => setModalEdit(!modalEdit);
     const toggle = () => setModal(!modal);
+    async function fetchMyAPI() {
+        let res = await axios.get(`https://localhost:7184/RegisterRoom`);
+        setState({
+            ListRegisterRooms: res.data ? res.data : []
+        })
+        console.log("check res get: ", res)
+    }
     useEffect(() => {
-        async function fetchMyAPI() {
-            let res = await axios.get(`https://localhost:7184/RegisterRoom`);
-            setState({
-                ListRegisterRooms: res.data ? res.data : []
-            })
-            console.log("check res get: ", res)
-        }
         fetchMyAPI()
-    }, [state.ListRegisterRooms])
+    }, [])
     const createNewRegisRoom = async (data) => {
         try {
             let res = await axios.post(`https://localhost:7184/RegisterRoom`, data);
@@ -182,15 +182,15 @@ function RegisterRoom(props) {
                     <table class="table shadow w-100 " >
                         <thead>
                             <tr class="border bg-light " >
-                                <th style={{ "font-size": "17px" }} >MASV</th>
-                                <th style={{ "font-size": "17px" }}>MAP</th>
-                                <th style={{ "font-size": "17px" }}>Ngày bắt đầu</th>
-                                <th style={{ "font-size": "17px" }}>Ngày kết thúc</th>
-                                <th style={{ "font-size": "17px" }}>Số tháng</th>
-                                <th style={{ "font-size": "17px" }}>Số tiền</th>
-                                <th style={{ "font-size": "17px" }}>Trạng thái tiền phòng</th>
-                                <th style={{ "font-size": "17px" }}>Thời hạn</th>
-                                <th style={{ "font-size": "17px" }}>Sửa / Hủy</th>
+                                <th  >MASV</th>
+                                <th >MAP</th>
+                                <th >Ngày bắt đầu</th>
+                                <th >Ngày kết thúc</th>
+                                <th >Số tháng</th>
+                                <th >Số tiền</th>
+                                <th >Trạng thái tiền phòng</th>
+                                <th >Thời hạn</th>
+                                <th >Sửa / Hủy</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -198,18 +198,18 @@ function RegisterRoom(props) {
                                 state.ListRegisterRooms.map((item, index) => {
                                     return (
                                         <tr className="child" key={item.id} class="border">
-                                            <td class="font-weight-bold text-primary" style={{ "font-size": "17px" }} id={item.studentId} onMouseOut={() => mouseOut(item.studentId)} onMouseOver={() => mouseOver(item.studentId)} onClick={() => handleViewDetailUser(item.studentId)}>{item.studentId}</td>
-                                            <td class="" style={{ "font-size": "17px" }} >{item.roomId}</td>
+                                            <td class="font-weight-bold text-primary" id={item.studentId} onMouseOut={() => mouseOut(item.studentId)} onMouseOver={() => mouseOver(item.studentId)} onClick={() => handleViewDetailUser(item.studentId)}>{item.studentId}</td>
+                                            <td class=""  >{item.roomId}</td>
 
-                                            {/* <td style={{ "font-size": "17px" }}>{item.dateBegin}</td> */}
-                                            <td style={{ "font-size": "17px" }}>{moment(item.dateBegin).format("DD-MM-YYYY")}</td>
-                                            <td style={{ "font-size": "17px" }} >{moment(item.dateEnd).format("DD-MM-YYYY")}</td>
+                                            {/* <td >{item.dateBegin}</td> */}
+                                            <td >{moment(item.dateBegin).format("DD-MM-YYYY")}</td>
+                                            <td  >{moment(item.dateEnd).format("DD-MM-YYYY")}</td>
 
-                                            <td style={{ "font-size": "17px" }} >{item.numberOfMonth}</td>
-                                            <td style={{ "font-size": "17px" }} >{item.domitoryFee} VNĐ</td>
-                                            <td style={{ "font-size": "17px" }} >{item.domitoryFeeStatus ? <div class="text-success">Đã thanh toán</div> : <div class="text-danger">Chưa thanh toán</div>}</td>
-                                            <td style={{ "font-size": "17px" }} >{item.status ? <div class="text-success">Còn hạn</div> : <div class="text-danger">Hết hạn</div>}</td>
-                                            <td style={{ "font-size": "17px" }}>
+                                            <td  >{item.numberOfMonth}</td>
+                                            <td  >{item.domitoryFee} VNĐ</td>
+                                            <td  >{item.domitoryFeeStatus ? <div class="text-success">Đã thanh toán</div> : <div class="text-danger">Chưa thanh toán</div>}</td>
+                                            <td  >{item.status ? <div class="text-success">Còn hạn</div> : <div class="text-danger">Hết hạn</div>}</td>
+                                            <td >
                                                 <button class="btn btn-success mr-1" onClick={() => handleUpdateRegister(item)}><i class="fa fa-pencil" aria-hidden="true"></i></button>
                                                 <button class="btn btn-danger" onClick={() => handleDeleteRegister(item)}><i class="fa fa-calendar-times-o" aria-hidden="true"></i></button>
                                             </td>

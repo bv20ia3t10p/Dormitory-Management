@@ -4,10 +4,13 @@ import React, { useState } from "react";
 import SidebarAdmin from '../Sidebar/SidebarAdmin';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import UpdateTypeRoom from './UpdateTypeRoom';
 import axios from 'axios';
 import moment from 'moment';
 import { toast } from 'react-toastify';
 function Room(props) {
+    const [modal, setModal] = useState(false);
+    const toggle = () => setModal(!modal);
     const [state, setState] = useState({ ListRooms: [] });
     const [student, setStudent] = useState([]);
     const [storeId, setStoreId] = useState(1);
@@ -81,15 +84,38 @@ function Room(props) {
         setStudent(
             res.data
         )
-        let rooms = await axios.get(`https://localhost:7184/${id}`);
+        let rooms = await axios.get(`https://localhost:7184/RoomType/${id}`);
         SetRoom(
             rooms.data
         )
         console.log("check room: ", room)
     }
+    const handleOnclickUpdate = () => {
+        toggle();
+    }
+    const updateTypeRoom = async (data) => {
+        console.log("check data from parent: ", data)
+        try {
+            await axios.put(`https://localhost:7184/RoomType/${data.id}`, data);
+            toast.success("Cap nhat thanh cong");
+            toggle();
+        } catch (error) {
+            toast.error("Cap nhat that bai")
+        }
+    }
     return (
         <>
             <SidebarAdmin />
+            {
+                modal &&
+                <UpdateTypeRoom
+                    modal={modal}
+                    toggle={toggle}
+                    // currentTypeRoom={editstaff}
+                    updateTypeRoom={updateTypeRoom}
+                />
+            }
+
             <div class="section">
                 <h3 class="">Quản lý phòng</h3>
                 <select class="rounded ml-2 text-center" onClick={(event) => handleSearchListRoom(event.target.value)}>
@@ -98,12 +124,14 @@ function Room(props) {
                     <option value={2}>Tòa A2</option>
                 </select>
                 <div class="row">
-                    <div class=" text-primary ml-2"><i class="fa fa-home fa-2x" aria-hidden="true"></i>Phòng còn trống</div>
-                    <div class="ml-5 text-danger"><i class="fa fa-home fa-2x" aria-hidden="true"></i>Phòng đầy</div>
-                    <div class="ml-5 text-success"><i class="fa fa-home fa-2x" aria-hidden="true"></i>Phòng đang chọn</div>
+                    <div class="col text-primary ml-2"><i class="fa fa-home fa-2x" aria-hidden="true"></i>Phòng còn trống</div>
+                    <div class="col  text-danger"><i class="fa fa-home fa-2x" aria-hidden="true"></i>Phòng đầy</div>
+                    <div class="col  text-success"><i class="fa fa-home fa-2x" aria-hidden="true"></i>Phòng đang chọn</div>
+                    {localStorage.getItem(localStorage.getItem("account")) == "Admin" ? <div class="col"><input type="button" class="btn btn-primary" value="Cập nhật loại phòng" onClick={() => handleOnclickUpdate()} /></div> : <></>}
+
                 </div>
 
-                <div class="row">
+                <div class="row mt-4">
                     {state.ListRooms && state.ListRooms.length > 0 &&
                         state.ListRooms.map((item, index) => {
                             return (
@@ -136,15 +164,20 @@ function Room(props) {
                         {student && student.length > 0 &&
                             student.map((item, index) => {
                                 return (
-                                    <tr key={item.id} class="border">
-                                        <td style={{ "font-size": "16px" }}>{item.studentId}</td>
-                                        <td style={{ "font-size": "16px" }}>{moment(item.dateBegin).format("DD-MM-YYYY")}</td>
-                                        <td style={{ "font-size": "16px" }}>{moment(item.dateEnd).format("DD-MM-YYYY")}</td>
-                                        <td style={{ "font-size": "16px" }}>{item.numberOfMonth}</td>
-                                        <td style={{ "font-size": "16px" }}>{item.domitoryFee}</td>
-                                        <td style={{ "font-size": "16px" }}>{item.domitoryFeeStatus ? <div class="text-success" style={{ "font-size": "16px" }}>Đã thanh toán</div> : <div class="text-danger" style={{ "font-size": "16px" }}>Chưa thanh toán</div>}</td>
-                                        <td style={{ "font-size": "16px" }}>{item.status ? <div class="text-success" style={{ "font-size": "16px" }}>Còn hạn</div> : <div class="text-danger" style={{ "font-size": "16px" }}>Hết hạn</div>}</td>
-                                    </tr>
+                                    <>{item.status ?
+                                        <tr key={item.id} class="border">
+                                            <td style={{ "font-size": "16px" }}>{item.studentId}</td>
+                                            <td style={{ "font-size": "16px" }}>{moment(item.dateBegin).format("DD-MM-YYYY")}</td>
+                                            <td style={{ "font-size": "16px" }}>{moment(item.dateEnd).format("DD-MM-YYYY")}</td>
+                                            <td style={{ "font-size": "16px" }}>{item.numberOfMonth}</td>
+                                            <td style={{ "font-size": "16px" }}>{item.domitoryFee}</td>
+                                            <td style={{ "font-size": "16px" }}>{item.domitoryFeeStatus ? <div class="text-success" style={{ "font-size": "16px" }}>Đã thanh toán</div> : <div class="text-danger" style={{ "font-size": "16px" }}>Chưa thanh toán</div>}</td>
+                                            <td style={{ "font-size": "16px" }}>{item.status ? <div class="text-success" style={{ "font-size": "16px" }}>Còn hạn</div> : <div class="text-danger" style={{ "font-size": "16px" }}>Hết hạn</div>}</td>
+                                        </tr>
+                                        : <></>
+                                    }
+                                    </>
+
                                 )
                             })}
                     </tbody>

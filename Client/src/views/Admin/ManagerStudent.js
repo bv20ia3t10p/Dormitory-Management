@@ -15,6 +15,7 @@ function ManagerStudent(props) {
     const [modal, setModal] = useState(false);
     const [editStudent, setEditstudent] = useState({ StudentEdit: {} })
     const [modalEdit, setModalEdit] = useState(false);
+    const [idStudent, setStudent] = useState("")
     const toggleEdit = () => setModalEdit(!modalEdit);
     const toggle = () => setModal(!modal);
     useEffect(() => {
@@ -25,7 +26,7 @@ function ManagerStudent(props) {
             })
         }
         fetchMyAPI()
-    }, [state.ListUsers])
+    }, [])
     const createNewStudent = async (data) => {
         try {
             console.log('check data child: ', data)
@@ -97,12 +98,47 @@ function ManagerStudent(props) {
             console.log(error)
         }
     }
+    const handleOnclickSearch = async () => {
+        if (idStudent != "") {
+            try {
+                let res = await axios.get(`https://localhost:7184/Student/${idStudent}`);
+                setState({
+                    ListUsers: res.data ? res.data : []
+                })
+                console.log(state.ListUsers)
+            } catch (error) {
+                toast.error("Không có dữ liệu")
+            }
+        }
+        else if (idStudent == "") {
+            try {
+                let res = await axios.get(`https://localhost:7184/Student`);
+                setState({
+                    ListUsers: res.data ? res.data : []
+                })
+            } catch (error) {
+                toast.error("Không có dữ liệu")
+            }
+        }
+    }
+    const handleOnChangeInput = (event) => {
+        setStudent(
+            event.target.value
+        )
+    }
     return (
         <>
             {/* <NavStudent /> */}
             <SidebarAdmin />
             <div class="section row">
                 <h3 class="w-100 ">Quản lý sinh viên</h3>
+                <nav class="navbar navbar-light ml-5">
+                    <div class="row ml-1">
+                        <input class="col form-control mr-sm-2 " type="text" placeholder="Id Student" value={idStudent} aria-label="Search" onChange={(event) => handleOnChangeInput(event)}></input>
+                        <button class="col btn btn-outline-success my-2 my-sm-0" type="submit" onClick={() => handleOnclickSearch()}>Search</button>
+                        {/* <div class="col-6"></div> */}
+                    </div>
+                </nav>
                 <button style={{ marginLeft: "auto" }} class="pl-3 pr-3 mb-2 btn btn-primary pull-right mr-5" onClick={toggle}>Thêm sinh viên</button>
                 <div class="mr-4 text-white">...</div>
                 <Addstudent
@@ -123,7 +159,7 @@ function ManagerStudent(props) {
                     <table class="table table-hover shadow">
                         <thead>
                             <tr class="border bg-light">
-                                <th style={{ "font-size": "16px" }} scope="col">Stt</th>
+                                <th style={{ "font-size": "16px" }} scope="col">Id</th>
                                 <th style={{ "font-size": "16px" }} scope="col">Họ và tên</th>
                                 <th style={{ "font-size": "16px" }} scope="col">Giới tính</th>
                                 <th style={{ "font-size": "16px" }} scope="col">Email</th>
