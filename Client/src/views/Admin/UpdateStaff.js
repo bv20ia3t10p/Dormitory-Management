@@ -15,6 +15,7 @@ function UpdateStaff(props) {
         phoneNumber: staff.StaffEdit.phoneNumber,
         address: staff.StaffEdit.address,
         gender: staff.StaffEdit.gender,
+        idCard: staff.StaffEdit.idCard,
         status: staff.StaffEdit.status
     });
     const handleOnchangeInput = (event, item) => {
@@ -142,6 +143,18 @@ function UpdateStaff(props) {
                                 name="address"
                                 onChange={(event) => handleOnchangeInput(event, "address")}
                                 value={state.address}
+                            />
+                        </FormGroup>
+                        {/* idCard */}
+                        <FormGroup>
+                            <Label for="idCard">
+                                idCard
+                            </Label>
+                            <Input
+                                id="idCard"
+                                name="idCard"
+                                onChange={(event) => handleOnchangeInput(event, "idCard")}
+                                value={state.idCard}
                             />
                         </FormGroup>
                         <Label for="gender">

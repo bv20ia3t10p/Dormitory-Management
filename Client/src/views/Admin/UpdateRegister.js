@@ -110,7 +110,7 @@ function UpdateRegister(props) {
                             />
                         </FormGroup>
                         <Label for="gender">
-                            gender
+                            domitoryFee Status
                         </Label>
 
                         <FormGroup>

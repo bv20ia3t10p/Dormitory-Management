@@ -31,9 +31,9 @@ function Admin(props) {
             let res = await axios.post(`https://localhost:7184/api/Manager`, data);
             console.log('response create staff: ', res)
             setModal(false);
-            toast.success("Add new staff success");
+            toast.success("Thêm nhân viên thành công");
         } catch (error) {
-            toast.error("Add new staff fail")
+            toast.error("Thêm nhân viên thất bại")
             console.log('check data from child: ', data)
         }
     }
@@ -50,9 +50,9 @@ function Admin(props) {
             let res = await axios.put(`https://localhost:7184/api/Manager/${data.id}`, data);
             console.log('response create user: ', res)
             toggleEdit()
-            toast.success("Update success");
+            toast.success("Cập nhật thành công");
         } catch (error) {
-            toast.error("Update don't success");
+            toast.error("Cập nhật không thành công");
             console.log(error)
         }
         console.log('check data from child: ', data)
@@ -77,18 +77,18 @@ function Admin(props) {
                 status: false
             });
             console.log('response create user: ', res)
-            toast.success("Delete success")
+            toast.success("Xóa thành công")
         } catch (error) {
-            toast.error("Delete don't success")
+            toast.error("Xóa không thành công")
             console.log(error)
         }
     }
     return (
-        <>
+        < >
             <SidebarAdmin />
             <div class="section row">
-                <h3 class="col-12">Danh sách nhân viên</h3>
-                <button style={{ marginLeft: "auto" }} class="col-2 mb-2 btn btn-primary pull-right mr-5" onClick={toggle}>Thêm nhân viên</button>
+                <h3 class="col-12">Quản lý nhân viên</h3>
+                <button style={{ marginLeft: "auto" }} class="pl-3 pr-3 mb-2 btn btn-primary pull-right mr-5" onClick={toggle}>Thêm nhân viên</button>
                 <div class="mr-4 text-white">...</div>
                 <Addstaff
                     modal={modal}
@@ -104,7 +104,7 @@ function Admin(props) {
                         updateStaff={updateStaffId}
                     />
                 }
-                <div id="collapse1" class="col-12">
+                <div id="" class="col-12">
                     <table class="table table-hover shadow">
                         <thead>
                             <tr class="border bg-light">
@@ -112,9 +112,10 @@ function Admin(props) {
                                 <th scope="col">Họ và tên</th>
                                 <th scope="col">Giới tính</th>
                                 <th scope="col">Email</th>
+                                <th scope="col">idCard</th>
                                 <th scope="col">Số điện thoại</th>
                                 <th scope="col">Trạng thái</th>
-                                <th scope="col">Sửa</th>
+                                <th scope="col">Sửa / xóa</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -127,8 +128,9 @@ function Admin(props) {
                                             <td onClick={() => handleViewDetailUser(item)}>{item.lastName + " " + item.firstName}</td>
                                             <td onClick={() => handleViewDetailUser(item)}>{item.gender ? "Nam" : "Nữ"}</td>
                                             <td onClick={() => handleViewDetailUser(item)}>{item.email}</td>
+                                            <td onClick={() => handleViewDetailUser(item)}>{item.idCard}</td>
                                             <td onClick={() => handleViewDetailUser(item)}>{item.phoneNumber}</td>
-                                            <td onClick={() => handleViewDetailUser(item)}>{item.status ? <div class="text-success">True</div> : <div class="text-danger">false</div>}</td>
+                                            <td onClick={() => handleViewDetailUser(item)}>{item.status ? <div class="text-success">Đang làm</div> : <div class="text-danger">Đã nghĩ</div>}</td>
                                             <td>
                                                 <button class="btn btn-success mr-1" onClick={() => handleEditStaff(item)}><i class="fa fa-pencil" aria-hidden="true"></i></button>
                                                 <button class="btn btn-danger" onClick={() => handleDeleteStaff(item)}><i class="fa fa-trash" aria-hidden="true"></i></button>

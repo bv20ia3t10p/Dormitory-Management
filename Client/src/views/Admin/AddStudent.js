@@ -15,7 +15,7 @@ function Addstudent(props) {
         homeAddress: '',
         mainAddress: '',
         email: '',
-        avartar: '',
+        avartar: 'test',
         identifyCardNumber: '',
         universitysutdentId: '',
         faculty: '',
@@ -200,12 +200,11 @@ function Addstudent(props) {
                             />
                         </FormGroup>
                         <FormGroup>
-                            <Label for="avartar">
-                                avartar
-                            </Label>
+
                             <Input
                                 id="avartar"
                                 name="avartar"
+                                type="hidden"
                                 onChange={(event) => handleOnchangeInput(event, "avartar")}
                                 value={state.avartar}
                             />
