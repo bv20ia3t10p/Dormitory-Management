@@ -130,7 +130,7 @@ function Admin(props) {
                                             <td onClick={() => handleViewDetailUser(item)}>{item.email}</td>
                                             <td onClick={() => handleViewDetailUser(item)}>{item.idCard}</td>
                                             <td onClick={() => handleViewDetailUser(item)}>{item.phoneNumber}</td>
-                                            <td onClick={() => handleViewDetailUser(item)}>{item.status ? <div class="text-success">Đang làm</div> : <div class="text-danger">Đã nghĩ</div>}</td>
+                                            <td onClick={() => handleViewDetailUser(item)}>{item.status ? <div class="text-success">Đang làm</div> : <div class="text-danger">Đã nghỉ</div>}</td>
                                             <td>
                                                 <button class="btn btn-success mr-1" onClick={() => handleEditStaff(item)}><i class="fa fa-pencil" aria-hidden="true"></i></button>
                                                 <button class="btn btn-danger" onClick={() => handleDeleteStaff(item)}><i class="fa fa-trash" aria-hidden="true"></i></button>

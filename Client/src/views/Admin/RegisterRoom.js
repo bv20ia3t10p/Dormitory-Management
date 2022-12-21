@@ -30,7 +30,7 @@ function RegisterRoom(props) {
             console.log("check res get: ", res)
         }
         fetchMyAPI()
-    }, [state.ListRegisterRooms])
+    }, [])
     const createNewRegisRoom = async (data) => {
         try {
             let res = await axios.post(`https://localhost:7184/RegisterRoom`, data);
