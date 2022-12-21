@@ -7,18 +7,27 @@ import { useState, useEffect } from "react";
 import moment from "moment";
 function Accommodation(props) {
     const [Accommodation, setAccommodation] = useState([]);
+    const [idStudent, setIdStudent] = useState();
     var id = localStorage.getItem("id");
+
     console.log("check id: ", id);
+    async function GetIdStudent() {
+        let data = await axios.get(`https://localhost:7184/Student/${id}/accountId`);
+        setIdStudent(
+            data.data.id
+        )
+    }
+    async function fetchMyAPI() {
+        let data = await axios.get(`https://localhost:7184/RegisterRoom/${idStudent}/student`);
+        setAccommodation(
+            data.data
+        )
+    }
     useEffect(() => {
-        async function fetchMyAPI() {
-            let data = await axios.get(`https://localhost:7184/RegisterRoom/${id}/student`);
-            setAccommodation(
-                data.data
-            )
-        }
+        GetIdStudent()
         fetchMyAPI()
-    }, [])
-    console.log("check Accommodation: ", Accommodation);
+    }, [idStudent])
+    console.log("check idStudent: ", idStudent);
     return <div>
         <SidebarStudent />
         <h3 class="text-center p-3 text-danger ">Lịch sử thuê phòng</h3>

@@ -11,18 +11,26 @@ function Invoice(props) {
     const [modal, setModal] = useState(false);
     const [CurrentInvoice, setCurrentInvoice] = useState({});
     const [Invoice, setInvoice] = useState([]);
+    const [idStudent, setIdStudent] = useState();
     const toggle = () => setModal(!modal);
     var id = localStorage.getItem("id");
     console.log("check id: ", id);
+    async function GetIdStudent() {
+        let data = await axios.get(`https://localhost:7184/Student/${id}/accountId`);
+        setIdStudent(
+            data.data.id
+        )
+    }
+    async function fetchMyAPI() {
+        let data = await axios.get(`https://localhost:7184/RegisterRoom/${idStudent}/student`);
+        setInvoice(
+            data.data
+        )
+    }
     useEffect(() => {
-        async function fetchMyAPI() {
-            let data = await axios.get(`https://localhost:7184/RegisterRoom/${id}/student`);
-            setInvoice(
-                data.data
-            )
-        }
+        GetIdStudent()
         fetchMyAPI()
-    }, [Invoice])
+    }, [idStudent, Invoice])
 
     const PaymentRoom = async (item) => {
         toggle()

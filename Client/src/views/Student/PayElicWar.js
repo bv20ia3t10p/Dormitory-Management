@@ -11,17 +11,27 @@ function PayElicWar(props) {
     const [modal, setModal] = useState(false);
     const [CurrentElicWar, setCurrentElicWar] = useState({});
     const [payElicWar, setPayElicWar] = useState({});
+    const [getIdRoom, setGetIdRoom] = useState()
     const toggle = () => setModal(!modal);
-    useEffect(() => {
-        async function fetchMyAPI() {
-            let res = await axios.get(`https://localhost:7184/ElectricWaterLog/${localStorage.getItem("id")}`);
-            setPayElicWar(
-                res.data
-            )
-        }
+    var id = localStorage.getItem("id");
+    async function GetIdRoom() {
+        let data = await axios.get(`https://localhost:7184/Student/${id}/accountId`);
+        setGetIdRoom(
+            data.data.registerRoomsDTO[0].roomId
+        )
+        // console.log("check id room: ", data.data.registerRoomsDTO[0].roomId)
 
+    }
+    async function fetchMyAPI() {
+        let res = await axios.get(`https://localhost:7184/ElectricWaterLog/${getIdRoom}`);
+        setPayElicWar(
+            res.data
+        )
+    }
+    useEffect(() => {
+        GetIdRoom()
         fetchMyAPI()
-    }, [payElicWar])
+    }, [payElicWar, getIdRoom])
 
     const handlePayElecWar = (item) => {
         toggle()
