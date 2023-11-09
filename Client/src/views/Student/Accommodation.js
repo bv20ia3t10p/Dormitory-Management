@@ -11,7 +11,9 @@ function Accommodation(props) {
     console.log("check id: ", id);
     useEffect(() => {
         async function fetchMyAPI() {
-            let data = await axios.get(`https://localhost:7184/RegisterRoom/${id}/student`);
+            let studentId = await axios.get(`https://localhost:7184/Student/${id}/accountId`);
+
+            let data = await axios.get(`https://localhost:7184/RegisterRoom/${studentId.data.id}/student`);
             setAccommodation(
                 data.data
             )

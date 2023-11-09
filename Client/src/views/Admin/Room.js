@@ -185,9 +185,9 @@ function Room(props) {
                 <table class="table table-hover shadow mt-2" style={{ width: "30%" }} >
                     <thead class="bg-info text-white">
                         <tr>
-                            <td style={{ "font-size": "16px" }}>Mã phòng</td>
-                            <td style={{ "font-size": "16px" }}>Phòng</td>
-                            <td style={{ "font-size": "16px" }}>Đồ đặc</td>
+                            <td style={{ "font-size": "16px" }}>Mã loại phòng</td>
+                            <td style={{ "font-size": "16px" }}>Số chỗ</td>
+                            <td style={{ "font-size": "16px" }}>Đồ đạc</td>
                             <td style={{ "font-size": "16px" }}>Phí phòng</td>
                         </tr>
                     </thead>

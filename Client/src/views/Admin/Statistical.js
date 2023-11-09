@@ -65,7 +65,7 @@ function Statistical(props) {
         < >
             <SidebarAdmin />
             <div class="section row">
-                <h3 class="w-100">Thống kê doanh thu</h3>
+                <h3 class="w-100">Thống kê</h3>
                 <div class="col border m-2 bg-light rounded p-3">
                     <div style={{ "font-size": "25px" }} class="font-weight-bold ">{totalFeeWaterElec}<span style={{ "margin-left": "60%" }}><i class="fa fa-usd text-warning fa-2x" aria-hidden="true"></i></span></div>
                     <div class="text-white">.</div>
@@ -79,7 +79,7 @@ function Statistical(props) {
                 <div class="col border m-2 bg-light rounded p-3">
                     <div class="font-weight-bold" style={{ "font-size": "25px" }}>{countStudent} <span style={{ "margin-left": "70%" }}><i class="fa fa-pie-chart text-primary fa-2x" aria-hidden="true"></i></span></div>
                     <div class="text-white">.</div>
-                    <div style={{ "font-size": "25px" }}>Số sinh viên chưa đóng</div>
+                    <div style={{ "font-size": "25px" }}>Số sinh viên chưa đóng tiền</div>
                 </div>
                 <div class="col border m-2 bg-light rounded p-3">
                     <div class="font-weight-bold" style={{ "font-size": "25px" }}>{countSlotRemain}<span style={{ "margin-left": "70%" }}><i class="fa fa-refresh text-info fa-2x" aria-hidden="true"></i></span></div>

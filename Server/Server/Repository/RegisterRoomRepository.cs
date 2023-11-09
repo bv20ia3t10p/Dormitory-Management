@@ -130,8 +130,8 @@ namespace Server.Repository
         public void UpdateRegisterRoom(int Id, UpdateRegisterRoom model)
         {
             var regigterRoom = GetRegisterRoom(Id);
-          
 
+           
             //Change student room
             if (regigterRoom.RoomId != model.RoomId) {
                 //Old room
@@ -153,8 +153,15 @@ namespace Server.Repository
                 room.SlotRemain = slotRemain - 1;
                 _context.Rooms.Update(oldRoom);
                 _context.Rooms.Update(room);
-            }          
-                     
+            }
+
+            //Cancel Room
+            if (!model.Status) {
+                var room = _context.Rooms.Find(regigterRoom.RoomId);
+                room.SlotRemain = room.SlotRemain + 1;
+                _context.Rooms.Update(room);
+            }
+            
             if (model.NumberOfMonth <= 0) {
                 throw new AppException("Number of month error");
             }

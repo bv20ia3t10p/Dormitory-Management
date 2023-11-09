@@ -14,7 +14,10 @@ function PayElicWar(props) {
     const toggle = () => setModal(!modal);
     useEffect(() => {
         async function fetchMyAPI() {
-            let res = await axios.get(`https://localhost:7184/ElectricWaterLog/${localStorage.getItem("id")}`);
+            let studentId = await axios.get(`https://localhost:7184/Student/${localStorage.getItem("id")}/accountId`);
+            console.log(studentId)
+            console.log(studentId.data?.registerRoomsDTO[0]?.roomId)
+            let res = await axios.get(`https://localhost:7184/ElectricWaterLog/${studentId.data?.registerRoomsDTO[0]?.roomId}`);
             setPayElicWar(
                 res.data
             )
@@ -51,7 +54,7 @@ function PayElicWar(props) {
             />
         }
 
-        <h3 class="text-center p-3 text-danger">Tiền điện tiền nước</h3>
+        <h3 class="text-center p-3 text-danger">Hóa đơn điện nước</h3>
         <div class="section row" >
             <div class="w-100" >
 
