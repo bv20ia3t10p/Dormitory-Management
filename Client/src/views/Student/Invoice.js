@@ -11,6 +11,7 @@ function Invoice(props) {
     const [modal, setModal] = useState(false);
     const [CurrentInvoice, setCurrentInvoice] = useState({});
     const [Invoice, setInvoice] = useState([]);
+    const [idStudent, setIdStudent] = useState();
     const toggle = () => setModal(!modal);
     var id = localStorage.getItem("id");
     console.log("check id: ", id);
@@ -23,7 +24,7 @@ function Invoice(props) {
             )
         }
         fetchMyAPI()
-    }, [Invoice])
+    }, [idStudent, Invoice])
 
     const PaymentRoom = async (item) => {
         toggle()

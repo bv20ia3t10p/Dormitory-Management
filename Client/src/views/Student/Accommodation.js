@@ -7,7 +7,9 @@ import { useState, useEffect } from "react";
 import moment from "moment";
 function Accommodation(props) {
     const [Accommodation, setAccommodation] = useState([]);
+    const [idStudent, setIdStudent] = useState();
     var id = localStorage.getItem("id");
+
     console.log("check id: ", id);
     useEffect(() => {
         async function fetchMyAPI() {
@@ -19,8 +21,8 @@ function Accommodation(props) {
             )
         }
         fetchMyAPI()
-    }, [])
-    console.log("check Accommodation: ", Accommodation);
+    }, [idStudent])
+    console.log("check idStudent: ", idStudent);
     return <div>
         <SidebarStudent />
         <h3 class="text-center p-3 text-danger ">Lịch sử thuê phòng</h3>

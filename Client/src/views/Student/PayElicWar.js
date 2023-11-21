@@ -11,6 +11,7 @@ function PayElicWar(props) {
     const [modal, setModal] = useState(false);
     const [CurrentElicWar, setCurrentElicWar] = useState({});
     const [payElicWar, setPayElicWar] = useState({});
+    const [getIdRoom, setGetIdRoom] = useState()
     const toggle = () => setModal(!modal);
     useEffect(() => {
         async function fetchMyAPI() {
@@ -24,7 +25,7 @@ function PayElicWar(props) {
         }
 
         fetchMyAPI()
-    }, [payElicWar])
+    }, [payElicWar, getIdRoom])
 
     const handlePayElecWar = (item) => {
         toggle()

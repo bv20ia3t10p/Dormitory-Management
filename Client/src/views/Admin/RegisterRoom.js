@@ -169,14 +169,14 @@ function RegisterRoom(props) {
 
             <div class="section row" >
                 <h3 class="w-100 " >Quản lý Đăng ký</h3>
-                <nav class="navbar navbar-light  col-6 ml-5">
+                <nav class="navbar navbar-light  col-6 ">
                     <div class="row ml-1">
                         <input class="col-3 form-control mr-sm-2 ml-3" type="search" placeholder="Id Student" aria-label="Search" value={id.idStudent} onChange={(event) => handleIdRegisterRoom(event, "idStudent")}></input>
                         <input class="col-3 form-control mr-sm-2" type="search" placeholder="Id Room" aria-label="Search" value={id.idRoom} onChange={(event) => handleIdRegisterRoom(event, "idRoom")}></input>
                         <button class="col-3 btn btn-outline-success my-2 my-sm-0" type="submit" onClick={() => handleOnclickSearch()}>Search</button>
                     </div>
                 </nav>
-                <button style={{ marginLeft: "auto" }} class="col-2 mb-2 btn btn-primary pull-right mr-5" onClick={toggle}>Đăng ký</button>
+                <button style={{ marginLeft: "auto" }} class="col-2 mb-2 btn btn-primary pull-right" onClick={toggle}>Đăng ký</button>
                 <div class="ml-4 text-white">...</div>
                 <div id="" class="align-item-center" style={{ "margin": "auto" }}>
                     <table class="table shadow w-100 " >
