@@ -23,6 +23,8 @@ import DetailStudent from './Admin/DetailStudent';
 import ManageReceipt from './Admin/ManageReceipt';
 import PayElicWar from './Student/PayElicWar';
 import Statistical from './Admin/Statistical';
+import BotChat from './Admin/BotChat';
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {
@@ -47,6 +49,7 @@ const App = () => {
     <Router>
       <div className="App">
         <header className="App-header">
+          
           <ToastContainer />
           <Switch>
             <Route path="/" exact render={() => {
@@ -65,6 +68,7 @@ const App = () => {
               <Nav />
               <User3 />
             </Route>
+            
             <Route path="/admin" render={() => {
               return localStorage.getItem(localStorage.getItem("account")) == "Admin" ? <Admin /> : <>{localStorage.getItem(localStorage.getItem("account")) == "Manager" ? toast.error("Trang này dành cho admin") && <ManagerStudent /> : <Redirect to="/Login" />} </>
             }}>
@@ -85,6 +89,9 @@ const App = () => {
             }}></Route>
             <Route path="/statistical" render={() => {
               return localStorage.getItem(localStorage.getItem("account")) == "Admin" || "Manager" ? <Statistical /> : <Redirect to="/Login" />
+            }}></Route>
+             <Route path="/botchat" render={() => {
+              return localStorage.getItem(localStorage.getItem("account")) == "Admin" || "Manager" || "Student" ? <BotChat /> : <Redirect to="/Login" />
             }}></Route>
             <Route path="/student" render={() => {
               return localStorage.getItem(localStorage.getItem("account")) == "Student" ? <Student /> : <Redirect to="/Login" />
@@ -115,11 +122,12 @@ const App = () => {
             <Route path="/Login" >
               <Login
                 Token={check}
-              />
+                />
             </Route>
           </Switch>
         </header>
       </div>
+
     </Router>
   );
 }
