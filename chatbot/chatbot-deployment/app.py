@@ -2,45 +2,115 @@ from flask import Flask, render_template,request,jsonify
 from chat import get_response
 from datetime import datetime
 from pymongo.server_api import ServerApi
-from pymongo import MongoClient
-app = Flask(__name__)
+from pymongo.mongo_client import MongoClient
+from flask_cors import CORS, cross_origin
+import pymongo
+import pandas as pd
+import json
+from bson import ObjectId
 
-client = MongoClient("mongodb+srv://hotuantrung29:123456tt@cluster0.dhtbvs5.mongodb.net/?retryWrites=true&w=majority", server_api=ServerApi('1'))
+class JSONEncoder(json.JSONEncoder):
+    def default(self, o):
+        if isinstance(o, ObjectId):
+            return str(o)
+        return json.JSONEncoder.default(self, o)
+
+
+app = Flask(__name__)
+cors = CORS(app)
+
+client = MongoClient("mongodb+srv://hotuantrung29:123456tt@cluster0.dhtbvs5.mongodb.net/?retryWrites=true", server_api=ServerApi('1'))
 db = client["chatbotDB"]
-messages_collection = db["chat"]
+session_collection = db["chatSession"]
+seperated_collection = db["seperatedChat"]
 
 @app.get("/")
 def index_get():
     return render_template("base.html")
 
-@app.post("/predict")
-def predict():
-    user_message = request.get_json().get("message")
-    chatbot_response = get_response(user_message)
+# # @app.post("/predict")
+# @app.route('/predict', methods=['POST'])
+# @cross_origin()
+# def predict():
+#     user_message = request.get_json().get("message")
+#     chatbot_response = get_response(user_message)
+#     save_to_mongodb(user_id="some_user_id", message=user_message, chat_by="user")
+#     save_to_mongodb(user_id="some_user_id", message=chatbot_response, chat_by="chatbot")
+#     message = {"answer": chatbot_response}
+#     return jsonify(message)
 
-    save_to_mongodb(user_id="some_user_id", message=user_message, chat_by="user")
-    save_to_mongodb(user_id="some_user_id", message=chatbot_response, chat_by="chatbot")
+@app.route("/sessions/<string:sessionId>/<string:msg>",methods=['GET'])
+@cross_origin()
+def chat_with_bot(sessionId, msg):
+    chatbot_response = get_response(msg)
+    insert_new_chat(sessionId,msg,"user")
+    insert_new_chat(sessionId,chatbot_response,"bot")
+    return jsonify(chatbot_response)
 
-    message = {"answer": chatbot_response}
-    return jsonify(message)
 
-def save_to_mongodb(user_id, message, chat_by):
-    # Create a document update query
-    update_query = {
-        "$push": {
-            "boxchat": {
-                "message": message,
-                "timestamp": int(datetime.timestamp(datetime.now())),
-                "dateTime": datetime.now().isoformat(),
-                "chatBy": chat_by
-            }
-        }
-    }
+@app.route("/sessions/new/<string:userId>", methods=['GET'])
+@cross_origin()
+def create_new_session(userId):
+    return jsonify({"sessionId":str(insert_new_sesion(userId))})
+    
 
-    # Update the document based on the User_id
-    messages_collection.update_one({"User_id": user_id}, update_query, upsert=True)
+@app.get("/sessions/<string:userId>")
+@cross_origin()
+def get_sessions_for_user(userId):
+    return get_sessions_for_user(userId)
+
+@app.get("/sessions/<string:sessionId>/messages")
+@cross_origin()
+def controller_get_history_for_session(sessionId):
+    return get_chat_for_session(sessionId)
+
+# Chatbot ID = "chatbot"
+def insert_new_chat(sessionId, message, msgType ):
+    seperated_collection.insert_one({
+        "sessionId":sessionId,
+        "message":message,
+        "timestamp": int(datetime.timestamp(datetime.now())),
+        "type":msgType
+    })
+
+def insert_new_sesion(userId):
+    return session_collection.insert_one({
+        "user":userId,
+        "timestamp": int(datetime.timestamp(datetime.now()))
+    }).inserted_id
+
+def get_sessions_for_user(userId):
+    result = pd.DataFrame(session_collection.find({'user':userId}))
+    result.columns=['sessionId','user','timestamp']
+    result['sessionId'] = result['sessionId'].apply(lambda x:str(x))
+    return result.to_dict(orient = 'records')
+
+def get_chat_for_session(sessionId):
+    result = pd.DataFrame(seperated_collection.find({'sessionId':sessionId}).sort({'timestamp':pymongo.ASCENDING}))
+    result.columns=['chatId','sessionId','message','timestamp','type']
+    result['sessionId'] = result['sessionId'].apply(lambda x:str(x))
+    result['chatId'] = result['chatId'].apply(lambda x:str(x))
+    return result.to_dict(orient = 'records')
+
+
+# def save_to_mongodb(user_id, message, chat_by):
+#     # Create a document update query
+#     update_query = {
+#         "$push": {
+#             "boxchat": {
+#                 "message": message,
+#                 "timestamp": int(datetime.timestamp(datetime.now())),
+#                 "dateTime": datetime.now().isoformat(),
+#                 "chatBy": chat_by
+#             }
+#         }
+#     }
+
+    # # Update the document based on the User_id
+    # messages_collection.update_one({"User_id": user_id}, update_query, upsert=True)
 
 
 
 if __name__ == "__main__":
     app.run(debug=True)
+
