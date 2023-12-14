@@ -9,6 +9,7 @@ namespace Server.Interface
         public IEnumerable<RegisterRoomDTO> GetAllRegisterRoom();
         public IEnumerable<RegisterRoom> GetRegiterRoomByStudent(int studentId);
         public IEnumerable<RegisterRoom> GetRegisterRoomByRoom(int roomId);
+        public IEnumerable<RegisterRoom> GetRegisterRoomByStatus(bool stattus);
         public IEnumerable<RegisterRoomDTO> GetRegisterRoomByRoomIdStudentId(int RoomId, int StudentId);
         public void CreateRegisterRoom(CreateRegisterRoom model);
         public void UpdateRegisterRoom(int Id, UpdateRegisterRoom model);

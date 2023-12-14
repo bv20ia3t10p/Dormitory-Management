@@ -177,7 +177,7 @@ namespace Server.Repository
 
         public IEnumerable<RegisterRoomDTO> GetAllRegisterRoom()
         {
-            var rsrList = _context.RegisterRooms.ToList();
+            var rsrList = _context.RegisterRooms.OrderByDescending(r=> r.DateBegin).ToList();
             foreach (var model in rsrList)
             {
                 if (DateTime.Compare(model.DateBegin, model.DateEnd) >= 0 && model.Status == true)
@@ -209,6 +209,11 @@ namespace Server.Repository
             var rr = _context.RegisterRooms.Where(rr=>rr.RoomId == RoomId && rr.StudentId == StudentId)
                 .ToList();
             return _mapper.Map<List<RegisterRoomDTO>>(rr);
+        }
+
+        public IEnumerable<RegisterRoom> GetRegisterRoomByStatus(bool stattus)
+        {
+            throw new NotImplementedException();
         }
     }
 }

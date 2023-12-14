@@ -44,13 +44,13 @@ namespace Server.Controllers
             return Ok(students);
         }
         [HttpGet("{accountId}/accountId")]
-        public IActionResult GetStudentByAccountId(int accountId){
+        public IActionResult GetStudentByAccountId(int accountId) {
             var student = _studentRepository.GetStudentByAccountId(accountId);
             return Ok(student);
-    
+
         }
         [HttpPut("{id}")]
-        public IActionResult Update(int id, UpdateStudent model) { 
+        public IActionResult Update(int id, UpdateStudent model) {
             _studentRepository.UpdateStudent(id, model);
             return Ok();
         }
@@ -58,6 +58,18 @@ namespace Server.Controllers
         public IActionResult Create(CreateStudent model) {
             _studentRepository.CreateStudent(model);
             return Ok();
+        }
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            _studentRepository.DeleteStudent(id);
+            return NoContent();
+        }
+        [HttpGet("search")]
+        public IActionResult Search(int? id, string? name, string? email, string? university, string? identify, string? phoneNumber, bool? status)
+        {
+            var student =_studentRepository.SearchStudent(id, name, email, university, identify, phoneNumber, status);
+            return Ok(student);
         }
     }
 }

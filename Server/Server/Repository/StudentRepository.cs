@@ -39,6 +39,17 @@ namespace Server.Repository
             _context.SaveChanges();
         }
 
+        public void DeleteStudent(int studentId)
+        {
+            var student = _context.Students.Find(studentId);
+            if (student == null)
+            {
+                throw new KeyNotFoundException("Student not found");
+            }
+            _context.Students.Remove(student);
+            _context.SaveChanges();
+        }
+
         public IEnumerable<StudentDTO> GetAllStudents()
         {
             var students = _context.Students
@@ -86,6 +97,27 @@ namespace Server.Repository
             if(student == null)
                 throw new KeyNotFoundException("Student not found");
             return student;
+        }
+
+        public IEnumerable<StudentDTO> SearchStudent(int? id, string? name,string? email, string? university, string? identify, string? phoneNumber, bool? status)
+        {
+            var studentsFilter = _context.Students.Include(s => s.University).ToList();
+            if (id.HasValue)
+                studentsFilter = studentsFilter.Where(s => s.Id == id).ToList();
+            if (!string.IsNullOrEmpty(name))
+                studentsFilter = studentsFilter.Where(s => s.FirstName.Contains(name) || s.LastName.Contains(name)).ToList();
+            if (!string.IsNullOrEmpty(phoneNumber))
+                studentsFilter = studentsFilter.Where(s => s.PhoneNumber.Contains(phoneNumber)).ToList();
+            if (!string.IsNullOrEmpty(identify))
+                studentsFilter = studentsFilter.Where(s => s.IdentifyCardNumber.Contains(identify)).ToList();
+            if (!string.IsNullOrEmpty(email))
+                studentsFilter = studentsFilter.Where(s => s.Email.Contains(email)).ToList();
+            if(!string.IsNullOrEmpty(university))
+                studentsFilter = studentsFilter.Where(s=>s.University.Name.Contains(university)).ToList();
+            if (status.HasValue)
+                studentsFilter = studentsFilter.Where(s => s.status == status).ToList();
+            
+            return _mapper.Map<List<StudentDTO>>(studentsFilter);
         }
 
         public void UpdateStudent(int studentId, UpdateStudent model)
