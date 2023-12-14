@@ -7,14 +7,38 @@ import Checklogin from './CheckLogin';
 import './Login.scss';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-
-
+import Addstudent from '../Admin/AddStudent';
 function Login(props) {
+    const [state, setState] = useState({ ListUsers: [] });
+    const [modal, setModal] = useState(false);
     const [loginn, setLogin] = useState({
         userName: '',
         password: ''
     })
     let history = useHistory()
+    const toggle = () => setModal(!modal);
+    useEffect(() => {
+        async function fetchMyAPI() {
+            let res = await axios.get(`https://localhost:7184/Student`);
+            setState({
+                ListUsers: res.data ? res.data : []
+            })
+        }
+        fetchMyAPI()
+    }, [])
+    const createNewStudent = async (data) => {
+        try {
+            console.log('check data child: ', data)
+            let res = await axios.post(`https://localhost:7184/Student`, data);
+            console.log('response create student: ', res)
+            setModal(false);
+            toast.success("Add new student success");
+        } catch (error) {
+            toast.error("Add new student fail")
+            console.log('check data from child: ', data)
+        }
+    }
+
     const login = async (data) => {
         try {
             let res = await axios.post(`https://localhost:7184/Account/Authenticate`, data);
@@ -59,6 +83,11 @@ function Login(props) {
         <div class="text-center p-3"><img class="mr-3" src="https://upload.wikimedia.org/wikipedia/vi/c/c6/Logo_KTX_%C4%90HQGTPHCM.png"></img><span class="h5 text-info">TRANG THÔNG TIN SINH VIÊN Ở KÝ TÚC XÁ ĐẠI HỌC QUỐC GIA</span></div>
         <div class="text-info p-2 bg-light border ">.</div>
         <div class="mt-5">
+        <Addstudent
+                    modal={modal}
+                    toggle={toggle}
+                    createNewStudent={createNewStudent}
+                />
             <div class="d-flex justify-content-center h-100 ">
                 <div class="card">
                     <div class="card-header bg-light">
@@ -82,7 +111,7 @@ function Login(props) {
                             <div class="form-group" >
                                 <button type="button" class="btn btn-primary pr-5 pl-5 w-100" onClick={() => login(loginn)}><i class="fa fa-key" aria-hidden="true"></i> Đăng nhập</button>
                             </div>
-                            <button type="button" class="btn btn-success">Đăng ký ở ktx</button>
+                            <button type="button" class="btn btn-success"  onClick={toggle}>Đăng ký ở ktx</button>
                             <button type="button" class="btn btn-info ml-3">Quên mật khẩu</button>
                         </div>
                     </div>

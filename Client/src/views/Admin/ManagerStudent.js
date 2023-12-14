@@ -98,14 +98,21 @@ function ManagerStudent(props) {
             console.log(error)
         }
     }
+
+    useEffect(()=>{
+        handleOnclickSearch()
+    },[id])
+
     const handleOnclickSearch = async () => {
+        console.log(id.idStudent)
         if (id.idStudent != "") {
             try {
                 let res = await axios.get(`https://localhost:7184/Student/${id.idStudent}`);
-                console.log("check state id in onclic", res.data)
                 setState({
-                    ListUsers: res.data
+                    ListUsers:[res.data]
                 })
+                console.log("check state id in onclic", state.ListUsers)
+
             } catch (error) {
                 toast.error("Không có dữ liệu")
             }
@@ -172,7 +179,7 @@ function ManagerStudent(props) {
                             </tr>
                         </thead>
                         <tbody>
-                            {state.ListUsers && state.ListUsers.length > 0 &&
+                            {state.ListUsers && state.ListUsers.length >= 0 &&
                                 state.ListUsers.map((item, index) => {
                                     return (
                                         <tr className="child" key={item.id} class="border">
