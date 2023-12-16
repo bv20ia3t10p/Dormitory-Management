@@ -20,7 +20,7 @@ function ManagerStudent(props) {
 
   useEffect(() => {
     async function fetchMyAPI() {
-      let res = await axios.get(`https://localhost:7184/Student`);
+      let res = await axios.get(`https://localhost:7184/api/Student`);
       setState({
         ListUsers: res.data ? res.data : [],
       });
@@ -31,12 +31,12 @@ function ManagerStudent(props) {
   const createNewStudent = async (data) => {
     try {
       console.log("check data child: ", data);
-      let res = await axios.post(`https://localhost:7184/Student`, data);
+      let res = await axios.post(`https://localhost:7184/api/Student`, data);
       console.log("response create student: ", res);
       setModal(false);
-      toast.success("Add new student success");
+      toast.success("Thêm sinh viên thành công");
     } catch (error) {
-      toast.error("Add new student fail");
+      toast.error("Thêm sinh viên thất bại");
       console.log("check data from child: ", data);
     }
   };
@@ -48,11 +48,12 @@ function ManagerStudent(props) {
     });
     console.log("check edit student: ", editStudent.StudentEdit);
   };
+
   const UpdateStudentId = async (data) => {
     console.log("check updateUser: ", data);
     try {
       let res = await axios.put(
-        `https://localhost:7184/Student/${data.id}`,
+        `https://localhost:7184/api/Student/${data.id}`,
         data
       );
       console.log("response create user: ", res);
@@ -81,7 +82,7 @@ function ManagerStudent(props) {
     var isPersisted = data.status;
 
     try {
-      let res = await axios.delete("https://localhost:7184/Student", {
+      let res = await axios.delete("https://localhost:7184/api/Student", {
         params: {
           id: data.id,
         },
@@ -102,33 +103,33 @@ function ManagerStudent(props) {
       console.error("Error deleting student:", error);
     }
 
-    let res = await axios.get(`https://localhost:7184/Student`);
+    let res = await axios.get(`https://localhost:7184/api/Student`);
     setState({
       ListUsers: res.data ? res.data : [],
     });
   };
 
-  useEffect(() => {
-    handleOnclickSearch();
-  }, [id]);
+    useEffect(() => {
+      handleOnclickSearch();
+    }, [id]);
 
   const handleOnclickSearch = async () => {
     console.log(id.idStudent);
     if (id.idStudent != "") {
       try {
         let res = await axios.get(
-          `https://localhost:7184/Student/${id.idStudent}`
+          `https://localhost:7184/api/Student/${id.idStudent}`
         );
         setState({
           ListUsers: [res.data],
         });
-        console.log("check state id in onclic", state.ListUsers);
+        console.log("check state id in onclick", state.ListUsers);
       } catch (error) {
         toast.error("Không có dữ liệu");
       }
     } else if (id.idStudent == "") {
       try {
-        let res = await axios.get(`https://localhost:7184/Student`);
+        let res = await axios.get(`https://localhost:7184/api/Student`);
         setState({
           ListUsers: res.data ? res.data : [],
         });
@@ -155,7 +156,7 @@ function ManagerStudent(props) {
             <input
               class="col form-control mr-sm-2 "
               type="text"
-              placeholder="Id Student"
+              placeholder="MSSV"
               value={id.idStudent}
               aria-label="Search"
               onChange={(event) => handleOnChangeInput(event, "idStudent")}
