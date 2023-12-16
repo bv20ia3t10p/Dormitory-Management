@@ -41,17 +41,19 @@ namespace Server.Repository
 
         public void DeleteStudent(int studentId)
         {
-            var student = _context.Students.Find(studentId);
+            var student = _context.Students.Where(s=>s.Id == studentId).Include(a=>a.account).FirstOrDefault();
             if (student == null)
             {
                 throw new KeyNotFoundException("Student not found");
             }
             if (student.status == false) {
+                var account = _context.Accounts.Where(a => a.Id == student.account.Id).FirstOrDefault();
+                if (account != null)
+                    _context.Accounts.Remove(account);
                 _context.Students.Remove(student);
                  _context.SaveChanges();
             }
             else {
-
                 student.status = false;
                 _context.Update(student);
                  _context.SaveChanges();
