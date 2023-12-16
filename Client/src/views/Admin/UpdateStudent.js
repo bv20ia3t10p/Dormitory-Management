@@ -76,12 +76,12 @@ function UpdateStudent(props) {
     return (
         <div>
             <Modal isOpen={props.modal} fade={false} toggle={props.toggle}>
-                <ModalHeader >Update Student</ModalHeader>
+                <ModalHeader >Cập nhật thông tin</ModalHeader>
                 <ModalBody>
                     <Form >
                         <FormGroup>
                             <Label for="lastName">
-                                lastName
+                                Tên
                             </Label>
                             <Input
                                 id="lastName"
@@ -92,7 +92,7 @@ function UpdateStudent(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="LastName">
-                                firstName
+                                Họ và Tên lót
                             </Label>
                             <Input
                                 id="firstName"
@@ -103,7 +103,7 @@ function UpdateStudent(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="birthDate">
-                                date Of Birth
+                                Ngày sinh
                             </Label>
                             <Input
                                 id="birthDate"
@@ -114,11 +114,11 @@ function UpdateStudent(props) {
                             />
                         </FormGroup>
                         <Label for="gender">
-                            gender
+                            Giới tính
                         </Label>
                         <FormGroup>
                             <Label for="gender">
-                                Man
+                                Nam
                             </Label>
                             &nbsp;
                             &nbsp;
@@ -131,7 +131,7 @@ function UpdateStudent(props) {
                                 value={true}
                             />
                             <Label for="gender">
-                                Woman
+                                Nữ
                             </Label>
                             &nbsp;
                             &nbsp;
@@ -147,7 +147,7 @@ function UpdateStudent(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="ethnic">
-                                ethnic
+                                Dân tộc
                             </Label>
                             <Input
                                 id="ethnic"
@@ -158,7 +158,7 @@ function UpdateStudent(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="nationnality">
-                                nation
+                                Quốc tịch
                             </Label>
                             <Input
                                 id="nationnality"
@@ -169,7 +169,7 @@ function UpdateStudent(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="phoneNumber">
-                                phone Number
+                                Số điện thoại
                             </Label>
                             <Input
                                 id="phoneNumber"
@@ -180,7 +180,7 @@ function UpdateStudent(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="homeAddress">
-                                Home Address
+                                Địa chỉ tạm trú
                             </Label>
                             <Input
                                 id="homeAddress"
@@ -191,7 +191,7 @@ function UpdateStudent(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="mainAddress">
-                                Main Address
+                                Địa chỉ thường trú
                             </Label>
                             <Input
                                 id="mainAddress"
@@ -202,7 +202,7 @@ function UpdateStudent(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="email">
-                                email
+                                Email
                             </Label>
                             <Input
                                 id="email"
@@ -213,7 +213,7 @@ function UpdateStudent(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="avartar">
-                                avartar
+                                Ảnh đại diện
                             </Label>
                             <Input
                                 id="avartar"
@@ -224,7 +224,7 @@ function UpdateStudent(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="identifyCardNumber">
-                                identifyCardNumber
+                                CMND/ CCCD
                             </Label>
                             <Input
                                 id="identifyCardNumber"
@@ -235,7 +235,7 @@ function UpdateStudent(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="universitysutdentId">
-                                universitysutdentId
+                                MSSV
                             </Label>
                             <Input
                                 id="universitysutdentId"
@@ -246,7 +246,7 @@ function UpdateStudent(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="faculty">
-                                faculty
+                                Khoa
                             </Label>
                             <Input
                                 id="faculty"
@@ -257,7 +257,7 @@ function UpdateStudent(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="major">
-                                major
+                                Chuyên ngành
                             </Label>
                             <Input
                                 id="major"
@@ -268,7 +268,7 @@ function UpdateStudent(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="schoolYear">
-                                schoolYear
+                                Năm học
                             </Label>
                             <Input
                                 id="schoolYear"
@@ -279,7 +279,7 @@ function UpdateStudent(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="relatedPersonName">
-                                relatedPersonName
+                                Tên Người thân
                             </Label>
                             <Input
                                 id="relatedPersonName"
@@ -290,7 +290,7 @@ function UpdateStudent(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="relatedPersonPhoneNumber">
-                                related Person Phone Number
+                            SĐT Người thân
                             </Label>
                             <Input
                                 id="relatedPersonPhoneNumber"
@@ -301,7 +301,7 @@ function UpdateStudent(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="universityId">
-                                universityId
+                                Mã trường
                             </Label>
                             <Input
                                 id="universityId"
@@ -311,11 +311,11 @@ function UpdateStudent(props) {
                             />
                         </FormGroup>
                         <Label for="status">
-                            Status
+                            Trạng thái
                         </Label>
                         <FormGroup>
                             <Label for="status">
-                                True
+                                Còn hạn
                             </Label>
                             &nbsp;
                             &nbsp;
@@ -328,7 +328,7 @@ function UpdateStudent(props) {
                                 value={true}
                             />
                             <Label for="status">
-                                Fail
+                                Hết hạn
                             </Label>
                             &nbsp;
                             &nbsp;
@@ -343,10 +343,10 @@ function UpdateStudent(props) {
 
                         </FormGroup>
                         <Button color="primary" onClick={() => handleUpdateStudent()}>
-                            Update
+                            Cập nhật
                         </Button>{' '}
                         <Button color="secondary" onClick={props.toggle}>
-                            Cancel
+                            Quay lại
                         </Button>
                     </Form>
                 </ModalBody>

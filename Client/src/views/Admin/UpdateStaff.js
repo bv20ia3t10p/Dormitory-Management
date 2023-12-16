@@ -64,12 +64,12 @@ function UpdateStaff(props) {
     return (
         <div>
             <Modal isOpen={props.modal} fade={false} toggle={props.toggle}>
-                <ModalHeader >Update Staff</ModalHeader>
+                <ModalHeader>Cập nhật thông tin</ModalHeader>
                 <ModalBody>
                     <Form >
                         <FormGroup>
                             <Label for="lastName">
-                                lastName
+                                Tên
                             </Label>
                             <Input
                                 id="lastName"
@@ -80,7 +80,7 @@ function UpdateStaff(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="LastName">
-                                firstName
+                                Họ và Tên lót
                             </Label>
                             <Input
                                 id="firstName"
@@ -91,7 +91,7 @@ function UpdateStaff(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="dateOfBirth">
-                                date Of Birth
+                                Ngày sinh
                             </Label>
                             <Input
                                 id="dateOfBirth"
@@ -103,7 +103,7 @@ function UpdateStaff(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="email">
-                                email
+                                Email
                             </Label>
                             <Input
                                 id="email"
@@ -114,7 +114,7 @@ function UpdateStaff(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="identiFyCardNumber">
-                                identiFy Card Number
+                                CMND/ CCCD
                             </Label>
                             <Input
                                 id="identiFyCardNumber"
@@ -125,7 +125,7 @@ function UpdateStaff(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="phoneNumber">
-                                phone Number
+                            Số điện thoại
                             </Label>
                             <Input
                                 id="phoneNumber"
@@ -136,7 +136,7 @@ function UpdateStaff(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="address">
-                                address
+                            Địa chỉ
                             </Label>
                             <Input
                                 id="address"
@@ -148,7 +148,7 @@ function UpdateStaff(props) {
                         {/* idCard */}
                         <FormGroup>
                             <Label for="idCard">
-                                idCard
+                            MSNV
                             </Label>
                             <Input
                                 id="idCard"
@@ -158,31 +158,29 @@ function UpdateStaff(props) {
                             />
                         </FormGroup>
                         <Label for="gender">
-                            gender
+                        Giới tính
                         </Label>
 
                         <FormGroup>
                             <select onChange={(event) => handleOnchangeInput(event, "gender")}>
-                                <option >--Choose gender--</option>
                                 <option value={true}>Nam</option>
                                 <option value={false}>Nữ</option>
                             </select>
                         </FormGroup>
                         <Label for="status">
-                            status
+                            Tình trạng
                         </Label>
                         <FormGroup>
                             <select onChange={(event) => handleOnchangeInput(event, "status")}>
-                                <option>--Choose status--</option>
-                                <option value={true}>True</option>
-                                <option value={false}>false</option>
+                                <option value={true}>Đang làm</option>
+                                <option value={false}>Đã nghỉ</option>
                             </select>
                         </FormGroup>
                         <Button color="primary" onClick={() => handleUpdateStaff()}>
-                            Update
+                            Cập nhật
                         </Button>{' '}
                         <Button color="secondary" onClick={props.toggle}>
-                            Cancel
+                            Quay lại
                         </Button>
                     </Form>
                 </ModalBody>

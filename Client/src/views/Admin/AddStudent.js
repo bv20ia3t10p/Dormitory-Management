@@ -266,7 +266,7 @@ function Addstudent(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="relatedPersonName">
-                                Người thân
+                                Tên Người thân
                             </Label>
                             <Input
                                 id="relatedPersonName"
