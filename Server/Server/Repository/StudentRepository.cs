@@ -46,8 +46,16 @@ namespace Server.Repository
             {
                 throw new KeyNotFoundException("Student not found");
             }
-            _context.Students.Remove(student);
-            _context.SaveChanges();
+            if (student.status == false) {
+                _context.Students.Remove(student);
+                 _context.SaveChanges();
+            }
+            else {
+
+                student.status = false;
+                _context.Update(student);
+                 _context.SaveChanges();
+            }
         }
 
         public IEnumerable<StudentDTO> GetAllStudents()
@@ -128,7 +136,6 @@ namespace Server.Repository
             {
                 throw new KeyNotFoundException("University not exist");
             }
-            
 
 
             _mapper.Map(model, student);
