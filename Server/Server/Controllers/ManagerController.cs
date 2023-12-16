@@ -62,5 +62,11 @@ namespace Server.Controllers
             return Ok(new { message = "Manager created" });
         }
 
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            _managerRepository.DeleteManager(id);
+            return NoContent();
+        }
     }
 }

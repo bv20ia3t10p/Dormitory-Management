@@ -51,7 +51,6 @@ namespace Server.Repository
                  _context.SaveChanges();
             }
             else {
-
                 student.status = false;
                 _context.Update(student);
                  _context.SaveChanges();
@@ -74,14 +73,14 @@ namespace Server.Repository
         {
             if (_context.Accounts.Find(accountId) == null)
                 throw new KeyNotFoundException("Account not found");
+
             var Student = _context.Students.Where(s => s.account.Id == accountId)
                 .Include(s => s.University)
                 .Include(s => s.RegisterRooms.Where(r => r.Status == true))
                 .Include(s => s.RegisterRooms)
                     .ThenInclude(r => r.Room)
                 .FirstOrDefault();
-            
-            
+        
             return _mapper.Map<StudentDTO>(Student);
         }
 

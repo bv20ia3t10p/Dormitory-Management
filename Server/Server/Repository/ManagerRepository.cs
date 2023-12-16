@@ -41,8 +41,6 @@ namespace Server.Repository
            
             _context.Managers.Add(manager);
             _context.SaveChanges();
-
-
         }
 
         public IEnumerable<Manager> GetAllManager()
@@ -85,5 +83,22 @@ namespace Server.Repository
             _context.SaveChanges();
         }
        
+       public void DeleteManager(int managerId)
+        {
+            var manager = _context.Managers.Find(managerId);
+            if (manager == null)
+            {
+                throw new KeyNotFoundException("Manager not found");
+            }
+            if (manager.Status == false) {
+                _context.Managers.Remove(manager);
+                 _context.SaveChanges();
+            }
+            else {
+                manager.Status = false;
+                _context.Update(manager);
+                 _context.SaveChanges();
+            }
+        }
     }
 }

@@ -10,6 +10,7 @@ namespace Server.Interface
         IEnumerable<Manager> GetManagerByIdBock(int id);
         void CreateManager(CreateManager model);
         void UpdateManager(int id,UpdateManager model);
+        void DeleteManager(int managerId);
         
     }
 }
