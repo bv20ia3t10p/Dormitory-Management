@@ -53,7 +53,7 @@ function AddregisRoom(props) {
                     <Form >
                         <FormGroup>
                             <Label for="studentId">
-                                studentId
+                                MSSV
                             </Label>
                             <Input
                                 id="studentId"
@@ -64,7 +64,7 @@ function AddregisRoom(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="roomId">
-                                roomId
+                                Mã phòng
                             </Label>
                             <Input
                                 id="roomId"
@@ -75,7 +75,7 @@ function AddregisRoom(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="numberOfMonth">
-                                numberOfMonth
+                                Số tháng dự kiến lưu trú
                             </Label>
                             <Input
                                 id="numberOfMonth"
@@ -86,10 +86,10 @@ function AddregisRoom(props) {
                             />
                         </FormGroup>
                         <Button color="primary" onClick={() => handleAddRegister()}>
-                            Register
+                            Đăng ký ở
                         </Button>{' '}
                         <Button color="secondary" onClick={props.toggle}>
-                            Cancel
+                            Quay lại
                         </Button>
                     </Form>
                 </ModalBody>

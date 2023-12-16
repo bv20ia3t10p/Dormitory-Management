@@ -66,7 +66,7 @@ function UpdateRegister(props) {
                     <Form >
                         <FormGroup>
                             <Label for="studentId">
-                                studentId
+                                MSSV
                             </Label>
                             <Input
                                 id="studentId"
@@ -77,7 +77,7 @@ function UpdateRegister(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="roomId">
-                                roomId
+                                Mã phòng
                             </Label>
                             <Input
                                 id="roomId"
@@ -88,7 +88,7 @@ function UpdateRegister(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="dateBegin">
-                                date of Begin
+                                Ngày bắt đầu ở
                             </Label>
                             <Input
                                 id="dateBegin"
@@ -100,7 +100,7 @@ function UpdateRegister(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="numberOfMonth">
-                                number Of Month
+                                Số tháng dự kiến lưu trú
                             </Label>
                             <Input
                                 id="numberOfMonth"
@@ -110,31 +110,31 @@ function UpdateRegister(props) {
                             />
                         </FormGroup>
                         <Label for="gender">
-                            domitoryFee Status
+                            Tình trạng hóa đơn
                         </Label>
 
                         <FormGroup>
                             <select onChange={(event) => handleOnchangeInput(event, "domitoryFeeStatus")}>
-                                <option >--Choose domitoryFeeStatus--</option>
+                                <option >--Chọn tình trạng hóa đơn--</option>
                                 <option value={true}>Đã thanh toán</option>
                                 <option value={false}>Chưa thanh toán</option>
                             </select>
                         </FormGroup>
                         <Label for="status">
-                            status
+                            Trạng thái
                         </Label>
                         <FormGroup>
                             <select onChange={(event) => handleOnchangeInput(event, "status")}>
-                                <option>--Choose status--</option>
+                                <option>-- Chọn trạng thái--</option>
                                 <option value={true}>Còn hạn</option>
                                 <option value={false}>Hết hạn</option>
                             </select>
                         </FormGroup>
                         <Button color="primary" onClick={() => handleUpdateRegister()}>
-                            Update
+                            Cập nhật
                         </Button>{' '}
                         <Button color="secondary" onClick={props.toggle}>
-                            Cancel
+                            Quay lại
                         </Button>
                     </Form>
                 </ModalBody>

@@ -197,11 +197,11 @@ function Admin(props) {
           <table class="table table-hover shadow">
             <thead>
               <tr class="border bg-light">
-                <th scope="col">MSNV</th>
+                <th scope="col">Id</th>
                 <th scope="col">Họ và tên</th>
                 <th scope="col">Giới tính</th>
                 <th scope="col">Email</th>
-                <th scope="col">id</th>
+                <th scope="col">MSNV</th>
                 <th scope="col">Số điện thoại</th>
                 <th scope="col">Trạng thái</th>
                 <th scope="col">Sửa / xóa</th>
@@ -226,7 +226,7 @@ function Admin(props) {
                         {item.email}
                       </td>
                       <td onClick={() => handleViewDetailUser(item)}>
-                        {item.id}
+                        {item.idCard}
                       </td>
                       <td onClick={() => handleViewDetailUser(item)}>
                         {item.phoneNumber}

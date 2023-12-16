@@ -79,7 +79,7 @@ function ManagerStudent(props) {
     // Kiểm tra tình trạng của sinh viên chuẩn bị xóa/ cập nhật trạng thái
 
     // Biến cờ isPersisted = 0 nếu sv đã hết hạn và = 1 nếu còn
-    var isPersisted = data.status;
+    var isPersisted = data.Status;
 
     try {
       let res = await axios.delete("https://localhost:7184/api/Student", {
@@ -200,7 +200,7 @@ function ManagerStudent(props) {
                   Id
                 </th>
                 <th style={{ "font-size": "16px" }} scope="col">
-                  Họ và tên
+                  Họ và Tên
                 </th>
                 <th style={{ "font-size": "16px" }} scope="col">
                   Giới tính
@@ -235,11 +235,8 @@ function ManagerStudent(props) {
                       >
                         {item.id}
                       </td>
-                      <td
-                        style={{ "font-size": "16px" }}
-                        onClick={() => handleViewDetailUser(item)}
-                      >
-                        {item.firstName}
+                      <td onClick={() => handleViewDetailUser(item)} style={{ "font-size": "16px" }}>
+                        {item.lastName + " " + item.firstName}
                       </td>
                       <td
                         style={{ "font-size": "16px" }}
