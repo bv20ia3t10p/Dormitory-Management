@@ -61,28 +61,46 @@ function Admin(props) {
     const handleViewDetailUser = (staff) => {
         history.replace(`/DetailStaff/${staff.id}`)
     }
+    
     const handleDeleteStaff = async (data) => {
-        console.log('check status: ', data.status)
+        // Hàm dùng để xóa đối tượng sinh viên
+        // Tiến trình gồm 2 bước:
+        // 1. cập nhật trạng thái Hết hạn nếu Sinh viên còn hạn  ~~ còn thời gian lưu trú tại ktx
+        // 2. xóa sinh viên nếu sinh viên đó đã hết hạn lưu trú tại ktx
+    
+        // Kiểm tra tình trạng của sinh viên chuẩn bị xóa/ cập nhật trạng thái
+    
+        // Biến cờ isPersisted = 0 nếu sv đã hết hạn và = 1 nếu còn
+        var isPersisted = data.status;
+    
         try {
-            let res = await axios.put(`https://localhost:7184/api/Manager/${data.id}`, {
-                lastName: data.lastName,
-                firstName: data.firstName,
-                dateOfBirth: data.dateOfBirth,
-                email: data.email,
-                identiFyCardNumber: data.identiFyCardNumber,
-                phoneNumber: data.phoneNumber,
-                address: data.address,
-                gender: data.gender,
-                idCard: data.idCard,
-                status: false
-            });
-            console.log('response create user: ', res)
-            toast.success("Xóa thành công")
+          let res = await axios.delete("https://localhost:7184/api/Manager", {
+            params: {
+              id: data.id,
+            },
+          });
+    
+          if (isPersisted == true) {
+            console.log(
+              `Đã cập nhật trạng thái Manager ${data.id} thành HẾT HẠN`
+            );
+            toast.success(`Cập nhật trạng thái thành công!`);
+          } else {
+            console.log("Delete successful:", res.data);
+            // Xử lý thành công sau khi xóa
+            toast.success("Xóa thành công");
+          }
         } catch (error) {
-            toast.error("Xóa không thành công")
-            console.log(error)
+          toast.error("Xóa không thành công");
+          console.error("Error deleting Manager:", error);
         }
-    }
+    
+        let res = await axios.get(`https://localhost:7184/api/Manager`);
+        setState({
+          ListUsers: res.data ? res.data : [],
+        });
+      };
+
     return (
         < >
             <SidebarAdmin />
