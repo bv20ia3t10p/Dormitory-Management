@@ -178,9 +178,9 @@ namespace Server
                         SchoolYear = "2020-2024",
                         RelatedPersonName = "Ba",
                         RelatedPersonPhoneNumber = "12344",
-                        status = true,
+                        Status = true,
                         University = dataContext.Universities.Where(u=>u.Id==1).FirstOrDefault(),
-                        account = new Account{
+                        Account = new Account{
                             UserName ="tuan@gmail.com",
                             PasswordHash =BCryptNet.HashPassword("123456"),
                             Role= Role.Student
@@ -205,9 +205,9 @@ namespace Server
                         SchoolYear = "2020-2024",
                         RelatedPersonName = "Ba",
                         RelatedPersonPhoneNumber = "12344",
-                        status = true,
+                        Status = true,
                         University = dataContext.Universities.Where(u=>u.Id==1).FirstOrDefault(),
-                        account = new Account{
+                        Account = new Account{
                             UserName ="dangnghia@gmail.com",
                             PasswordHash =BCryptNet.HashPassword("123456"),
                             Role= Role.Student
@@ -232,9 +232,9 @@ namespace Server
                         SchoolYear = "2020-2024",
                         RelatedPersonName = "Ba",
                         RelatedPersonPhoneNumber = "12344",
-                        status = true,
+                        Status = true,
                         University = dataContext.Universities.Where(u=>u.Id==2).FirstOrDefault(),
-                        account = new Account{
+                        Account = new Account{
                             UserName ="baoan@gmail.com",
                             PasswordHash =BCryptNet.HashPassword("123456"),
                             Role= Role.Student
@@ -260,14 +260,246 @@ namespace Server
                         SchoolYear = "2020-2024",
                         RelatedPersonName = "Ba",
                         RelatedPersonPhoneNumber = "12344",
-                        status = true,
+                        Status = true,
                         University = dataContext.Universities.Where(u=>u.Id==3).FirstOrDefault(),
-                        account = new Account{
+                        Account = new Account{
                             UserName ="thaotrang@gmail.com",
                             PasswordHash =BCryptNet.HashPassword("123456"),
                             Role= Role.Student
                         }
-                       }
+                       },
+                       new Student()
+                        {
+                            LastName = "Huong",
+                            FirstName = "Mai",
+                            BirthDate = new DateTime(2001, 5, 15),
+                            Gender = false,
+                            Ethnic = "Kinh",
+                            Nationnality = "Việt Nam",
+                            PhoneNumber = "0123456789",
+                            HomeAddress = "Ninh Kieu, Can Tho",
+                            MainAddress = "KTXB, Linh Trung, Thủ Đức",
+                            Email = "huongmai@gmail.com",
+                            Avartar = Convert.FromBase64String("test"),
+                            IdentifyCardNumber = "1122334455",
+                            UniversitysutdentId = "20522069",
+                            Faculty = "Computer Science",
+                            Major = "Software Engineering",
+                            SchoolYear = "2020-2024",
+                            RelatedPersonName = "Mother",
+                            RelatedPersonPhoneNumber = "98765",
+                            Status = true,
+                            University = dataContext.Universities.Where(u => u.Id == 1).FirstOrDefault(),
+                            Account = new Account
+                            {
+                                UserName = "huongmai@gmail.com",
+                                PasswordHash = BCryptNet.HashPassword("password123"),
+                                Role = Role.Student
+                            }
+                        },
+                        new Student()
+                        {
+                            LastName = "Duc",
+                            FirstName = "Truong",
+                            BirthDate = new DateTime(2000, 8, 20),
+                            Gender = true,
+                            Ethnic = "Kinh",
+                            Nationnality = "Việt Nam",
+                            PhoneNumber = "0987654321",
+                            HomeAddress = "Quang Nam, Vietnam",
+                            MainAddress = "KTXC, Linh Trung, Thủ Đức",
+                            Email = "ductruong@gmail.com",
+                            Avartar = Convert.FromBase64String("test"),
+                            IdentifyCardNumber = "555566667777",
+                            UniversitysutdentId = "20522070",
+                            Faculty = "Mathematics",
+                            Major = "Applied Mathematics",
+                            SchoolYear = "2020-2024",
+                            RelatedPersonName = "Father",
+                            RelatedPersonPhoneNumber = "87654",
+                            Status = true,
+                            University = dataContext.Universities.Where(u => u.Id == 3).FirstOrDefault(),
+                            Account = new Account
+                            {
+                                UserName = "ductruong@gmail.com",
+                                PasswordHash = BCryptNet.HashPassword("password456"),
+                                Role = Role.Student
+                            }
+                        },
+                        new Student()
+                        {
+                            LastName = "Thu",
+                            FirstName = "Tran",
+                            BirthDate = new DateTime(2001, 3, 10),
+                            Gender = false,
+                            Ethnic = "Kinh",
+                            Nationnality = "Việt Nam",
+                            PhoneNumber = "0112233445",
+                            HomeAddress = "Ha Noi, Vietnam",
+                            MainAddress = "KTXD, Linh Trung, Thủ Đức",
+                            Email = "thutran@gmail.com",
+                            Avartar = Convert.FromBase64String("test"),
+                            IdentifyCardNumber = "9988776655",
+                            UniversitysutdentId = "20522071",
+                            Faculty = "Chemistry",
+                            Major = "Organic Chemistry",
+                            SchoolYear = "2020-2024",
+                            RelatedPersonName = "Sister",
+                            RelatedPersonPhoneNumber = "54321",
+                            Status = true,
+                            University = dataContext.Universities.Where(u => u.Id == 4).FirstOrDefault(),
+                            Account = new Account
+                            {
+                                UserName = "thutran@gmail.com",
+                                PasswordHash = BCryptNet.HashPassword("password789"),
+                                Role = Role.Student
+                            }
+                        },
+                        new Student()
+                        {
+                            LastName = "Minh",
+                            FirstName = "Nguyen",
+                            BirthDate = new DateTime(2002, 7, 18),
+                            Gender = true,
+                            Ethnic = "Kinh",
+                            Nationnality = "Việt Nam",
+                            PhoneNumber = "0369876543",
+                            HomeAddress = "Quang Tri, Vietnam",
+                            MainAddress = "KTXE, Linh Trung, Thủ Đức",
+                            Email = "minhnguyen@gmail.com",
+                            Avartar = Convert.FromBase64String("test"),
+                            IdentifyCardNumber = "777788889999",
+                            UniversitysutdentId = "20522072",
+                            Faculty = "Mechanical Engineering",
+                            Major = "Thermal Engineering",
+                            SchoolYear = "2020-2024",
+                            RelatedPersonName = "Brother",
+                            RelatedPersonPhoneNumber = "43210",
+                            Status = true,
+                            University = dataContext.Universities.Where(u => u.Id == 2).FirstOrDefault(),
+                            Account = new Account
+                            {
+                                UserName = "minhnguyen@gmail.com",
+                                PasswordHash = BCryptNet.HashPassword("password101"),
+                                Role = Role.Student
+                            }
+                        },
+                        new Student()
+                        {
+                            LastName = "Hoa",
+                            FirstName = "Tran",
+                            BirthDate = new DateTime(2001, 12, 5),
+                            Gender = false,
+                            Ethnic = "Kinh",
+                            Nationnality = "Việt Nam",
+                            PhoneNumber = "0998877665",
+                            HomeAddress = "Bac Lieu, Vietnam",
+                            MainAddress = "KTXF, Linh Trung, Thủ Đức",
+                            Email = "hoatran@gmail.com",
+                            Avartar = Convert.FromBase64String("test"),
+                            IdentifyCardNumber = "123412341234",
+                            UniversitysutdentId = "20522073",
+                            Faculty = "Business Administration",
+                            Major = "Marketing",
+                            SchoolYear = "2020-2024",
+                            RelatedPersonName = "Sister",
+                            RelatedPersonPhoneNumber = "67890",
+                            Status = true,
+                            University = dataContext.Universities.Where(u => u.Id == 4).FirstOrDefault(),
+                            Account = new Account
+                            {
+                                UserName = "hoatran@gmail.com",
+                                PasswordHash = BCryptNet.HashPassword("password202"),
+                                Role = Role.Student
+                            }
+                        },
+                        new Student()
+                        {
+                            LastName = "Phuc",
+                            FirstName = "Tran",
+                            BirthDate = new DateTime(2001, 9, 20),
+                            Gender = true,
+                            Ethnic = "Kinh",
+                            Nationnality = "Việt Nam",
+                            PhoneNumber = "0888777666",
+                            HomeAddress = "Long An, Vietnam",
+                            MainAddress = "KTXG, Linh Trung, Thủ Đức",
+                            Email = "phuctran@gmail.com",
+                            Avartar = Convert.FromBase64String("test"),
+                            IdentifyCardNumber = "555566667777",
+                            UniversitysutdentId = "20522074",
+                            Faculty = "Environmental Science",
+                            Major = "Ecology",
+                            SchoolYear = "2020-2024",
+                            RelatedPersonName = "Uncle",
+                            RelatedPersonPhoneNumber = "112233",
+                            Status = true,
+                            University = dataContext.Universities.Where(u => u.Id == 3).FirstOrDefault(),
+                            Account = new Account
+                            {
+                                UserName = "phuctran@gmail.com",
+                                PasswordHash = BCryptNet.HashPassword("password303"),
+                                Role = Role.Student
+                            }
+                        },
+                        new Student()
+                        {
+                            LastName = "Nhung",
+                            FirstName = "Le",
+                            BirthDate = new DateTime(2002, 3, 15),
+                            Gender = false,
+                            Ethnic = "Kinh",
+                            Nationnality = "Việt Nam",
+                            PhoneNumber = "0777666555",
+                            HomeAddress = "Quang Ngai, Vietnam",
+                            MainAddress = "KTXH, Linh Trung, Thủ Đức",
+                            Email = "nhungle@gmail.com",
+                            Avartar = Convert.FromBase64String("test"),
+                            IdentifyCardNumber = "999988887777",
+                            UniversitysutdentId = "20522075",
+                            Faculty = "Computer Science",
+                            Major = "Software Engineering",
+                            SchoolYear = "2020-2024",
+                            RelatedPersonName = "Aunt",
+                            RelatedPersonPhoneNumber = "554433",
+                            Status = true,
+                            University = dataContext.Universities.Where(u => u.Id == 1).FirstOrDefault(),
+                            Account = new Account
+                            {
+                                UserName = "nhungle@gmail.com",
+                                PasswordHash = BCryptNet.HashPassword("password404"),
+                                Role = Role.Student
+                            }
+                        },
+                        new Student()
+                        {
+                            LastName = "Quyen",
+                            FirstName = "Nguyen",
+                            BirthDate = new DateTime(2002, 5, 10),
+                            Gender = true,
+                            Ethnic = "Kinh",
+                            Nationnality = "Việt Nam",
+                            PhoneNumber = "0666555444",
+                            HomeAddress = "Hai Duong, Vietnam",
+                            MainAddress = "KTXI, Linh Trung, Thủ Đức",
+                            Email = "quyennguyen@gmail.com",
+                            Avartar = Convert.FromBase64String("test"),
+                            IdentifyCardNumber = "123487654321",
+                            UniversitysutdentId = "20522076",
+                            Faculty = "Electrical Engineering",
+                            Major = "Power Systems",
+                            SchoolYear = "2020-2024",
+                            RelatedPersonName = "Grandpa",
+                            RelatedPersonPhoneNumber = "998877",
+                            Status = true,
+                            University = dataContext.Universities.Where(u => u.Id == 4).FirstOrDefault(),
+                            Account = new Account
+                            {
+                                UserName = "quyennguyen@gmail.com",
+                                PasswordHash = BCryptNet.HashPassword("password505"),
+                                Role = Role.Student
+                            }
+                        }
                 };
                 dataContext.Students.AddRange(students);
                 dataContext.SaveChanges();
@@ -412,6 +644,120 @@ namespace Server
                     }
                 };
                 dataContext.Managers.AddRange(managers);
+                dataContext.SaveChanges();
+            }
+
+            if (!dataContext.RegisterRooms.Any())
+            {
+                var registerRooms = new List<RegisterRoom>
+                {
+                    // Room A1-001
+                    new RegisterRoom
+                    {
+                        StudentId = 1,
+                        RoomId = 1,
+                        DateBegin = new DateTime(2023, 1, 1),
+                        DateEnd = new DateTime(2023, 12, 31),
+                        NumberOfMonth = 12,
+                        DomitoryFee = 12000000, // Assuming the fee is 1,000,000 VND per month
+                        DomitoryFeeStatus = true,
+                        Status = true,
+                        Room = dataContext.Rooms.Find(1),
+                        Student = dataContext.Students.Find(1)
+                    },
+                    new RegisterRoom
+                    {
+                        StudentId = 2,
+                        RoomId = 1,
+                        DateBegin = new DateTime(2023, 1, 1),
+                        DateEnd = new DateTime(2023, 12, 31),
+                        NumberOfMonth = 12,
+                        DomitoryFee = 12000000,
+                        DomitoryFeeStatus = true,
+                        Status = true,
+                        Room = dataContext.Rooms.Find(1),
+                        Student = dataContext.Students.Find(2)
+                    },
+                    new RegisterRoom
+                    {
+                        StudentId = 3,
+                        RoomId = 2,
+                        DateBegin = new DateTime(2023, 2, 1),
+                        DateEnd = new DateTime(2023, 11, 30),
+                        NumberOfMonth = 10,
+                        DomitoryFee = 10000000,
+                        DomitoryFeeStatus = true,
+                        Status = true,
+                        Room = dataContext.Rooms.Find(2),
+                        Student = dataContext.Students.Find(3)
+                    },
+                    new RegisterRoom
+                    {
+                        StudentId = 4,
+                        RoomId = 2,
+                        DateBegin = new DateTime(2023, 2, 1),
+                        DateEnd = new DateTime(2023, 11, 30),
+                        NumberOfMonth = 10,
+                        DomitoryFee = 10000000,
+                        DomitoryFeeStatus = true,
+                        Status = true,
+                        Room = dataContext.Rooms.Find(2),
+                        Student = dataContext.Students.Find(4)
+                    },
+                    new RegisterRoom
+                    {
+                        StudentId = 5,
+                        RoomId = 3,
+                        DateBegin = new DateTime(2023, 3, 1),
+                        DateEnd = new DateTime(2023, 10, 31),
+                        NumberOfMonth = 8,
+                        DomitoryFee = 8000000,
+                        DomitoryFeeStatus = true,
+                        Status = true,
+                        Room = dataContext.Rooms.Find(3),
+                        Student = dataContext.Students.Find(5)
+                    },
+                    new RegisterRoom
+                    {
+                        StudentId = 6,
+                        RoomId = 3,
+                        DateBegin = new DateTime(2023, 3, 1),
+                        DateEnd = new DateTime(2023, 10, 31),
+                        NumberOfMonth = 8,
+                        DomitoryFee = 8000000,
+                        DomitoryFeeStatus = true,
+                        Status = true,
+                        Room = dataContext.Rooms.Find(3),
+                        Student = dataContext.Students.Find(6)
+                    },
+                    new RegisterRoom
+                    {
+                        StudentId = 7,
+                        RoomId = 4,
+                        DateBegin = new DateTime(2023, 4, 1),
+                        DateEnd = new DateTime(2023, 9, 30),
+                        NumberOfMonth = 6,
+                        DomitoryFee = 6000000,
+                        DomitoryFeeStatus = true,
+                        Status = true,
+                        Room = dataContext.Rooms.Find(4),
+                        Student = dataContext.Students.Find(7)
+                    },
+                    new RegisterRoom
+                    {
+                        StudentId = 8,
+                        RoomId = 4,
+                        DateBegin = new DateTime(2023, 4, 1),
+                        DateEnd = new DateTime(2023, 9, 30),
+                        NumberOfMonth = 6,
+                        DomitoryFee = 6000000,
+                        DomitoryFeeStatus = true,
+                        Status = true,
+                        Room = dataContext.Rooms.Find(4),
+                        Student = dataContext.Students.Find(8)
+                    },
+                };
+                dataContext.RegisterRooms.AddRange(registerRooms);
                 dataContext.SaveChanges();
             }
         }

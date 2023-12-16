@@ -31,8 +31,8 @@ namespace Server.Repository
                 Role = Role.Student,
             };
             var student = _mapper.Map<Student>(model);
-            student.account = account;
-            student.status = true;
+            student.Account = account;
+            student.Status = true;
             student.University = school;
             
             _context.Students.Add(student);
@@ -41,20 +41,20 @@ namespace Server.Repository
 
         public void DeleteStudent(int studentId)
         {
-            var student = _context.Students.Where(s=>s.Id == studentId).Include(a=>a.account).FirstOrDefault();
+            var student = _context.Students.Where(s=>s.Id == studentId).Include(a=>a.Account).FirstOrDefault();
             if (student == null)
             {
                 throw new KeyNotFoundException("Student not found");
             }
-            if (student.status == false) {
-                var account = _context.Accounts.Where(a => a.Id == student.account.Id).FirstOrDefault();
+            if (student.Status == false) {
+                var account = _context.Accounts.Where(a => a.Id == student.Account.Id).FirstOrDefault();
                 if (account != null)
                     _context.Accounts.Remove(account);
                 _context.Students.Remove(student);
                 _context.SaveChanges();
             }
             else {
-                student.status = false;
+                student.Status = false;
                 _context.Update(student);
                 _context.SaveChanges();
             }
@@ -77,7 +77,7 @@ namespace Server.Repository
             if (_context.Accounts.Find(accountId) == null)
                 throw new KeyNotFoundException("Account not found");
 
-            var Student = _context.Students.Where(s => s.account.Id == accountId)
+            var Student = _context.Students.Where(s => s.Account.Id == accountId)
                 .Include(s => s.University)
                 .Include(s => s.RegisterRooms.Where(r => r.Status == true))
                 .Include(s => s.RegisterRooms)
@@ -125,7 +125,7 @@ namespace Server.Repository
             if(!string.IsNullOrEmpty(university))
                 studentsFilter = studentsFilter.Where(s=>s.University.Name.Contains(university)).ToList();
             if (status.HasValue)
-                studentsFilter = studentsFilter.Where(s => s.status == status).ToList();
+                studentsFilter = studentsFilter.Where(s => s.Status == status).ToList();
             
             return _mapper.Map<List<StudentDTO>>(studentsFilter);
         }

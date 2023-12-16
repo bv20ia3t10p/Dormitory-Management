@@ -5,8 +5,8 @@ using Server.Models;
 
 namespace Server.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("[controller]")]
     public class StudentController : ControllerBase
     {
         private readonly IStudent _studentRepository;

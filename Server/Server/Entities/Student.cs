@@ -23,8 +23,8 @@
         //public string Outdate { get; set; }
         public string RelatedPersonName { get; set; }
         public string RelatedPersonPhoneNumber { get; set; }
-        public bool status { get; set; }
-        public Account account { get; set; }
+        public bool Status { get; set; }
+        public Account Account { get; set; }
         public University University { get; set; }
         public ICollection<RegisterRoom> RegisterRooms { get; set; }
 
