@@ -91,6 +91,9 @@ namespace Server.Repository
                 throw new KeyNotFoundException("Manager not found");
             }
             if (manager.Status == false) {
+                var account = _context.Accounts.Where(a => a.Id == manager.Account.Id).FirstOrDefault();
+                if (account != null)
+                    _context.Accounts.Remove(account);
                 _context.Managers.Remove(manager);
                  _context.SaveChanges();
             }
