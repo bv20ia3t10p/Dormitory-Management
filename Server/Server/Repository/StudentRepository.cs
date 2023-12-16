@@ -51,12 +51,12 @@ namespace Server.Repository
                 if (account != null)
                     _context.Accounts.Remove(account);
                 _context.Students.Remove(student);
-                 _context.SaveChanges();
+                _context.SaveChanges();
             }
             else {
                 student.status = false;
                 _context.Update(student);
-                 _context.SaveChanges();
+                _context.SaveChanges();
             }
         }
 

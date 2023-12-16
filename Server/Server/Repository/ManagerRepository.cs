@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Server.Data;
 using Server.Helpers;
@@ -85,7 +86,7 @@ namespace Server.Repository
        
        public void DeleteManager(int managerId)
         {
-            var manager = _context.Managers.Find(managerId);
+            var manager = _context.Managers.Where(s=>s.Id == managerId).Include(a=>a.Account).FirstOrDefault();
             if (manager == null)
             {
                 throw new KeyNotFoundException("Manager not found");
@@ -95,12 +96,12 @@ namespace Server.Repository
                 if (account != null)
                     _context.Accounts.Remove(account);
                 _context.Managers.Remove(manager);
-                 _context.SaveChanges();
+                _context.SaveChanges();
             }
             else {
                 manager.Status = false;
                 _context.Update(manager);
-                 _context.SaveChanges();
+                _context.SaveChanges();
             }
         }
     }

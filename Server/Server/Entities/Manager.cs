@@ -1,4 +1,6 @@
-﻿namespace Server.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Server.Models
 {
     public class Manager
     {
