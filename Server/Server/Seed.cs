@@ -760,6 +760,85 @@ namespace Server
                 dataContext.RegisterRooms.AddRange(registerRooms);
                 dataContext.SaveChanges();
             }
+        
+            if (!dataContext.ElectricWaterlogs.Any())
+            {
+                var electricWaterlogs = new List<ElectricWaterlog>
+                {
+                    // Room A1-001
+                    new ElectricWaterlog
+                    {
+                        LogDate = new DateTime(2023, 1, 5),
+                        ElectricNew = 120,
+                        ElectricOld = 100,
+                        WaterOld = 50,
+                        WaterNew = 70,
+                        WaterUse = 20,
+                        ElectricUse = 20,
+                        ElectricFee = 50000,
+                        WaterFee = 30000,
+                        TotalFee = 80000,
+                        FeeStatus = true,
+                        RoomId = 1,
+                        Room = dataContext.Rooms.Find(1)
+                    },
+                    // Room A1-002
+                    new ElectricWaterlog
+                    {
+                        LogDate = new DateTime(2023, 1, 5),
+                        ElectricNew = 110,
+                        ElectricOld = 90,
+                        WaterOld = 40,
+                        WaterNew = 60,
+                        WaterUse = 20,
+                        ElectricUse = 20,
+                        ElectricFee = 45000,
+                        WaterFee = 25000,
+                        TotalFee = 70000,
+                        FeeStatus = true,
+                        RoomId = 2,
+                        Room = dataContext.Rooms.Find(2)
+                    },
+                    // Room A1-003
+                    new ElectricWaterlog
+                    {
+                        LogDate = new DateTime(2023, 1, 5),
+                        ElectricNew = 130,
+                        ElectricOld = 110,
+                        WaterOld = 60,
+                        WaterNew = 80,
+                        WaterUse = 20,
+                        ElectricUse = 20,
+                        ElectricFee = 55000,
+                        WaterFee = 35000,
+                        TotalFee = 90000,
+                        FeeStatus = true,
+                        RoomId = 3,
+                        Room = dataContext.Rooms.Find(3)
+                    },
+                    // Room A1-004
+                    new ElectricWaterlog
+                    {
+                        LogDate = new DateTime(2023, 1, 5),
+                        ElectricNew = 100,
+                        ElectricOld = 80,
+                        WaterOld = 30,
+                        WaterNew = 50,
+                        WaterUse = 20,
+                        ElectricUse = 20,
+                        ElectricFee = 40000,
+                        WaterFee = 20000,
+                        TotalFee = 60000,
+                        FeeStatus = true,
+                        RoomId = 4,
+                        Room = dataContext.Rooms.Find(4)
+                    },
+                    // Add more entries as needed...
+                };
+
+                dataContext.ElectricWaterlogs.AddRange(electricWaterlogs);
+                dataContext.SaveChanges();
+            }
         }
     }
 }

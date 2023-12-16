@@ -14,7 +14,7 @@
         public int WaterFee { get; set; }
         public int TotalFee { get; set; }
         public Boolean FeeStatus { get; set; }
+        public int RoomId { get; set; }
         public Room Room { get; set; }
-
     }
 }
