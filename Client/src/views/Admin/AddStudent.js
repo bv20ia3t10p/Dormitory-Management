@@ -64,12 +64,12 @@ function Addstudent(props) {
     return (
         <div>
             <Modal isOpen={props.modal} fade={false} toggle={props.toggle}>
-                <ModalHeader >Add New Student</ModalHeader>
+                <ModalHeader >Thêm Sinh Viênt</ModalHeader>
                 <ModalBody>
                     <Form >
                         <FormGroup>
                             <Label for="lastName">
-                                lastName
+                                Tên
                             </Label>
                             <Input
                                 id="lastName"
@@ -80,7 +80,7 @@ function Addstudent(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="LastName">
-                                firstName
+                                Họ và Tên lót
                             </Label>
                             <Input
                                 id="firstName"
@@ -91,7 +91,7 @@ function Addstudent(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="birthDate">
-                                date Of Birth
+                                Ngày sinh
                             </Label>
                             <Input
                                 id="birthDate"
@@ -102,11 +102,11 @@ function Addstudent(props) {
                             />
                         </FormGroup>
                         <Label for="gender">
-                            gender
+                            Giới tính
                         </Label>
                         <FormGroup>
                             <Label for="gender">
-                                Man
+                                Nam
                             </Label>
                             &nbsp;
                             &nbsp;
@@ -119,7 +119,7 @@ function Addstudent(props) {
                                 value={true}
                             />
                             <Label for="gender">
-                                Woman
+                                Nữ
                             </Label>
                             &nbsp;
                             &nbsp;
@@ -135,7 +135,7 @@ function Addstudent(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="ethnic">
-                                ethnic
+                                Dân tộc
                             </Label>
                             <Input
                                 id="ethnic"
@@ -146,7 +146,7 @@ function Addstudent(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="nationnality">
-                                nation
+                                Quốc tịch
                             </Label>
                             <Input
                                 id="nationnality"
@@ -157,7 +157,7 @@ function Addstudent(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="phoneNumber">
-                                phone Number
+                                Số điện thoại
                             </Label>
                             <Input
                                 id="phoneNumber"
@@ -168,7 +168,7 @@ function Addstudent(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="homeAddress">
-                                Home Address
+                                Địa chỉ tạm trú
                             </Label>
                             <Input
                                 id="homeAddress"
@@ -179,7 +179,7 @@ function Addstudent(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="mainAddress">
-                                Main Address
+                                Địa chỉ thường trú
                             </Label>
                             <Input
                                 id="mainAddress"
@@ -190,7 +190,7 @@ function Addstudent(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="email">
-                                email
+                                Email
                             </Label>
                             <Input
                                 id="email"
@@ -211,7 +211,7 @@ function Addstudent(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="identifyCardNumber">
-                                identifyCardNumber
+                                CMND/CCCD
                             </Label>
                             <Input
                                 id="identifyCardNumber"
@@ -222,7 +222,7 @@ function Addstudent(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="universitysutdentId">
-                                universitysutdentId
+                                MSSV
                             </Label>
                             <Input
                                 id="universitysutdentId"
@@ -233,7 +233,7 @@ function Addstudent(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="faculty">
-                                faculty
+                                Khoa
                             </Label>
                             <Input
                                 id="faculty"
@@ -244,7 +244,7 @@ function Addstudent(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="major">
-                                major
+                                Chuyên ngành
                             </Label>
                             <Input
                                 id="major"
@@ -255,7 +255,7 @@ function Addstudent(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="schoolYear">
-                                schoolYear
+                                Năm học
                             </Label>
                             <Input
                                 id="schoolYear"
@@ -266,7 +266,7 @@ function Addstudent(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="relatedPersonName">
-                                relatedPersonName
+                                Người thân
                             </Label>
                             <Input
                                 id="relatedPersonName"
@@ -277,7 +277,7 @@ function Addstudent(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="relatedPersonPhoneNumber">
-                                related Person Phone Number
+                                SĐT Người thân
                             </Label>
                             <Input
                                 id="relatedPersonPhoneNumber"
@@ -288,7 +288,7 @@ function Addstudent(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="universityId">
-                                universityId
+                                Mã trường
                             </Label>
                             <Input
                                 id="universityId"
@@ -298,10 +298,10 @@ function Addstudent(props) {
                             />
                         </FormGroup>
                         <Button color="primary" onClick={() => handleAddNewStudent()}>
-                            Create
+                            Thêm
                         </Button>{' '}
                         <Button color="secondary" onClick={props.toggle}>
-                            Cancel
+                            Quay lại
                         </Button>
                     </Form>
                 </ModalBody>

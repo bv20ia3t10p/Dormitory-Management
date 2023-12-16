@@ -54,12 +54,12 @@ function Addstaff(props) {
     return (
         <div>
             <Modal isOpen={props.modal} fade={false} toggle={props.toggle}>
-                <ModalHeader >Add New Staff</ModalHeader>
+                <ModalHeader >Thêm Nhân Viên</ModalHeader>
                 <ModalBody>
                     <Form >
                         <FormGroup>
                             <Label for="lastName">
-                                lastName
+                                Tên
                             </Label>
                             <Input
                                 id="lastName"
@@ -70,7 +70,7 @@ function Addstaff(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="LastName">
-                                firstName
+                                Họ và Tên lót
                             </Label>
                             <Input
                                 id="firstName"
@@ -81,7 +81,7 @@ function Addstaff(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="dateOfBirth">
-                                date Of Birth
+                                Ngày sinh
                             </Label>
                             <Input
                                 id="dateOfBirth"
@@ -93,7 +93,7 @@ function Addstaff(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="email">
-                                email
+                                Email
                             </Label>
                             <Input
                                 id="email"
@@ -104,7 +104,7 @@ function Addstaff(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="identiFyCardNumber">
-                                identiFy Card Number
+                                CMND/ CCCD
                             </Label>
                             <Input
                                 id="identiFyCardNumber"
@@ -115,7 +115,7 @@ function Addstaff(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="phoneNumber">
-                                phone Number
+                                Số điện thoại
                             </Label>
                             <Input
                                 id="phoneNumber"
@@ -126,7 +126,7 @@ function Addstaff(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="address">
-                                address
+                                Địa chỉ
                             </Label>
                             <Input
                                 id="address"
@@ -138,7 +138,7 @@ function Addstaff(props) {
                         {/* idCard */}
                         <FormGroup>
                             <Label for="gender">
-                                idCard
+                                MSNV
                             </Label>
                             <Input
                                 id="idCard"
@@ -149,11 +149,11 @@ function Addstaff(props) {
                             />
                         </FormGroup>
                         <Label for="gender">
-                            gender
+                            Giới tính
                         </Label>
                         <FormGroup>
                             <Label for="gender">
-                                Man
+                                Nam
                             </Label>
                             &nbsp;
                             &nbsp;
@@ -166,7 +166,7 @@ function Addstaff(props) {
                                 value={true}
                             />
                             <Label for="gender">
-                                Woman
+                                Nữ
                             </Label>
                             &nbsp;
                             &nbsp;
@@ -181,10 +181,10 @@ function Addstaff(props) {
 
                         </FormGroup>
                         <Button color="primary" onClick={() => handleAddNewStaff()}>
-                            Create
+                            Thêm
                         </Button>{' '}
                         <Button color="secondary" onClick={props.toggle}>
-                            Cancel
+                            Quay lại
                         </Button>
                     </Form>
                 </ModalBody>
