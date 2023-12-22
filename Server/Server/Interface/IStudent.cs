@@ -10,8 +10,8 @@ namespace Server.Interface
         StudentDTO GetStudentByAccountId(int accountId);
         IEnumerable<Student> GetStudentByRoom(int roomId);
         //IEnumerable<Student> GetStudentByBlock(int blockId);
-        void CreateStudent(CreateStudent model);
-        void UpdateStudent(int studentId, UpdateStudent model);
+        void CreateStudent(CreateStudentDTO model);
+        void UpdateStudent(int studentId, UpdateStudentDTO model);
         void DeleteStudent(int studentId);
     }
 }

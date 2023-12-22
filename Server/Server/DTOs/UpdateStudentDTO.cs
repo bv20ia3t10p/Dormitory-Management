@@ -1,6 +1,6 @@
 ﻿            namespace Server.Models
 {
-    public class UpdateStudent
+    public class UpdateStudentDTO
     {
          public string LastName { get; set;}
         public string FirstName { get; set;}

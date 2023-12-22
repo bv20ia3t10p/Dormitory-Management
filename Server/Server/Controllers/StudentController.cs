@@ -50,12 +50,12 @@ namespace Server.Controllers
 
         }
         [HttpPut("{id}")]
-        public IActionResult Update(int id, UpdateStudent model) {
+        public IActionResult Update(int id, UpdateStudentDTO model) {
             _studentRepository.UpdateStudent(id, model);
             return Ok();
         }
         [HttpPost]
-        public IActionResult Create(CreateStudent model) {
+        public IActionResult Create(CreateStudentDTO model) {
             _studentRepository.CreateStudent(model);
             return Ok();
         }

@@ -31,7 +31,7 @@ namespace Server.Models
 
         [JsonIgnore]
      
-        public virtual Account? Acount { get; set; }
+        public virtual Account Acount { get; set; }
 
 
     }

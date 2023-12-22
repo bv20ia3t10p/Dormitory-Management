@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace Server.Models
 {
-    public class CreateStudent
+    public class CreateStudentDTO
     {
         [Required]
         public string LastName { get; set; }
@@ -26,7 +26,7 @@ namespace Server.Models
         [Required]
         public string Email { get; set; }
         [Required]
-        public byte[]? Avartar { get; set; }
+        public byte[] Avartar { get; set; }
         [Required]
         public string IdentifyCardNumber { get; set; }
         [Required]
@@ -47,10 +47,10 @@ namespace Server.Models
         public bool? status { get; set; }
 
         [JsonIgnore]
-        public Account? account { get; set; }
+        public Account account { get; set; }
 
         public int UniversityId { get; set; }
         [JsonIgnore]
-        public University ?University { get; set; }
+        public University University { get; set; }
     }
 }

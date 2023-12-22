@@ -26,8 +26,8 @@ namespace Server.Helpers
             ));
 
             CreateMap<UpdateManager, Manager>().ReverseMap();
-            CreateMap<CreateStudent, Student>().ReverseMap();
-            CreateMap<UpdateStudent, Student>().ReverseMap();
+            CreateMap<CreateStudentDTO, Student>().ReverseMap();
+            CreateMap<UpdateStudentDTO, Student>().ReverseMap();
             CreateMap<CreateRegisterRoom, RegisterRoom>();
             CreateMap<UpdateRegisterRoom, RegisterRoom>();
             CreateMap<CreateElectricWaterLog, ElectricWaterlog>().ReverseMap();

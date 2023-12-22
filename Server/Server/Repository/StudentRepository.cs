@@ -18,7 +18,7 @@ namespace Server.Repository
             _mapper = mapper;
         }
 
-        public void CreateStudent(CreateStudent model)
+        public void CreateStudent(CreateStudentDTO model)
         {
             var school = _context.Universities.Find(model.UniversityId);
             if (school == null) {
@@ -130,7 +130,7 @@ namespace Server.Repository
             return _mapper.Map<List<StudentDTO>>(studentsFilter);
         }
 
-        public void UpdateStudent(int studentId, UpdateStudent model)
+        public void UpdateStudent(int studentId, UpdateStudentDTO model)
         {
             var student = GetStudentById(studentId);
             var school = _context.Universities.Find(model.UniversityId);
