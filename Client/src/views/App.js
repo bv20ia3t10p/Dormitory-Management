@@ -24,6 +24,7 @@ import ManageReceipt from './Admin/ManageReceipt';
 import PayElicWar from './Student/PayElicWar';
 import Statistical from './Admin/Statistical';
 import BotChat from './Admin/BotChat';
+import NotFound from './NotFound';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -40,6 +41,7 @@ const App = () => {
   const [state, setState] = useState({
     token: ""
   })
+  
   const check = (data) => {
     console.log('check data: ', data);
     state.token = data
@@ -119,11 +121,14 @@ const App = () => {
             <Route path="/DetailStudent/:id" render={() => {
               return localStorage.getItem(localStorage.getItem("account")) == "Admin" || "Manager" ? <DetailStudent /> : <Redirect to="/Login" />
             }}></Route>
+
             <Route path="/Login" >
               <Login
                 Token={check}
                 />
             </Route>
+
+            <Route path="*" component={NotFound} />
           </Switch>
         </header>
       </div>

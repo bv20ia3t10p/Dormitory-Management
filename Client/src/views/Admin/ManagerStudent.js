@@ -150,7 +150,7 @@ function ManagerStudent(props) {
       {/* <NavStudent /> */}
       <SidebarAdmin />
       <div class="section row">
-        <h3 class="w-100 ">Quản lý sinh viên</h3>
+        <h3 class="w-100">Quản lý sinh viên</h3>
         <nav class="navbar navbar-light ml-5">
           <div class="row ml-1">
             <input
@@ -178,7 +178,7 @@ function ManagerStudent(props) {
         >
           Thêm sinh viên
         </button>
-        <div class="mr-4 text-white">...</div>
+
         <Addstudent
           modal={modal}
           toggle={toggle}

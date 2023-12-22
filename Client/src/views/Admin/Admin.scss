@@ -1,11 +1,21 @@
 .section {
+    padding: 0 80px;
+    nav {
+        padding: 0;
+
+        .row {
+            margin: 0 !important;
+        }
+    }
+
     h3 {
         padding: 22px;
         text-align: center;
     }
 
-    table {
-        width: 90%;
+    .table-container {
+        padding: 0;
+        padding-top: 12px;
     }
 
     cursor: pointer;

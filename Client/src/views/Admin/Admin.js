@@ -152,8 +152,8 @@ function Admin(props) {
       <SidebarAdmin />
       <div class="section row">
         <h3 class="col-12">Quản lý nhân viên</h3>
-        <nav class="navbar navbar-light ml-5">
-          <div class="row ml-1">
+        <nav class="navbar navbar-light">
+          <div class="row">
             <input
               class="col form-control mr-sm-2 "
               type="text"
@@ -172,19 +172,22 @@ function Admin(props) {
             {/* <div class="col-6"></div> */}
           </div>
         </nav>
+
         <button
           style={{ marginLeft: "auto" }}
-          class="pl-3 pr-3 mb-2 btn btn-primary pull-right mr-5"
+          class="pl-3 mb-2 btn btn-primary pull-right"
           onClick={toggle}
         >
           Thêm nhân viên
         </button>
-        <div class="mr-4 text-white">...</div>
+
+        
         <Addstaff
           modal={modal}
           toggle={toggle}
           createNewStaff={createNewStaff}
         />
+
         {modalEdit && (
           <UpdateStaff
             modal={modalEdit}
@@ -193,7 +196,8 @@ function Admin(props) {
             updateStaff={updateStaffId}
           />
         )}
-        <div id="" class="col-12">
+        
+        <div id="" class="col-12 table-container">
           <table class="table table-hover shadow">
             <thead>
               <tr class="border bg-light">

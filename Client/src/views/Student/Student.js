@@ -19,7 +19,7 @@ function Student(props) {
     useEffect(() => {
         // alert(props.scrolled)
         async function fetchMyAPI() {
-            let { data } = await axios.get(`https://localhost:7184/Student/${id}/accountId`);
+            let { data } = await axios.get(`https://localhost:7184/api/Student/${id}/accountId`);
             setStudent(
                 data
             )

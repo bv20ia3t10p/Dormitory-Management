@@ -92,7 +92,7 @@ function ManageReceipt(props) {
                 />
             }
             <div class="section">
-                <h3 class="">Quản lý tiền điện, tiền nước</h3>
+                <h3 class="">QUẢN LÝ HÓA ĐƠN ĐIỆN NƯỚC</h3>
                 <button style={{ marginLeft: "auto" }} class=" mb-2 btn btn-primary pull-right mr-5" onClick={toggle}>Thêm hóa đơn</button>
             </div>
             <div >

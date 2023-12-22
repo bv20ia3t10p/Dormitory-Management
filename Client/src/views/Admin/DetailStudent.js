@@ -13,7 +13,7 @@ class DetailStudent extends React.Component {
         if (this.props.match && this.props.match.params) {
             let id = this.props.match.params.id;
             console.log('check prams', this.props.match.params)
-            let res = await axios.get(`https://localhost:7184/Student/${id}`);
+            let res = await axios.get(`https://localhost:7184/api/Student/${id}`);
             this.setState({
                 student: res.data ? res.data : []
             })

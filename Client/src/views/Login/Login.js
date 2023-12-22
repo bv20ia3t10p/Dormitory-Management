@@ -15,11 +15,13 @@ function Login(props) {
         userName: '',
         password: ''
     })
+
     let history = useHistory()
+
     const toggle = () => setModal(!modal);
     useEffect(() => {
         async function fetchMyAPI() {
-            let res = await axios.get(`https://localhost:7184/Student`);
+            let res = await axios.get(`https://localhost:7184/api/Student`);
             setState({
                 ListUsers: res.data ? res.data : []
             })
@@ -29,7 +31,7 @@ function Login(props) {
     const createNewStudent = async (data) => {
         try {
             console.log('check data child: ', data)
-            let res = await axios.post(`https://localhost:7184/Student`, data);
+            let res = await axios.post(`https://localhost:7184/api/Student`, data);
             console.log('response create student: ', res)
             setModal(false);
             toast.success("Add new student success");

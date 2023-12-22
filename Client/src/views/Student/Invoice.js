@@ -17,7 +17,7 @@ function Invoice(props) {
     console.log("check id: ", id);
     useEffect(() => {
         async function fetchMyAPI() {
-            let studentId = await axios.get(`https://localhost:7184/Student/${id}/accountId`);
+            let studentId = await axios.get(`https://localhost:7184/api/Student/${id}/accountId`);
             let data = await axios.get(`https://localhost:7184/RegisterRoom/${studentId.data.id}/student`);
             setInvoice(
                 data.data

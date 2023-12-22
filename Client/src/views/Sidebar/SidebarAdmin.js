@@ -14,8 +14,6 @@ class SidebarAdmin extends React.Component {
             <div class="sidebar-for-admin bg-info">
                 <header class="header d-flex ">
                     <div class="text-center p-2" style={{ "margin-left": "35%" }}><img class="mr-3 " src="https://upload.wikimedia.org/wikipedia/vi/c/c6/Logo_KTX_%C4%90HQGTPHCM.png"></img><span class="h5 text-info">TRANG QUẢN LÝ KÝ TÚC XÁ ĐẠI HỌC QUỐC GIA</span></div>
-                    <div class="text-white ml-5">.</div>
-                    <div class="text-white ml-3">.</div>
                     <nav class="navbar navbar-toggleable-md navbar-light pt-0 pb-0">
 
                         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,7 +42,8 @@ class SidebarAdmin extends React.Component {
                         </div>
                     </nav>
                 </header>
-                <div class="main pr-2" >
+
+                <div class="main" >
                     <aside >
                         <div class="sidebar left " >
                             <div class="user-panel">
