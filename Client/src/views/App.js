@@ -1,140 +1,86 @@
 import './App.scss';
-import Nav from './Nav/Nav';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import Home from './user/Home';
-import User1 from './user/user1/user1';
-import User2 from './user/user2/user2';
-import User3 from './user/User3/user3';
 import Admin from './Admin/Admin';
-import Login from './Login/Login';
-import Student from './Student/Student';
-import Demand from './Student/Demand';
-import Notify from './Student/Notify';
-import Receipt from './Student/Receipt';
-import Stay from './Student/Stay';
-import Staff from './Staff/Staff';
-import DetailStaff from './Admin/DetailStaff';
-import UpdateStaff from './Admin/UpdateStaff';
 import Room from './Admin/Room';
-import ManagerStudent from './Admin/ManagerStudent';
 import RegisterRoom from './Admin/RegisterRoom';
-import Accommodation from './Student/Accommodation';
-import Invoice from './Student/Invoice';
-import DetailStudent from './Admin/DetailStudent';
+import ManagerStudent from './Admin/ManagerStudent';
 import ManageReceipt from './Admin/ManageReceipt';
-import PayElicWar from './Student/PayElicWar';
 import Statistical from './Admin/Statistical';
 import BotChat from './Admin/BotChat';
+import Student from './Student/Student';
+import PayElicWar from './Student/PayElicWar';
+import Accommodation from './Student/Accommodation';
+import Invoice from './Student/Invoice';
+import DetailStaff from './Admin/DetailStaff';
+import DetailStudent from './Admin/DetailStudent';
+import Login from './Login/Login';
 import NotFound from './NotFound';
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect,
-  useHistory
-} from "react-router-dom";
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+
 const App = () => {
   const [state, setState] = useState({
-    token: ""
-  })
-  
+    token: "",
+  });
+
   const check = (data) => {
     console.log('check data: ', data);
-    state.token = data
+    state.token = data;
     localStorage.setItem('account', state.token);
-  }
+  };
+
+  const PrivateRoute = ({ component: Component, roles, ...rest }) => (
+    <Route
+      {...rest}
+      render={(props) => {
+        const userRole = localStorage.getItem(localStorage.getItem('account'));
+        if (roles.includes(userRole)) {
+          return <Component {...props} />;
+        } else {
+          return <Redirect to="/Login" />;
+        }
+      }}
+    />
+  );
+
   return (
     <Router>
       <div className="App">
         <header className="App-header">
-          
           <ToastContainer />
           <Switch>
-            <Route path="/" exact render={() => {
-              return localStorage.getItem("accessToken") == "user" ? <Home /> : <Redirect to="/Login" />
-            }}>
-            </Route>
-            <Route path="/user1">
-              <Nav />
-              <User1 />
-            </Route>
-            <Route path="/user2">
-              <Nav />
-              <User2 />
-            </Route>
-            <Route path="/user3" exact>
-              <Nav />
-              <User3 />
-            </Route>
-            
-            <Route path="/admin" render={() => {
-              return localStorage.getItem(localStorage.getItem("account")) == "Admin" ? <Admin /> : <>{localStorage.getItem(localStorage.getItem("account")) == "Manager" ? toast.error("Trang này dành cho admin") && <ManagerStudent /> : <Redirect to="/Login" />} </>
-            }}>
-            </Route>
-            <Route path="/room" render={() => {
-              return localStorage.getItem(localStorage.getItem("account")) == "Admin" || "Manager" ? <Room /> : <Redirect to="/Login" />
-            }}>
-            </Route>
-            <Route path="/registerRoom" render={() => {
-              return localStorage.getItem(localStorage.getItem("account")) == "Admin" || "Manager" ? <RegisterRoom /> : <Redirect to="/Login" />
-            }}>
-            </Route>
-            <Route path="/ManagerStudent" render={() => {
-              return localStorage.getItem(localStorage.getItem("account")) == "Admin" || "Manager" ? <ManagerStudent /> : <Redirect to="/Login" />
-            }}></Route>
-            <Route path="/ManageReceipt" render={() => {
-              return localStorage.getItem(localStorage.getItem("account")) == "Admin" || "Manager" ? <ManageReceipt /> : <Redirect to="/Login" />
-            }}></Route>
-            <Route path="/statistical" render={() => {
-              return localStorage.getItem(localStorage.getItem("account")) == "Admin" || "Manager" ? <Statistical /> : <Redirect to="/Login" />
-            }}></Route>
-             <Route path="/botchat" render={() => {
-              return localStorage.getItem(localStorage.getItem("account")) == "Admin" || "Manager" || "Student" ? <BotChat /> : <Redirect to="/Login" />
-            }}></Route>
-            <Route path="/student" render={() => {
-              return localStorage.getItem(localStorage.getItem("account")) == "Student" ? <Student /> : <Redirect to="/Login" />
-            }}>
-            </Route>
-            <Route path="/payElicWar" render={() => {
-              return localStorage.getItem(localStorage.getItem("account")) == "Student" ? <PayElicWar /> : <Redirect to="/Login" />
-            }}>
-            </Route>
-            <Route path="/accommodation" render={() => {
-              return localStorage.getItem(localStorage.getItem("account")) == "Student" ? <Accommodation /> : <Redirect to="/Login" />
-            }}>
-            </Route>
-            <Route path="/Invoice" render={() => {
-              return localStorage.getItem(localStorage.getItem("account")) == "Student" ? <Invoice /> : <Redirect to="/Login" />
-            }}>
-            </Route>
-            <Route path="/staff" render={() => {
-              return localStorage.getItem(localStorage.getItem("account")) == "Manager" ? <ManagerStudent /> : <Redirect to="/Login" />
-            }}>
-            </Route>
-            <Route path="/DetailStaff/:id" render={() => {
-              return localStorage.getItem(localStorage.getItem("account")) == "Admin" || "Manager" ? <DetailStaff /> : <Redirect to="/Login" />
-            }}></Route>
-            <Route path="/DetailStudent/:id" render={() => {
-              return localStorage.getItem(localStorage.getItem("account")) == "Admin" || "Manager" ? <DetailStudent /> : <Redirect to="/Login" />
-            }}></Route>
-
-            <Route path="/Login" >
-              <Login
-                Token={check}
-                />
+            <Route path="/" exact>
+              {localStorage.getItem('accessToken') === 'user' ? <Home /> : <Redirect to="/Login" />}
             </Route>
 
+            <PrivateRoute path="/admin" component={Admin} roles={['Admin', 'Manager']} />
+            <PrivateRoute path="/room" component={Room} roles={['Admin', 'Manager']} />
+            <PrivateRoute path="/registerRoom" component={RegisterRoom} roles={['Admin', 'Manager']} />
+            <PrivateRoute path="/ManagerStudent" component={ManagerStudent} roles={['Admin', 'Manager']} />
+            <PrivateRoute path="/ManageReceipt" component={ManageReceipt} roles={['Admin', 'Manager']} />
+            <PrivateRoute path="/statistical" component={Statistical} roles={['Admin', 'Manager']} />
+            <PrivateRoute path="/botchat" component={BotChat} roles={['Admin', 'Manager', 'Student']} />
+            <PrivateRoute path="/student" component={Student} roles={['Student']} />
+            <PrivateRoute path="/payElicWar" component={PayElicWar} roles={['Student']} />
+            <PrivateRoute path="/accommodation" component={Accommodation} roles={['Student']} />
+            <PrivateRoute path="/Invoice" component={Invoice} roles={['Student']} />
+            <PrivateRoute path="/staff" component={ManagerStudent} roles={['Manager']} />
+            <PrivateRoute path="/DetailStaff/:id" component={DetailStaff} roles={['Admin', 'Manager']} />
+            <PrivateRoute path="/DetailStudent/:id" component={DetailStudent} roles={['Admin', 'Manager']} />
+
+            <Route path="/Login">
+              <Login Token={check} />
+            </Route>
             <Route path="*" component={NotFound} />
           </Switch>
         </header>
       </div>
-
     </Router>
   );
-}
+};
 
 export default App;

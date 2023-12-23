@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import {
-    Form, Row, FormGroup, Col, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter, Label
+    Form, FormGroup, Input, Button, Modal, ModalHeader, ModalBody, Label
 } from 'reactstrap';
+import InputField from '../InputField';
 
-function Addstaff(props) {
+function AddStaff(props) {
     const [state, setState] = useState({
         lastName: '',
         firstName: '',
@@ -15,149 +16,48 @@ function Addstaff(props) {
         gender: true,
         idCard: '',
     });
+
     const handleOnchangeInput = (event, item) => {
-        let copyState = { ...state }
-        if (event.target.value == "true" && item == "gender") {
-            copyState["gender"] = true;
-        }
-        else if (event.target.value == "false" && item == "gender") {
-            copyState["gender"] = false;
-        }
-        else {
-            copyState[item] = event.target.value;
-        }
         setState({
-            ...copyState
-        })
-    }
-    const checkValideInput = () => {
-        let isValid = true;
-        let arrInput = ['lastName', 'firstName', 'dateOfBirth', 'identiFyCardNumber', 'phoneNumber', 'address', 'idCard']
-        for (let i = 0; i < arrInput.length; i++) {
-            console.log('check inside loop', state[arrInput[i]], arrInput[i])
-            if (!state[arrInput[i]]) {
-                isValid = false;
-                alert('Missing parameter: ' + arrInput[i]);
-                break;
-            }
+            ...state,
+            [item]: item === 'gender' ? event.target.value === 'true' : event.target.value,
+        });
+    };
+
+    const checkValidInput = () => {
+        const requiredFields = ['lastName', 'firstName', 'dateOfBirth', 'identiFyCardNumber', 'phoneNumber', 'address', 'idCard'];
+        const missingField = requiredFields.find(field => !state[field]);
+        if (missingField) {
+            alert('Missing parameter: ' + missingField);
+            return false;
         }
-        return isValid;
-    }
+        return true;
+    };
+
     const handleAddNewStaff = () => {
-        let isValid = checkValideInput();
-        if (isValid === true) {
-            props.createNewStaff(state);
+        if (checkValidInput()) {
+            props.createObject(state);
             console.log("data modal: ", state);
-            // { lastName: 'df', firstName: 'sdf', dateOfBirth: '2022-12-03', email: 'test1@gmail.com', identiFyCardNumber: '123', phoneNumber: '12345', address: '12345', gender: true, status: true }
         }
-    }
+    };
     return (
         <div>
             <Modal isOpen={props.modal} fade={false} toggle={props.toggle}>
-                <ModalHeader >Thêm Nhân Viên</ModalHeader>
+                <ModalHeader>Thêm {props.object}</ModalHeader>
                 <ModalBody>
-                    <Form >
+                    <Form>
+                        <InputField id="lastName" label="Tên" type="text" value={state.lastName} onChange={handleOnchangeInput} />
+                        <InputField id="firstName" label="Họ và Tên lót" type="text" value={state.firstName} onChange={handleOnchangeInput} />
+                        <InputField id="dateOfBirth" label="Ngày sinh" type="date" value={state.dateOfBirth} onChange={handleOnchangeInput} />
+                        <InputField id="email" label="Email" type="text" value={state.email} onChange={handleOnchangeInput} />
+                        <InputField id="identiFyCardNumber" label="CMND/ CCCD" type="text" value={state.identiFyCardNumber} onChange={handleOnchangeInput} />
+                        <InputField id="phoneNumber" label="Số điện thoại" type="text" value={state.phoneNumber} onChange={handleOnchangeInput} />
+                        <InputField id="address" label="Địa chỉ" type="text" value={state.address} onChange={handleOnchangeInput} />
+                        <InputField id="idCard" label="MSNV" type="text" value={state.idCard} onChange={handleOnchangeInput} />
+
+                        <Label for="gender">Giới tính</Label>
                         <FormGroup>
-                            <Label for="lastName">
-                                Tên
-                            </Label>
-                            <Input
-                                id="lastName"
-                                name="lastName"
-                                onChange={(event) => handleOnchangeInput(event, "lastName")}
-                                value={state.lastName}
-                            />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for="LastName">
-                                Họ và Tên lót
-                            </Label>
-                            <Input
-                                id="firstName"
-                                name="firstName"
-                                onChange={(event) => handleOnchangeInput(event, "firstName")}
-                                value={state.firstName}
-                            />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for="dateOfBirth">
-                                Ngày sinh
-                            </Label>
-                            <Input
-                                id="dateOfBirth"
-                                name="dateOfBirth"
-                                type="date"
-                                onChange={(event) => handleOnchangeInput(event, "dateOfBirth")}
-                                value={state.dateOfBirth}
-                            />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for="email">
-                                Email
-                            </Label>
-                            <Input
-                                id="email"
-                                name="email"
-                                onChange={(event) => handleOnchangeInput(event, "email")}
-                                value={state.email}
-                            />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for="identiFyCardNumber">
-                                CMND/ CCCD
-                            </Label>
-                            <Input
-                                id="identiFyCardNumber"
-                                name="identiFyCardNumber"
-                                onChange={(event) => handleOnchangeInput(event, "identiFyCardNumber")}
-                                value={state.identiFyCardNumber}
-                            />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for="phoneNumber">
-                                Số điện thoại
-                            </Label>
-                            <Input
-                                id="phoneNumber"
-                                name="phoneNumber"
-                                onChange={(event) => handleOnchangeInput(event, "phoneNumber")}
-                                value={state.phoneNumber}
-                            />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for="address">
-                                Địa chỉ
-                            </Label>
-                            <Input
-                                id="address"
-                                name="address"
-                                onChange={(event) => handleOnchangeInput(event, "address")}
-                                value={state.address}
-                            />
-                        </FormGroup>
-                        {/* idCard */}
-                        <FormGroup>
-                            <Label for="gender">
-                                MSNV
-                            </Label>
-                            <Input
-                                id="idCard"
-                                name="idCard"
-                                type="text"
-                                onChange={(event) => handleOnchangeInput(event, "idCard")}
-                                value={state.idCard}
-                            />
-                        </FormGroup>
-                        <Label for="gender">
-                            Giới tính
-                        </Label>
-                        <FormGroup>
-                            <Label for="gender">
-                                Nam
-                            </Label>
-                            &nbsp;
-                            &nbsp;
-                            &nbsp;
+                            <Label for="gender">Nam</Label>
                             <Input
                                 id="gender"
                                 name="gender"
@@ -165,12 +65,7 @@ function Addstaff(props) {
                                 onChange={(event) => handleOnchangeInput(event, "gender")}
                                 value={true}
                             />
-                            <Label for="gender">
-                                Nữ
-                            </Label>
-                            &nbsp;
-                            &nbsp;
-                            &nbsp;
+                            <Label for="gender">Nữ</Label>
                             <Input
                                 id="gender"
                                 name="gender"
@@ -178,28 +73,15 @@ function Addstaff(props) {
                                 onChange={(event) => handleOnchangeInput(event, "gender")}
                                 value={false}
                             />
-
                         </FormGroup>
-                        <Button color="primary" onClick={() => handleAddNewStaff()}>
-                            Thêm
-                        </Button>{' '}
-                        <Button color="secondary" onClick={props.toggle}>
-                            Quay lại
-                        </Button>
+
+                        <Button color="primary" onClick={handleAddNewStaff}>Thêm</Button>
+                        <Button color="secondary" onClick={props.toggle}>Quay lại</Button>
                     </Form>
                 </ModalBody>
-                {/* Nút tắt phần modal */}
-                {/* <ModalFooter>
-                    <Button color="primary" onClick={props.toggle}>
-                        Create
-                    </Button>{' '}
-                    <Button color="secondary" onClick={props.toggle}>
-                        Cancel
-                    </Button>
-                </ModalFooter> */}
             </Modal>
         </div>
     );
 }
 
-export default Addstaff;
+export default AddStaff;

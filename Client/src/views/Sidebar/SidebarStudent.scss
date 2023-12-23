@@ -270,46 +270,6 @@ a.navbar-brand {
     z-index: 100;
 }
 
-
-.user-panel {
-    clear: left;
-    display: block;
-    float: left;
-}
-
-.user-panel>.image>img {
-    width: 100%;
-    max-width: 45px;
-    height: auto;
-}
-
-.user-panel>.info,
-.user-panel>.info>a {
-    color: #fff;
-}
-
-.user-panel>.info>p {
-    font-weight: 600;
-    margin-bottom: 9px;
-}
-
-.user-panel {
-    clear: left;
-    display: block;
-    float: left;
-    width: 100%;
-    margin-bottom: 15px;
-    padding: 25px 15px;
-    border-bottom: 1px solid;
-}
-
-.user-panel>.info {
-    padding: 5px 5px 5px 15px;
-    line-height: 1;
-    position: absolute;
-    left: 55px;
-}
-
 .fliph .user-panel {
     display: none;
 }
@@ -689,10 +649,6 @@ h6 {
     margin-bottom: .5rem
 }
 
-p {
-    margin-top: 0;
-    margin-bottom: 1rem
-}
 
 abbr[data-original-title],
 abbr[title] {

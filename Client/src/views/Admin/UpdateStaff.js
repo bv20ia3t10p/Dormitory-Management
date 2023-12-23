@@ -5,18 +5,19 @@ import {
 
 function UpdateStaff(props) {
     let staff = props.currentUser
+    console.log(staff)
     const [state, setState] = useState({
-        id: staff.StaffEdit.id,
-        lastName: staff.StaffEdit.lastName,
-        firstName: staff.StaffEdit.firstName,
-        dateOfBirth: staff.StaffEdit.dateOfBirth,
-        email: staff.StaffEdit.email,
-        identiFyCardNumber: staff.StaffEdit.identiFyCardNumber,
-        phoneNumber: staff.StaffEdit.phoneNumber,
-        address: staff.StaffEdit.address,
-        gender: staff.StaffEdit.gender,
-        idCard: staff.StaffEdit.idCard,
-        status: staff.StaffEdit.status
+        id: staff.ObjectEdit.id,
+        lastName: staff.ObjectEdit.lastName,
+        firstName: staff.ObjectEdit.firstName,
+        dateOfBirth: staff.ObjectEdit.dateOfBirth,
+        email: staff.ObjectEdit.email,
+        identiFyCardNumber: staff.ObjectEdit.identiFyCardNumber,
+        phoneNumber: staff.ObjectEdit.phoneNumber,
+        address: staff.ObjectEdit.address,
+        gender: staff.ObjectEdit.gender,
+        idCard: staff.ObjectEdit.idCard,
+        status: staff.ObjectEdit.status
     });
     const handleOnchangeInput = (event, item) => {
         let copyState = { ...state }
@@ -56,7 +57,7 @@ function UpdateStaff(props) {
     const handleUpdateStaff = () => {
         let isValid = checkValideInput();
         if (isValid === true) {
-            props.updateStaff(state);
+            props.updateObject(state);
             console.log("check data modalUpdate: ", state);
             // { lastName: 'df', firstName: 'sdf', dateOfBirth: '2022-12-03', email: 'test1@gmail.com', identiFyCardNumber: '123', phoneNumber: '12345', address: '12345', gender: true, status: true }
         }
