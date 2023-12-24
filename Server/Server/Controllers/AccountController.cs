@@ -38,8 +38,8 @@ namespace Server.Controllers
         public IActionResult GetById(int id)
         {
             // only admins can access other user records
-            var currentUser = (Account)HttpContext.Items["Account"];
-            if (id != currentUser.Id && currentUser.Role != Role.Admin)
+            var currentObject = (Account)HttpContext.Items["Account"];
+            if (id != currentObject.Id && currentObject.Role != Role.Admin)
                 return Unauthorized(new { message = "Unauthorized" });
 
             var user = _accountService.GetById(id);

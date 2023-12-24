@@ -4,7 +4,7 @@ import {
 } from 'reactstrap';
 
 function UpdateReceipt(props) {
-    let Receipt = props.CurrentReceipt;
+    let Receipt = props.currentObject;
     console.log("check prop receipt in child: ", Receipt)
     // https://localhost:7184/ElectricWaterLog/1?RoomId=1
     // RoomId
@@ -15,13 +15,13 @@ function UpdateReceipt(props) {
     // "waterNew": 0,
     // "feeStatus": true
     const [state, setState] = useState({
-        ElectricWaterLogId: Receipt.id,
-        RoomId: Receipt.room.id,
-        electricNew: Receipt.electricNew,
-        electricOld: Receipt.electricOld,
-        waterNew: Receipt.waterNew,
-        waterOld: Receipt.waterOld,
-        feeStatus: Receipt.feeStatus,
+        ElectricWaterLogId: Receipt.ObjectEdit.id,
+        RoomId: Receipt.ObjectEdit.room.id,
+        electricNew: Receipt.ObjectEdit.electricNew,
+        electricOld: Receipt.ObjectEdit.electricOld,
+        waterNew: Receipt.ObjectEdit.waterNew,
+        waterOld: Receipt.ObjectEdit.waterOld,
+        feeStatus: Receipt.ObjectEdit.feeStatus,
     });
     console.log("check state in children: ", state);
     const handleOnchangeInput = (event, item) => {
@@ -56,7 +56,7 @@ function UpdateReceipt(props) {
     const handleUpdateReceipt = () => {
         let isValid = checkValideInput();
         if (isValid === true) {
-            props.UpdateDataReceipt(state);
+            props.updateObject(state);
             // console.log("check data modalUpdate : ", state);
         }
     }

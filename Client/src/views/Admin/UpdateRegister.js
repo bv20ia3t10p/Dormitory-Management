@@ -4,7 +4,7 @@ import {
 } from 'reactstrap';
 
 function UpdateRegister(props) {
-    let RegisterRoom = props.currentUser;
+    let RegisterRoom = props.currentObject;
     console.log("check prop registerroom: ", RegisterRoom)
 
     const [state, setState] = useState({

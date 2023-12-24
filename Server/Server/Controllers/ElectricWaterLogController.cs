@@ -7,7 +7,7 @@ namespace Server.Controllers
 {
 
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class ElectricWaterLogController : ControllerBase
     {
         private readonly IElectricWaterLog _electricWaterLog;

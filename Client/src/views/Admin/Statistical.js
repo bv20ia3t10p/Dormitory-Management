@@ -21,7 +21,7 @@ function Statistical(props) {
         async function fetchMyAPI() {
             let res = await axios.get(`https://localhost:7184/api/RegisterRoom`);
             let res1 = await axios.get(`https://localhost:7184/Rooms`);
-            let res2 = await axios.get(`https://localhost:7184/ElectricWaterLog`);
+            let res2 = await axios.get(`https://localhost:7184/api/ElectricWaterLog`);
             setRegisterRoom(
                 res.data ? res.data : []
             )

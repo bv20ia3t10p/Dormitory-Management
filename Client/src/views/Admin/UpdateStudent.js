@@ -4,7 +4,7 @@ import {
 } from 'reactstrap';
 
 function UpdateStudent(props) {
-    let student = props.currentUser
+    let student = props.currentObject
     console.log('check student: ', student)
     const [state, setState] = useState({
         id: student.ObjectEdit.id,

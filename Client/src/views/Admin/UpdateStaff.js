@@ -4,7 +4,7 @@ import {
 } from 'reactstrap';
 
 function UpdateStaff(props) {
-    let staff = props.currentUser
+    let staff = props.currentObject
     const [state, setState] = useState({
         id: staff.ObjectEdit.id,
         lastName: staff.ObjectEdit.lastName,

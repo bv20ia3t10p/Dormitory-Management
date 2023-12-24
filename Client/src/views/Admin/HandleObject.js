@@ -121,7 +121,7 @@ const HandleObject = (props) => {
                 <props.editModalComponent
                     modal={modalEdit}
                     toggle={toggleEdit}
-                    currentUser={editObject}
+                    currentObject={editObject}
                     updateObject={updateObject}
                 />
             )}
