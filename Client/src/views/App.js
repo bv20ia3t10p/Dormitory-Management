@@ -6,8 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import Home from './user/Home';
 import Admin from './Admin/Admin';
 import Room from './Admin/Room';
-import RegisterRoom from './Admin/RegisterRoom';
-import ManagerStudent from './Admin/ManagerStudent';
+import ManageRegisterRoom from './Admin/ManageRegisterRoom';
+import ManageStudent from './Admin/ManageStudent';
 import ManageReceipt from './Admin/ManageReceipt';
 import Statistical from './Admin/Statistical';
 import BotChat from './Admin/BotChat';
@@ -59,8 +59,8 @@ const App = () => {
 
             <PrivateRoute path="/admin" component={Admin} roles={['Admin', 'Manager']} />
             <PrivateRoute path="/room" component={Room} roles={['Admin', 'Manager']} />
-            <PrivateRoute path="/registerRoom" component={RegisterRoom} roles={['Admin', 'Manager']} />
-            <PrivateRoute path="/ManagerStudent" component={ManagerStudent} roles={['Admin', 'Manager']} />
+            <PrivateRoute path="/registerRoom" component={ManageRegisterRoom} roles={['Admin', 'Manager']} />
+            <PrivateRoute path="/ManageStudent" component={ManageStudent} roles={['Admin', 'Manager']} />
             <PrivateRoute path="/ManageReceipt" component={ManageReceipt} roles={['Admin', 'Manager']} />
             <PrivateRoute path="/statistical" component={Statistical} roles={['Admin', 'Manager']} />
             <PrivateRoute path="/botchat" component={BotChat} roles={['Admin', 'Manager', 'Student']} />
@@ -68,8 +68,8 @@ const App = () => {
             <PrivateRoute path="/payElicWar" component={PayElicWar} roles={['Student']} />
             <PrivateRoute path="/accommodation" component={Accommodation} roles={['Student']} />
             <PrivateRoute path="/Invoice" component={Invoice} roles={['Student']} />
-            <PrivateRoute path="/staff" component={ManagerStudent} roles={['Manager']} />
-            <PrivateRoute path="/DetailStaff/:id" component={DetailStaff} roles={['Admin', 'Manager']} />
+            <PrivateRoute path="/staff" component={ManageStudent} roles={['Manager']} />
+            <PrivateRoute path="/DetailManager/:id" component={DetailStaff} roles={['Admin', 'Manager']} />
             <PrivateRoute path="/DetailStudent/:id" component={DetailStudent} roles={['Admin', 'Manager']} />
 
             <Route path="/Login">

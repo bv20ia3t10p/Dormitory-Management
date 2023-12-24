@@ -5,7 +5,7 @@ const RowStudent = (props) => {
 
     const { item, handleEditObject, handleDeleteObject, handleViewDetailUser } = props;
     return (
-        <tr className="child" key={item.id} class="border" onClick={() => handleViewDetailUser(item)}>
+        <tr className="child border" key={item.id} onClick={() => handleViewDetailUser(item)}>
             {/* <td>{index + 1}</td> */}
             <td>{item.id}</td>
             <td> {item.lastName + " " + item.firstName}</td>
@@ -15,9 +15,9 @@ const RowStudent = (props) => {
             <td>{item.phoneNumber}</td>
             <td>
                 {item.status ? (
-                    <div class="text-success">Còn hạn</div>
+                    <div className="text-success">Còn hạn</div>
                 ) : (
-                    <div class="text-danger">Hết hạn</div>
+                    <div className="text-danger">Hết hạn</div>
                 )}
             </td>
 

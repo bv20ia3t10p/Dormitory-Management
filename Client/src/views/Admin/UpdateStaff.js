@@ -5,7 +5,6 @@ import {
 
 function UpdateStaff(props) {
     let staff = props.currentUser
-    console.log(staff)
     const [state, setState] = useState({
         id: staff.ObjectEdit.id,
         lastName: staff.ObjectEdit.lastName,

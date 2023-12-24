@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-    Form, Row, FormGroup, Col, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter, Label
+    Form, FormGroup, Input, Button, Modal, ModalHeader, ModalBody, Label
 } from 'reactstrap';
 
 function AddregisRoom(props) {
@@ -40,7 +40,7 @@ function AddregisRoom(props) {
     const handleAddRegister = () => {
         let isValid = checkValideInput();
         if (isValid === true) {
-            props.createNewRegisRoom(state);
+            props.createObject(state);
             console.log("data modal: ", state);
             // { lastName: 'df', firstName: 'sdf', dateOfBirth: '2022-12-03', email: 'test1@gmail.com', identiFyCardNumber: '123', phoneNumber: '12345', address: '12345', gender: true, status: true }
         }

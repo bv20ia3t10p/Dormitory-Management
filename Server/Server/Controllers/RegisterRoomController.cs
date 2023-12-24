@@ -7,7 +7,7 @@ using Server.Repository;
 namespace Server.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class RegisterRoomController : ControllerBase
     {
         private readonly IRegisterRoom _registerRoom;

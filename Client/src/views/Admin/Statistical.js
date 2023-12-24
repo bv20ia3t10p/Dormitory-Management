@@ -19,7 +19,7 @@ function Statistical(props) {
 
     useEffect(() => {
         async function fetchMyAPI() {
-            let res = await axios.get(`https://localhost:7184/RegisterRoom`);
+            let res = await axios.get(`https://localhost:7184/api/RegisterRoom`);
             let res1 = await axios.get(`https://localhost:7184/Rooms`);
             let res2 = await axios.get(`https://localhost:7184/ElectricWaterLog`);
             setRegisterRoom(
@@ -64,26 +64,26 @@ function Statistical(props) {
     return (
         < >
             <SidebarAdmin />
-            <div class="section row">
-                <h3 class="w-100">Thống kê</h3>
-                <div class="col border m-2 bg-light rounded p-3">
-                    <div style={{ "font-size": "25px" }} class="font-weight-bold ">{totalFeeWaterElec}<span style={{ "margin-left": "60%" }}><i class="fa fa-usd text-warning fa-2x" aria-hidden="true"></i></span></div>
-                    <div class="text-white">.</div>
+            <div className="section row">
+                <h3 className="w-100">Thống kê</h3>
+                <div className="col border m-2 bg-light rounded p-3">
+                    <div style={{ "font-size": "25px" }} className="font-weight-bold ">{totalFeeWaterElec}<span style={{ "margin-left": "60%" }}><i className="fa fa-usd text-warning fa-2x" aria-hidden="true"></i></span></div>
+                    <div className="text-white">.</div>
                     <div style={{ "font-size": "25px" }}>Tiền điện nước còn nợ</div>
                 </div>
-                <div class="col border m-2 bg-light rounded p-3">
-                    <div style={{ "font-size": "25px" }} class="font-weight-bold">{totalFeeRoom} VNĐ<span style={{ "margin-left": "20%" }}><i class="fa fa-signal text-success fa-2x" aria-hidden="true"></i></span></div>
-                    <div class="text-white">.</div>
+                <div className="col border m-2 bg-light rounded p-3">
+                    <div style={{ "font-size": "25px" }} className="font-weight-bold">{totalFeeRoom} VNĐ<span style={{ "margin-left": "20%" }}><i className="fa fa-signal text-success fa-2x" aria-hidden="true"></i></span></div>
+                    <div className="text-white">.</div>
                     <div style={{ "font-size": "25px" }}>Tiền phòng còn nợ</div>
                 </div>
-                <div class="col border m-2 bg-light rounded p-3">
-                    <div class="font-weight-bold" style={{ "font-size": "25px" }}>{countStudent} <span style={{ "margin-left": "70%" }}><i class="fa fa-pie-chart text-primary fa-2x" aria-hidden="true"></i></span></div>
-                    <div class="text-white">.</div>
+                <div className="col border m-2 bg-light rounded p-3">
+                    <div className="font-weight-bold" style={{ "font-size": "25px" }}>{countStudent} <span style={{ "margin-left": "70%" }}><i className="fa fa-pie-chart text-primary fa-2x" aria-hidden="true"></i></span></div>
+                    <div className="text-white">.</div>
                     <div style={{ "font-size": "25px" }}>Số sinh viên chưa đóng tiền</div>
                 </div>
-                <div class="col border m-2 bg-light rounded p-3">
-                    <div class="font-weight-bold" style={{ "font-size": "25px" }}>{countSlotRemain}<span style={{ "margin-left": "70%" }}><i class="fa fa-refresh text-info fa-2x" aria-hidden="true"></i></span></div>
-                    <div class="text-white">.</div>
+                <div className="col border m-2 bg-light rounded p-3">
+                    <div className="font-weight-bold" style={{ "font-size": "25px" }}>{countSlotRemain}<span style={{ "margin-left": "70%" }}><i className="fa fa-refresh text-info fa-2x" aria-hidden="true"></i></span></div>
+                    <div className="text-white">.</div>
                     <div style={{ "font-size": "25px" }}>Số chỗ còn trống</div>
                 </div>
             </div>

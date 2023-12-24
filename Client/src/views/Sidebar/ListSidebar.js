@@ -10,7 +10,7 @@ const ListSidebar = ({ menuItems }) => {
         <ul className="list-sidebar bg-info list-side-bar">
             {menuItems.map((item, index) => (
                 <li key={index}>
-                    <Link to={item.to} activeClassName="active" exact={true}>
+                    <Link to={item.to} activeclassname="active" exact={true}>
                         <i className={`fa ${item.icon}`}></i>
                         <span className="nav-label">{item.label}</span>
                     </Link>

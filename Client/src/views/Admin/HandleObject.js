@@ -85,7 +85,7 @@ const HandleObject = (props) => {
 
 
     const handleViewDetailUser = (object) => {
-        history.replace(`/DetailStaff/${object.id}`)
+        history.replace(`/Detail${props.object}/${object.id}`)
     }
 
     // EDIT
@@ -106,7 +106,7 @@ const HandleObject = (props) => {
             <button style={{ marginLeft: "auto" }} className="pl-3 mb-2 btn btn-primary pull-right" onClick={toggle}>
                 {props.addButtonTitle}
             </button>
-            
+
             {/* dynamic components */}
             {props.addModalComponent && (
                 <props.addModalComponent
@@ -125,7 +125,7 @@ const HandleObject = (props) => {
                     updateObject={updateObject}
                 />
             )}
-            
+
 
             <div className="col-12 table-container">
                 <table className="table table-hover shadow">

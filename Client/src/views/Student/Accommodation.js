@@ -15,7 +15,7 @@ function Accommodation(props) {
         async function fetchMyAPI() {
             let studentId = await axios.get(`https://localhost:7184/Student/${id}/accountId`);
 
-            let data = await axios.get(`https://localhost:7184/RegisterRoom/${studentId.data.id}/student`);
+            let data = await axios.get(`https://localhost:7184/api/RegisterRoom/${studentId.data.id}/student`);
             setAccommodation(
                 data.data
             )

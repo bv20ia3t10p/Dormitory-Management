@@ -24,7 +24,7 @@ function ManageReceipt(props) {
             )
         }
         fetchMyAPI()
-    }, [ListReceipt])
+    }, [])
     const createNewReceipt = async (id, data) => {
         console.log('check id and data from parent: ', id, data)
         try {
@@ -91,14 +91,14 @@ function ManageReceipt(props) {
                     UpdateDataReceipt={UpdateDataReceipt}
                 />
             }
-            <div class="section">
-                <h3 class="">QUẢN LÝ HÓA ĐƠN ĐIỆN NƯỚC</h3>
-                <button style={{ marginLeft: "auto" }} class=" mb-2 btn btn-primary pull-right mr-5" onClick={toggle}>Thêm hóa đơn</button>
+            <div className="section">
+                <h3 className="">QUẢN LÝ HÓA ĐƠN ĐIỆN NƯỚC</h3>
+                <button style={{ marginLeft: "auto" }} className=" mb-2 btn btn-primary pull-right mr-5" onClick={toggle}>Thêm hóa đơn</button>
             </div>
             <div >
-                <table class="table mt-5 w-75 shadow" >
-                    <thead class="bg-light">
-                        <tr class="border font-weight-bold">
+                <table className="table mt-5 w-75 shadow" >
+                    <thead className="bg-light">
+                        <tr className="border font-weight-bold">
                             <td>Phòng</td>
                             <td>Còn trống</td>
                             <td>Chỉ số điện</td>
@@ -106,35 +106,36 @@ function ManageReceipt(props) {
                             <td>Tổng tiền</td>
                             <td>Trạng thái thanh toán</td>
                             <td>Sửa / xóa</td>
+                            
                         </tr>
                     </thead>
                     <tbody>
                         {ListReceipt && ListReceipt.length > 0 &&
                             ListReceipt.map((item, index) => {
                                 return (
-                                    <tr key={item.id} class="border">
+                                    <tr key={item.id} className="border">
                                         <td>{item.room.name}</td>
                                         <td>{item.room.slotRemain}</td>
                                         <td>
-                                            <div>Chỉ số đầu:  <span class="font-weight-bold">{item.electricNew} Kwh</span> </div>
-                                            <div>Chỉ số cuối:  <span class="font-weight-bold">{item.electricOld} Kwh</span> </div>
-                                            <div>Sử dụng:  <span class="font-weight-bold">{item.electricNew - item.electricOld} Kwh</span> </div>
-                                            <div>Tiền điện:  <span class="font-weight-bold">{item.electricFee} VNĐ</span> </div>
+                                            <div>Chỉ số đầu:  <span className="font-weight-bold">{item.electricNew} Kwh</span> </div>
+                                            <div>Chỉ số cuối:  <span className="font-weight-bold">{item.electricOld} Kwh</span> </div>
+                                            <div>Sử dụng:  <span className="font-weight-bold">{item.electricNew - item.electricOld} Kwh</span> </div>
+                                            <div>Tiền điện:  <span className="font-weight-bold">{item.electricFee} VNĐ</span> </div>
                                         </td>
                                         <td>
-                                            <div>Chỉ số đầu:  <span class="font-weight-bold">{item.waterNew} m<sup>3</sup></span></div>
-                                            <div>Chỉ số cuối:<span class="font-weight-bold">{item.waterOld} m<sup>3</sup></span></div>
-                                            <div>Sử dụng:  <span class="font-weight-bold">{item.waterNew - item.waterOld} m<sup>3</sup></span> </div>
-                                            <div>Tiền nước:  <span class="font-weight-bold">{item.waterFee} VNĐ</span> </div>
+                                            <div>Chỉ số đầu:  <span className="font-weight-bold">{item.waterNew} m<sup>3</sup></span></div>
+                                            <div>Chỉ số cuối:<span className="font-weight-bold">{item.waterOld} m<sup>3</sup></span></div>
+                                            <div>Sử dụng:  <span className="font-weight-bold">{item.waterNew - item.waterOld} m<sup>3</sup></span> </div>
+                                            <div>Tiền nước:  <span className="font-weight-bold">{item.waterFee} VNĐ</span> </div>
                                         </td>
                                         <td>
-                                            <div class="font-weight-bold ">{item.totalFee} VNĐ</div>
+                                            <div className="font-weight-bold ">{item.totalFee} VNĐ</div>
                                             <div>(4 sinh viên)</div>
                                         </td>
-                                        <td>{item.feeStatus ? <div class="text-success">Đã thanh toán</div> : <div class="text-danger">Chưa thanh toán</div>}</td>
+                                        <td>{item.feeStatus ? <div className="text-success">Đã thanh toán</div> : <div className="text-danger">Chưa thanh toán</div>}</td>
                                         <td>
-                                            <button class="btn btn-success mr-1" onClick={() => handleUpdateReceipt(item)}><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                                            <button class="btn btn-danger" onClick={() => handleDeleteReceipt(item)}><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                            <button className="btn btn-success mr-1" onClick={() => handleUpdateReceipt(item)}><i className="fa fa-pencil" aria-hidden="true"></i></button>
+                                            <button className="btn btn-danger" onClick={() => handleDeleteReceipt(item)}><i className="fa fa-trash" aria-hidden="true"></i></button>
                                         </td>
                                     </tr>
                                 )
@@ -142,7 +143,7 @@ function ManageReceipt(props) {
                     </tbody>
                 </table>
             </div>
-            <div class="clear-fix">
+            <div className="clear-fix">
             </div>
         </>
     )

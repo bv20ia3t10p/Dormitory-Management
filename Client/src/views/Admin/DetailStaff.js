@@ -31,22 +31,22 @@ class DetailStaff extends React.Component {
             <>
                 {isEmptyObj === false &&
                     <>
-                        <div class="bg-info text-info pb-4">.</div>
-                        <div class="text-center p-3"><img class="mr-3" src="https://upload.wikimedia.org/wikipedia/vi/c/c6/Logo_KTX_%C4%90HQGTPHCM.png"></img><span class="h5 text-info">TRANG THÔNG TIN SINH VIÊN Ở KÝ TÚC XÁ ĐẠI HỌC QUỐC GIA</span></div>
-                        <div class="section row">
-                            <div class="" style={{ "width": "100%" }}>
-                                <table class="table table-hover">
-                                    <tr><td class="table-active border">Họ và tên</td><td class="font-weight-bold border">{staff.lastName + " " + staff.firstName}</td></tr>
-                                    <tr><td class="table-active border">Email</td><td class="font-weight-bold border">{staff.email}</td></tr>
-                                    <tr><td class="table-active border">Mã nhân viên</td><td class="font-weight-bold border">{staff.identiFyCardNumber}</td></tr>
-                                    <tr><td class="table-active border">Ngày sinh</td><td class="font-weight-bold border">{moment(staff.dateOfBirth).format("DD-MM-YYYY")}</td></tr>
-                                    <tr><td class="table-active border">Giới tính</td><td class="font-weight-bold border">{staff.gender == true ? "Nam" : "Nữ"}</td></tr>
-                                    <tr><td class="table-active border">Số điện thoại</td><td class="font-weight-bold border">{staff.phoneNumber}</td></tr>
-                                    <tr><td class="table-active border">Địa chỉ</td><td class="font-weight-bold border">{staff.address}</td></tr>
+                        <div className="bg-info text-info pb-4">.</div>
+                        <div className="text-center p-3"><img className="mr-3" src="https://upload.wikimedia.org/wikipedia/vi/c/c6/Logo_KTX_%C4%90HQGTPHCM.png"></img><span className="h5 text-info">TRANG THÔNG TIN SINH VIÊN Ở KÝ TÚC XÁ ĐẠI HỌC QUỐC GIA</span></div>
+                        <div className="section row">
+                            <div className="" style={{ "width": "100%" }}>
+                                <table className="table table-hover">
+                                    <tr><td className="table-active border">Họ và tên</td><td className="font-weight-bold border">{staff.lastName + " " + staff.firstName}</td></tr>
+                                    <tr><td className="table-active border">Email</td><td className="font-weight-bold border">{staff.email}</td></tr>
+                                    <tr><td className="table-active border">Mã nhân viên</td><td className="font-weight-bold border">{staff.identiFyCardNumber}</td></tr>
+                                    <tr><td className="table-active border">Ngày sinh</td><td className="font-weight-bold border">{moment(staff.dateOfBirth).format("DD-MM-YYYY")}</td></tr>
+                                    <tr><td className="table-active border">Giới tính</td><td className="font-weight-bold border">{staff.gender == true ? "Nam" : "Nữ"}</td></tr>
+                                    <tr><td className="table-active border">Số điện thoại</td><td className="font-weight-bold border">{staff.phoneNumber}</td></tr>
+                                    <tr><td className="table-active border">Địa chỉ</td><td className="font-weight-bold border">{staff.address}</td></tr>
                                 </table>
                             </div>
                         </div>
-                        <div scope="row"><button type="button" class="btn btn-primary ml-5" onClick={() => this.handleBackButton()}>Quay lại</button></div>
+                        <div scope="row"><button type="button" className="btn btn-primary ml-5" onClick={() => this.handleBackButton()}>Quay lại</button></div>
 
                     </>
                 }

@@ -2,7 +2,6 @@ import React from "react";
 import './SidebarAdmin.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.js';
-import { Link } from 'react-router-dom';
 import Header from "./Header";
 import ListSidebar from "./ListSidebar";
 
@@ -12,7 +11,7 @@ class SidebarAdmin extends React.Component {
         
         const menuItems = [
             { to: '/admin', icon: 'fa fa-address-book', label: 'Quản lý nhân viên' },
-            { to: '/ManagerStudent', icon: 'fa fa-graduation-cap', label: 'Quản lý sinh viên' },
+            { to: '/ManageStudent', icon: 'fa fa-graduation-cap', label: 'Quản lý sinh viên' },
             { to: "/room", icon: "fa fa-list-alt", label:"Quản lý phòng"},
             { to: "/registerRoom", icon: "fa fa-laptop", label:"Quản lý đăng ký"},
             { to: "/ManageReceipt", icon: "fa fa-money", label:"Hóa đơn điện nước"},

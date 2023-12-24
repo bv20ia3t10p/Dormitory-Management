@@ -4,16 +4,17 @@ import {
 } from 'reactstrap';
 
 function UpdateRegister(props) {
-    let RegisterRoom = props.CurrentRegister;
+    let RegisterRoom = props.currentUser;
     console.log("check prop registerroom: ", RegisterRoom)
+
     const [state, setState] = useState({
-        id: RegisterRoom.id,
-        studentId: RegisterRoom.studentId,
-        roomId: RegisterRoom.roomId,
-        dateBegin: RegisterRoom.dateBegin,
-        numberOfMonth: RegisterRoom.numberOfMonth,
-        domitoryFeeStatus: RegisterRoom.domitoryFeeStatus,
-        status: RegisterRoom.status,
+        id: RegisterRoom.ObjectEdit.id,
+        studentId: RegisterRoom.ObjectEdit.studentId,
+        roomId: RegisterRoom.ObjectEdit.roomId,
+        dateBegin: RegisterRoom.ObjectEdit.dateBegin,
+        numberOfMonth: RegisterRoom.ObjectEdit.numberOfMonth,
+        domitoryFeeStatus: RegisterRoom.ObjectEdit.domitoryFeeStatus,
+        status: RegisterRoom.ObjectEdit.status,
     });
     console.log("check state in children: ", state);
     const handleOnchangeInput = (event, item) => {

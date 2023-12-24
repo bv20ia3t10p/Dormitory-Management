@@ -18,7 +18,7 @@ function Invoice(props) {
     useEffect(() => {
         async function fetchMyAPI() {
             let studentId = await axios.get(`https://localhost:7184/api/Student/${id}/accountId`);
-            let data = await axios.get(`https://localhost:7184/RegisterRoom/${studentId.data.id}/student`);
+            let data = await axios.get(`https://localhost:7184/api/RegisterRoom/${studentId.data.id}/student`);
             setInvoice(
                 data.data
             )
@@ -30,7 +30,7 @@ function Invoice(props) {
         toggle()
         console.log('check updateUser in parent: ', item)
         try {
-            let res = await axios.put(`https://localhost:7184/RegisterRoom/${item.id}`, {
+            let res = await axios.put(`https://localhost:7184/api/RegisterRoom/${item.id}`, {
                 studentId: item.studentId,
                 roomId: item.roomId,
                 dateBegin: item.dateBegin,

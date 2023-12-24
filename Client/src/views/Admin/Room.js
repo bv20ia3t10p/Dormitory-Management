@@ -80,7 +80,7 @@ function Room(props) {
             )
         }
 
-        let res = await axios.get(`https://localhost:7184/RegisterRoom/${id}/room`);
+        let res = await axios.get(`https://localhost:7184/api/RegisterRoom/${id}/room`);
         setStudent(
             res.data
         )
