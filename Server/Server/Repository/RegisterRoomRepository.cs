@@ -215,5 +215,17 @@ namespace Server.Repository
         {
             throw new NotImplementedException();
         }
+
+        public void DeleteRegisterRoom(int registerRoomId)
+        {
+            var registerRoom = _context.RegisterRooms.Find(registerRoomId);
+            if (registerRoom == null)
+            {
+                throw new KeyNotFoundException("Register room");
+            }
+            registerRoom.Status = false;
+            _context.Update(registerRoom);
+            _context.SaveChanges();
+        }
     }
 }

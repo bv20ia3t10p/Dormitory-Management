@@ -53,5 +53,12 @@ namespace Server.Controllers
             _registerRoom.UpdateRegisterRoom(registerRoomId, model);
             return Ok(new { message = "Update success"});
         } 
+
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            _registerRoom.DeleteRegisterRoom(id);
+            return NoContent();
+        }
     }
 }

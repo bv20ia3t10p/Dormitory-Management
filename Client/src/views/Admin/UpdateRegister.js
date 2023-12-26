@@ -55,7 +55,7 @@ function UpdateRegister(props) {
     const handleUpdateRegister = () => {
         let isValid = checkValideInput();
         if (isValid === true) {
-            props.updateRegister(state);
+            props.updateObject(state);
             console.log("check data modalUpdate: ", state);
         }
     }

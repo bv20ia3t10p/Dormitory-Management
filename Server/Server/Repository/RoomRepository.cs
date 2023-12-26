@@ -35,8 +35,7 @@ namespace Server.Repository
             //if(roomDto == null)
             //    throw new KeyNotFoundException("Block not exist");
             //return roomDto;
-            
-
         }
+
     }
 }
