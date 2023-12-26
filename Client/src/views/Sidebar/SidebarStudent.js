@@ -23,19 +23,16 @@ class SidebarStudent extends React.Component {
                             <div class="user-panel">
 
                                 <div class="pull-left info">
-                                    <p>Sinh viên</p>
+                                 
                                 </div>
                             </div>
                             <ul class="list-sidebar bg-info" id="sidebar">
 
                                 <li><Link to="/student" activeClassName="active" exact={true}><i class="fa fa-address-book"></i> <span class="nav-label">Thông tin sinh viên</span></Link></li>
                                 <li><Link to="/accommodation" activeClassName="active" exact={true}><i class="fa fa-list-alt"></i> <span class="nav-label">Thông tin lưu trú</span></Link> </li>
-                                <li> <a href="#" data-toggle="collapse" data-target="#Request" class="collapsed active" ><i class="fa fa-money"></i> <span class="nav-label">Hóa đơn, biên lai</span><span class="fa fa-chevron-left pull-right"></span></a>
-                                    <ul class="sub-menu collapse" id="Request" >
-                                        <li><Link to="/Invoice" activeClassName="active" exact={true}>Hóa đơn lưu trú</Link></li>
-                                        <li><Link to="/payElicWar" activeClassName="active" exact={true}> Hóa đơn tiền điện</Link></li>
-                                    </ul>
-                                </li>
+
+                                        <li><Link to="/Invoice" activeClassName="active" exact={true} ><i class="fa fa-money"></i>Hóa đơn lưu trú</Link></li>
+                                        <li><Link to="/payElicWar" activeClassName="active" exact={true}> <i class="fa fa-money"></i>Hóa đơn tiền điện</Link></li>
                                 <li><Link to="/student" activeClassName="active" exact={true}><i class="fa fa-files-o"></i> <span class="nav-label">Khảo sát</span></Link> </li>
                                 <li><Link to="/student" activeClassName="active" exact={true}><i class="fa fa-bell"></i> <span class="nav-label">Thông báo</span></Link> </li>
                                 <li><Link to="/Login" activeClassName="active" exact={true}><i class="fa fa-sign-out"></i> <span class="nav-label">Log out</span></Link> </li>
