@@ -56,7 +56,7 @@ function Addstudent(props) {
     const handleAddNewStudent = () => {
         let isValid = checkValideInput();
         if (isValid === true) {
-            props.createNewStudent(state);
+            props.createObject(state);
             console.log("data modal: ", state);
             // { lastName: 'df', firstName: 'sdf', dateOfBirth: '2022-12-03', email: 'test1@gmail.com', identiFyCardNumber: '123', phoneNumber: '12345', address: '12345', gender: true, status: true }
         }

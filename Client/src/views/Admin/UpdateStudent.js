@@ -68,7 +68,7 @@ function UpdateStudent(props) {
     const handleUpdateStudent = () => {
         let isValid = checkValideInput();
         if (isValid === true) {
-            props.UpdateStudent(state);
+            props.updateObject(state);
             console.log("check data modalUpdate: ", state);
             // { lastName: 'df', firstName: 'sdf', dateOfBirth: '2022-12-03', email: 'test1@gmail.com', identiFyCardNumber: '123', phoneNumber: '12345', address: '12345', gender: true, status: true }
         }
