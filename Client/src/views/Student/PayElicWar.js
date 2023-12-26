@@ -15,10 +15,10 @@ function PayElicWar(props) {
     const toggle = () => setModal(!modal);
     useEffect(() => {
         async function fetchMyAPI() {
-            let studentId = await axios.get(`https://localhost:7184/Student/${localStorage.getItem("id")}/accountId`);
+            let studentId = await axios.get(`https://localhost:7184/api/Student/${localStorage.getItem("id")}/accountId`);
             console.log(studentId)
             console.log(studentId.data?.registerRoomsDTO[0]?.roomId)
-            let res = await axios.get(`https://localhost:7184/ElectricWaterLog/${studentId.data?.registerRoomsDTO[0]?.roomId}`);
+            let res = await axios.get(`https://localhost:7184/api/ElectricWaterLog/${studentId.data?.registerRoomsDTO[0]?.roomId}`);
             setPayElicWar(
                 res.data
             )
@@ -34,7 +34,7 @@ function PayElicWar(props) {
     const handlePayFeeEW = async (data) => {
         console.log('check payment in parent: ', data)
         try {
-            let res = await axios.put(`https://localhost:7184/ElectricWaterLog/${data.ElectricWaterLogId}?RoomId=${data.RoomId}`, data);
+            let res = await axios.put(`https://localhost:7184/api/ElectricWaterLog/${data.ElectricWaterLogId}?RoomId=${data.RoomId}`, data);
             console.log('response create user: ', res)
             toggle()
             toast.success("Thanh toán thành công");
