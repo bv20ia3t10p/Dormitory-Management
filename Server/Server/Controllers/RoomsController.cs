@@ -30,5 +30,11 @@ namespace Server.Controllers
             return Ok(room);
 
         }
+        [HttpGet("Search")]
+        public IActionResult Search(string search)
+        {
+            var rooms = _room.SearchRoom(search);
+            return Ok(rooms);
+        }
     }
 }

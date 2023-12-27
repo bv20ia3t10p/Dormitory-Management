@@ -1,7 +1,11 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Server.Data;
 using Server.Interface;
 using Server.Models;
+using System.Security;
+using System.Text.RegularExpressions;
 
 namespace Server.Repository
 {
@@ -37,5 +41,21 @@ namespace Server.Repository
             //return roomDto;
         }
 
+        public IEnumerable<RoomDTO> SearchRoom(string? search)
+        {
+            if (!string.IsNullOrEmpty(search))
+            {
+                var roomList = _context.Rooms.Include(r => r.Block).ToList();
+                string pattern = "[^a-zA-Z0-9]";
+                search = Regex.Replace(search, pattern, "");
+                search = search.ToLower();
+                roomList = roomList.Where(r =>
+                        r.Block.Name.Contains(search) ||
+                        r.Name.ToLower().Contains(search)).ToList();
+
+                return _mapper.Map<List<RoomDTO>>(roomList);
+            }
+            return new List<RoomDTO>();
+        }
     }
 }
