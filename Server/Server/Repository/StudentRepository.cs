@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.Interface;
 using Server.Models;
+using System.Text.RegularExpressions;
 using BCryptNet = BCrypt.Net.BCrypt;
 
 namespace Server.Repository
@@ -34,14 +35,14 @@ namespace Server.Repository
             student.Account = account;
             student.Status = true;
             student.University = school;
-            
+
             _context.Students.Add(student);
             _context.SaveChanges();
         }
 
         public void DeleteStudent(int studentId)
         {
-            var student = _context.Students.Where(s=>s.Id == studentId).Include(a=>a.Account).FirstOrDefault();
+            var student = _context.Students.Where(s => s.Id == studentId).Include(a => a.Account).FirstOrDefault();
             if (student == null)
             {
                 throw new KeyNotFoundException("Student not found");
@@ -65,7 +66,7 @@ namespace Server.Repository
             var students = _context.Students
                 .Include(s => s.University)
                 .Include(s => s.RegisterRooms.Where(r => r.Status == true))
-                .Include(s=>s.RegisterRooms)
+                .Include(s => s.RegisterRooms)
                     .ThenInclude(r => r.Room)
                 .ToList();
 
@@ -83,7 +84,7 @@ namespace Server.Repository
                 .Include(s => s.RegisterRooms)
                     .ThenInclude(r => r.Room)
                 .FirstOrDefault();
-        
+
             return _mapper.Map<StudentDTO>(Student);
         }
 
@@ -102,11 +103,31 @@ namespace Server.Repository
 
         public IEnumerable<Student> GetStudentByRoom(int roomId)
         {
-            var student = _context.RegisterRooms.Where(r => r.RoomId == roomId && r.Status == true )
+            var student = _context.RegisterRooms.Where(r => r.RoomId == roomId && r.Status == true)
                 .Select(r => r.Student);
-            if(student == null)
+            if (student == null)
                 throw new KeyNotFoundException("Student not found");
             return student;
+        }
+
+        public IEnumerable<StudentDTO> SearchAllFill(string? search)
+        {
+
+            
+            if (!string.IsNullOrEmpty(search))
+            {
+                string pattern = "[^a-zA-Z0-9]";
+                 search = Regex.Replace(search, pattern, "");
+                var studentsFilter = _context.Students.Where(s=>s.Status == true).Include(s => s.University).ToList();
+                studentsFilter = studentsFilter.Where(s => 
+                            s.Email.Contains(search) ||
+                            s.PhoneNumber.Contains(search) ||
+                            s.FirstName.Contains(search) || s.LastName.Contains(search) ||
+                            s.IdentifyCardNumber.Contains(search) ||
+                            s.University.Name.Contains(search)).ToList();
+                return _mapper.Map<List<StudentDTO>>(studentsFilter);
+            }
+            return new List<StudentDTO>();
         }
 
         public IEnumerable<StudentDTO> SearchStudent(int? id, string? name,string? email, string? university, string? identify, string? phoneNumber, bool? status)

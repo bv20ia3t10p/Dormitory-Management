@@ -71,5 +71,12 @@ namespace Server.Controllers
             var student =_studentRepository.SearchStudent(id, name, email, university, identify, phoneNumber, status);
             return Ok(student);
         }
+
+        [HttpGet("searchAllContent")]
+        public IActionResult SearchAllContent(string? search)
+        {
+            var student = _studentRepository.SearchAllFill(search);
+            return Ok(student);
+        }
     }
 }
