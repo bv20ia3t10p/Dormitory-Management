@@ -118,13 +118,14 @@ namespace Server.Repository
             {
                 string pattern = "[^a-zA-Z0-9]";
                  search = Regex.Replace(search, pattern, "");
+                search = search.ToLower();
                 var studentsFilter = _context.Students.Where(s=>s.Status == true).Include(s => s.University).ToList();
                 studentsFilter = studentsFilter.Where(s => 
-                            s.Email.Contains(search) ||
-                            s.PhoneNumber.Contains(search) ||
-                            s.FirstName.Contains(search) || s.LastName.Contains(search) ||
-                            s.IdentifyCardNumber.Contains(search) ||
-                            s.University.Name.Contains(search)).ToList();
+                            s.Email.ToLower().Contains(search) ||
+                            s.PhoneNumber.ToLower().Contains(search) ||
+                            s.FirstName.ToLower().Contains(search) || s.LastName.Contains(search) ||
+                            s.IdentifyCardNumber.ToLower().Contains(search) ||
+                            s.University.Name.ToLower().Contains(search)).ToList();
                 return _mapper.Map<List<StudentDTO>>(studentsFilter);
             }
             return new List<StudentDTO>();
