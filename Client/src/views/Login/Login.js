@@ -59,7 +59,7 @@ function Login(props) {
             else if (res.data.role == "Manager") {
                 localStorage.setItem(res.data.token, res.data.role);
                 props.Token(res.data.token);
-                history.replace("/staff")
+                history.replace("/ManageStudent")
             }
             else {
                 // history.replace("/login")

@@ -17,17 +17,13 @@ namespace Server.Repository
             _mapper = mapper;
 
         }
-        public void CreateElectricWaterLog(int roomId, CreateElectricWaterLog model)
+        public void CreateElectricWaterLog(CreateElectricWaterLog model)
         {
-            var room = _context.Rooms.Find(roomId);
-            if ( room== null) {
-                throw new KeyNotFoundException("room not exist");
-            }
+            var room = _context.Rooms.Find(model.Room.Id) ?? throw new KeyNotFoundException("room not exist");
+            Console.WriteLine("ROOM: ", room);
             var roomDTO = _mapper.Map<RoomDTO>(room);
-           
-            model.LogDate = DateTime.Today;
 
-     
+            model.LogDate = DateTime.Today;
 
             if ((model.ElectricNew - model.ElectricOld < 0)
                 || (model.WaterNew - model.WaterOld <0 )) {
@@ -41,15 +37,10 @@ namespace Server.Repository
             model.TotalFee = model.ElectricFee+ model.WaterFee;
             model.FeeStatus = false;
             model.Room = room;
-           
-
             var EWLMap = _mapper.Map<ElectricWaterlog>(model);
 
             _context.ElectricWaterlogs.Add(EWLMap);
             _context.SaveChanges();
-
-
-            
         }
 
         public IEnumerable<ElectricWaterLogResponse> GetElectricWaterLog()
@@ -70,41 +61,46 @@ namespace Server.Repository
 
         }
 
-        public void UpdateElectricWaterLog(int ElectricwaterLogId,int RoomId, UpdateElectricWaterLog model)
+        public void UpdateElectricWaterLog(int ElectricwaterLogId, UpdateElectricWaterLog model)
         {
             var EWL = _context.ElectricWaterlogs.Find(ElectricwaterLogId);
             if (EWL == null) {
                 throw new KeyNotFoundException("Electric water log not exist");
             }
 
-            var room = _context.Rooms.Find(RoomId);
+            var room = _context.Rooms.Find(EWL.RoomId);
             if (room == null)
             {
                 throw new KeyNotFoundException("room not exist");
             }
-
-       
 
             if ((model.ElectricNew - model.ElectricOld < 0)
                 || (model.WaterNew - model.WaterOld < 0))
             {
                 throw new AppException("Input water or electric error");
             }
-
+            Console.WriteLine("OK_ UPDATE");
             model.ElectricUse = model.ElectricNew - model.ElectricOld;
             model.WaterUse = model.WaterNew - model.ElectricOld;
             model.ElectricFee = 1200 * model.ElectricUse;
             model.WaterFee = 800 * model.WaterUse;
             model.TotalFee = model.ElectricFee + model.WaterFee;
-
             model.Room = room;
-
             _mapper.Map(model, EWL);
             _context.ElectricWaterlogs.Update(EWL);
             _context.SaveChanges();
-
         }
 
-       
+        public void DeleteElectricWaterLog(int ElectricwaterLogId)
+        {
+            var log = _context.ElectricWaterlogs.Find(ElectricwaterLogId);
+            if (log == null)
+            {
+                throw new KeyNotFoundException("Log does not exists");
+            }
+            log.FeeStatus = false;
+            _context.Update(log);
+            _context.SaveChanges();
+        }
     }
 }

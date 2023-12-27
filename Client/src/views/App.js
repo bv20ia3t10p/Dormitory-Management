@@ -57,7 +57,7 @@ const App = () => {
               {localStorage.getItem('accessToken') === 'user' ? <Home /> : <Redirect to="/Login" />}
             </Route>
 
-            <PrivateRoute path="/admin" component={Admin} roles={['Admin', 'Manager']} />
+            <PrivateRoute path="/admin" component={Admin} roles={['Admin']} />
             <PrivateRoute path="/room" component={Room} roles={['Admin', 'Manager']} />
             <PrivateRoute path="/registerRoom" component={ManageRegisterRoom} roles={['Admin', 'Manager']} />
             <PrivateRoute path="/ManageStudent" component={ManageStudent} roles={['Admin', 'Manager']} />
@@ -68,7 +68,7 @@ const App = () => {
             <PrivateRoute path="/payElicWar" component={PayElicWar} roles={['Student']} />
             <PrivateRoute path="/accommodation" component={Accommodation} roles={['Student']} />
             <PrivateRoute path="/Invoice" component={Invoice} roles={['Student']} />
-            <PrivateRoute path="/staff" component={ManageStudent} roles={['Manager']} />
+            {/* <PrivateRoute path="/s" component={ManageStudent} roles={['Manager']} /> */}
             <PrivateRoute path="/DetailManager/:id" component={DetailStaff} roles={['Admin', 'Manager']} />
             <PrivateRoute path="/DetailStudent/:id" component={DetailStudent} roles={['Admin', 'Manager']} />
 

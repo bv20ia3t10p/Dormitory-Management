@@ -41,14 +41,15 @@ const HandleObject = (props) => {
 
     const handleApiRequest = async (url, method, data, successMessage) => {
         try {
+            console.log("data: ", data);
             let res = await axios[method](url, data);
             successToast(successMessage);
             fetchMyAPI();
-
             return res;
         } catch (error) {
-            errorToast(`Error: ${error.message}`);
-            console.error("API Request Error:", error);
+            console.log(`ERROR: ${error}`)
+            errorToast(`Error: ${error.response.data.message}`);
+            console.error("API Request Error:", error.response.data.message);
             throw error;
         }
     };
@@ -63,10 +64,12 @@ const HandleObject = (props) => {
     }
 
     const updateObject = async (data) => {
+        console.log("Update Object:", data)
         try {
             await handleApiRequest(`${apiUrl}/${data.id}`, 'put', data, "Cập nhật thành công");
             setModal(false);
         } catch (error) {
+            console.log(error.message);
             console.log('check data from child: ', data);
         }
     }

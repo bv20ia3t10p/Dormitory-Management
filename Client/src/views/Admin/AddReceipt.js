@@ -2,50 +2,37 @@ import React, { useState } from 'react';
 import {
     Form, FormGroup, Input, Button, Modal, ModalHeader, ModalBody, Label
 } from 'reactstrap';
+import InputField from '../InputField';
 
 function AddReceipt(props) {
     const [state, setState] = useState({
+        roomId: '',
         electricNew: '',
         electricOld: '',
         waterOld: '',
         waterNew: '',
     });
-    const [id, setId] = useState()
     const handleOnchangeInput = (event, item) => {
-        let copyState = { ...state }
-        if (item == "id") {
-            setId(event.target.value)
-        } else {
-            copyState[item] = event.target.value;
-            setState({
-                ...copyState
-            })
-        }
+        setState({
+            ...state,
+            [item]: item === 'gender' ? event.target.value === 'true' : event.target.value,
+        });
+    };
 
-    }
-    const checkValideInput = () => {
-        let isValid = true;
-        let arrInput = ['electricNew', 'electricOld', 'waterOld', 'waterNew']
-        for (let i = 0; i < arrInput.length; i++) {
-            console.log('check inside loop', state[arrInput[i]], arrInput[i])
-            if (!state[arrInput[i]]) {
-                isValid = false;
-                alert('Missing parameter: ' + arrInput[i]);
-                break;
-            }
+    const checkValidInput = () => {
+        const requiredFields = ['roomId', 'electricNew', 'electricOld', 'waterOld', 'waterNew'];
+        const missingField = requiredFields.find(field => !state[field]);
+        if (missingField) {
+            alert('Missing parameter: ' + missingField);
+            return false;
         }
-        if (!id) {
-            isValid = false;
-            alert('Missing parameter: ' + "id");
-        }
-        return isValid;
-    }
+        return true;
+    };
+
     const handleAddReceipt = () => {
-        let isValid = checkValideInput();
-        if (isValid === true) {
-            props.createObject(id, state);
-            console.log("data modal: ", id, state);
-            // { lastName: 'df', firstName: 'sdf', dateOfBirth: '2022-12-03', email: 'test1@gmail.com', identiFyCardNumber: '123', phoneNumber: '12345', address: '12345', gender: true, status: true }
+        if (checkValidInput()) {
+            props.createObject(state);
+            console.log("data modal: ", state);
         }
     }
     return (
@@ -54,14 +41,21 @@ function AddReceipt(props) {
                 <ModalHeader >Thêm tiền điện, tiền nước</ModalHeader>
                 <ModalBody>
                     <Form >
-                        <FormGroup>
-                            <Label for="id">
+                        <InputField id="roomId" label="roomId" type="number" value={state.roomId} onChange={handleOnchangeInput} />
+                        <InputField id="electricNew" label="electricNew" type="number" value={state.electricNew} onChange={handleOnchangeInput} />
+                        <InputField id="electricOld" label="electricOld" type="number" value={state.electricOld} onChange={handleOnchangeInput} />
+                        <InputField id="waterNew" label="waterNew" type="number" value={state.waterNew} onChange={handleOnchangeInput} />
+                        <InputField id="waterOld" label="waterOld" type="number" value={state.waterOld} onChange={handleOnchangeInput} />
+
+                        {/* <FormGroup>
+                            <Label for="roomId">
                                 roomId
                             </Label>
                             <Input
-                                id="id"
-                                name="id"
-                                onChange={(event) => handleOnchangeInput(event, "id")}
+                                id="roomId"
+                                name="roomId"
+                                value={state.roomId}
+                                onChange={handleOnchangeInput} 
 
                             />
                         </FormGroup>
@@ -72,7 +66,7 @@ function AddReceipt(props) {
                             <Input
                                 id="electricNew"
                                 name="electricNew"
-                                onChange={(event) => handleOnchangeInput(event, "electricNew")}
+                                onChange={handleOnchangeInput}
                                 value={state.electricNew}
                             />
                         </FormGroup>
@@ -83,7 +77,7 @@ function AddReceipt(props) {
                             <Input
                                 id="electricOld"
                                 name="electricOld"
-                                onChange={(event) => handleOnchangeInput(event, "electricOld")}
+                                onChange={handleOnchangeInput}
                                 value={state.electricOld}
                             />
                         </FormGroup>
@@ -95,7 +89,7 @@ function AddReceipt(props) {
                                 id="waterNew"
                                 name="waterNew"
 
-                                onChange={(event) => handleOnchangeInput(event, "waterNew")}
+                                onChange={handleOnchangeInput}
                                 value={state.waterNew}
                             />
                         </FormGroup>
@@ -107,16 +101,12 @@ function AddReceipt(props) {
                                 id="waterOld"
                                 name="waterOld"
 
-                                onChange={(event) => handleOnchangeInput(event, "waterOld")}
+                                onChange={handleOnchangeInput}
                                 value={state.waterOld}
                             />
-                        </FormGroup>
-                        <Button color="primary" onClick={() => handleAddReceipt()}>
-                            Create
-                        </Button>{' '}
-                        <Button color="secondary" onClick={props.toggle}>
-                            Cancel
-                        </Button>
+                        </FormGroup> */}
+                        <Button color="primary" onClick={handleAddReceipt}>Thêm</Button>
+                        <Button color="secondary" onClick={props.toggle}>Quay lại</Button>
                     </Form>
                 </ModalBody>
                 {/* Nút tắt phần modal */}

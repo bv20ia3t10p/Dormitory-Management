@@ -5,7 +5,7 @@ import {
 
 function UpdateReceipt(props) {
     let Receipt = props.currentObject;
-    console.log("check prop receipt in child: ", Receipt)
+    console.log(`Check Receipt:`, Receipt)
     // https://localhost:7184/ElectricWaterLog/1?RoomId=1
     // RoomId
     // ElectricWaterLogId 
@@ -15,7 +15,7 @@ function UpdateReceipt(props) {
     // "waterNew": 0,
     // "feeStatus": true
     const [state, setState] = useState({
-        ElectricWaterLogId: Receipt.ObjectEdit.id,
+        id: Receipt.ObjectEdit.id,
         RoomId: Receipt.ObjectEdit.room.id,
         electricNew: Receipt.ObjectEdit.electricNew,
         electricOld: Receipt.ObjectEdit.electricOld,
@@ -23,7 +23,6 @@ function UpdateReceipt(props) {
         waterOld: Receipt.ObjectEdit.waterOld,
         feeStatus: Receipt.ObjectEdit.feeStatus,
     });
-    console.log("check state in children: ", state);
     const handleOnchangeInput = (event, item) => {
         let copyState = { ...state }
         console.log('check event: ', event);
@@ -42,7 +41,7 @@ function UpdateReceipt(props) {
     }
     const checkValideInput = () => {
         let isValid = true;
-        let arrInput = ['ElectricWaterLogId', 'RoomId', 'electricNew', 'electricOld', 'waterNew', 'waterOld']
+        let arrInput = ['id', 'RoomId', 'electricNew', 'electricOld', 'waterNew', 'waterOld']
         for (let i = 0; i < arrInput.length; i++) {
             console.log('check inside loop', state[arrInput[i]], arrInput[i])
             if (!state[arrInput[i]]) {
@@ -57,7 +56,7 @@ function UpdateReceipt(props) {
         let isValid = checkValideInput();
         if (isValid === true) {
             props.updateObject(state);
-            // console.log("check data modalUpdate : ", state);
+            console.log("check data modalUpdate : ", state);
         }
     }
     return (
@@ -127,11 +126,11 @@ function UpdateReceipt(props) {
                                 ElectricWaterLogId
                             </Label> */}
                             <Input
-                                id="ElectricWaterLogId"
-                                name="ElectricWaterLogId"
+                                id="id"
+                                name="id"
                                 type="hidden"
-                                onChange={(event) => handleOnchangeInput(event, "ElectricWaterLogId")}
-                                value={state.ElectricWaterLogId}
+                                onChange={(event) => handleOnchangeInput(event, "Id")}
+                                value={state.id}
                             />
                         </FormGroup>
                         <FormGroup>

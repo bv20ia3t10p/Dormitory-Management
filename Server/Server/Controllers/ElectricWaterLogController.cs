@@ -28,16 +28,23 @@ namespace Server.Controllers
 
 
         [HttpPost]
-        public IActionResult Create(int roomId, CreateElectricWaterLog model) {
-            _electricWaterLog.CreateElectricWaterLog(roomId,model);
+        public IActionResult Create(CreateElectricWaterLog model) {
+            _electricWaterLog.CreateElectricWaterLog(model);
             return Ok();    
         }
 
-        [HttpPut("{ElectricWaterLogId}")]
-        public IActionResult Update(int ElectricWaterLogId,int RoomId, UpdateElectricWaterLog model) {
-            _electricWaterLog.UpdateElectricWaterLog(ElectricWaterLogId, RoomId, model);
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, UpdateElectricWaterLog model) {
+            _electricWaterLog.UpdateElectricWaterLog(id, model);
             return Ok(new { message = "Update success" });
 
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            _electricWaterLog.DeleteElectricWaterLog(id);
+            return NoContent();
         }
     }
 }
