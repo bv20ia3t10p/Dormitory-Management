@@ -1,14 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import {
-    Form, FormGroup, Input, Button, Modal, ModalHeader, ModalBody, Label
+    Form, FormGroup, Input, Button, Modal, ModalHeader, ModalBody, Label, Col,Row,Table
 } from 'reactstrap';
 
 function AddregisRoom(props) {
+    const [searcStudent,setSearchStudent] =useState()
+    const [studentInfor,setStudentInfor] = useState([])
+    const [searchRoom,setSearchRoom] = useState()
+    const [roomInfor,setRoomInfor] = useState([])
     const [state, setState] = useState({
         studentId: '',
         roomId: '',
         numberOfMonth: ''
     });
+
+    useEffect(()=>{
+        fetchSearcStudenthResults(searcStudent)
+    },[searcStudent])
+
+    useEffect(()=>{
+        fetchSearcRoomhResults(searchRoom)
+    },[searchRoom])
+
+    const fetchSearcStudenthResults = async (searchQuery) => {
+        try {
+          // Replace 'YOUR_API_ENDPOINT' with the actual endpoint of your search API
+          const response = await fetch(`https://localhost:7184/api/Student/searchAllContent?search=${searchQuery}`);
+          const data = await response.json();
+       
+          // Assuming the API response has an array of results under a 'data' key
+          setStudentInfor(data)
+        } catch (error) {
+          console.error('Error fetching data from the API:', error);
+        }
+      };
+      const fetchSearcRoomhResults = async (searchQuery) => {
+        try {
+          // Replace 'YOUR_API_ENDPOINT' with the actual endpoint of your search API
+          const response = await fetch(`https://localhost:7184/Rooms/Search?search=${searchQuery}`);
+          const data = await response.json();
+       
+          // Assuming the API response has an array of results under a 'data' key
+          setRoomInfor(data)
+        } catch (error) {
+          console.error('Error fetching data from the API:', error);
+        }
+      };
     const handleOnchangeInput = (event, item) => {
         let copyState = { ...state }
         if (event.target.value == "true" && item == "gender") {
@@ -45,11 +82,125 @@ function AddregisRoom(props) {
             // { lastName: 'df', firstName: 'sdf', dateOfBirth: '2022-12-03', email: 'test1@gmail.com', identiFyCardNumber: '123', phoneNumber: '12345', address: '12345', gender: true, status: true }
         }
     }
+    const handleSudentRowClick = (studentId) => {
+        // Update the state with the clicked studentId
+        setState((prevState) => ({
+          ...prevState,
+          studentId: studentId
+        }));
+      };
+
+      const handleRoomRowClick = (roomId) => {
+        // Update the state with the clicked studentId
+        setState((prevState) => ({
+          ...prevState,
+          roomId: roomId
+        }));
+      };
+   
     return (
         <div>
-            <Modal isOpen={props.modal} fade={false} toggle={props.toggle}>
+            <Modal isOpen={props.modal} fade={false} toggle={props.toggle} fullscreen='lg' size='lg' style={{maxWidth: '1600px', width: '80%'}}>
                 <ModalHeader >Register Room</ModalHeader>
                 <ModalBody>
+                    <Row> 
+                        <Col className="bg-light border" md={8} > 
+                            <Label for="Student Infor">
+                               Tìm Kiếm Sinh Viên
+                            </Label>
+                            <Input
+                                onChange={(e)=>setSearchStudent(e.target.value)}
+                            />
+                        </Col>
+                        <Col className="bg-light border"   md={4}>
+                        <Label for="Room Infor">
+                               Search Room
+                            </Label>
+                            <Input
+                                onChange={(e) => setSearchRoom(e.target.value)}
+                            />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={8}>                       
+                            <Table hover size='sm'>
+                                <thead>
+                                    <tr>
+                                    <th>
+                                        Id Sinh Viên
+                                    </th>
+                                    <th>
+                                        Tên
+                                    </th>
+                                    <th>
+                                        Email
+                                    </th>
+                                    <th>
+                                        Số điện thoại
+                                    </th>
+                                    <th>
+                                        MSSV
+                                    </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {studentInfor.map((item)=>{
+                                    
+                                    return(
+                                        <tr
+                                        id="studentId"
+                                        name="studentId"
+                                        scope="row"
+                                        onClick={()=>handleSudentRowClick(item.id)}
+                                        >
+                                        <th>{item.id}</th>
+                                        <th>{`${item.firstName} ${item.lastName}`}</th>
+                                        <th>{item.email}</th>
+                                        <th>{item.phoneNumber}</th>
+                                        <th>{item.identifyCardNumber}</th>
+                                    
+                                        </tr>)
+                                    })}
+
+                                </tbody>
+                                </Table>
+                        </Col>
+                        <Col md={4}>                       
+                            <Table hover size='sm'>
+                                <thead>
+                                    <tr>
+                                    <th>
+                                        Id Phòng
+                                    </th>
+                                    <th>
+                                        Tên Phòng
+                                    </th>
+                                    <th>
+                                        Chỗ Trống
+                                    </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {roomInfor.map((item)=>{
+                                    
+                                    return(
+                                        <tr
+                                        id="roomId"
+                                        name="roomId"
+                                        scope="row"
+                                        onClick={()=>handleRoomRowClick(item.id)}
+                                        >
+                                        <th>{item.id}</th>
+                                        <th>{item.name}</th>
+                                        <th>{item.slotRemain}</th>
+                                                                    
+                                        </tr>)
+                                    })}
+
+                                </tbody>
+                                </Table>
+                        </Col>
+                    </Row>
                     <Form >
                         <FormGroup>
                             <Label for="studentId">
