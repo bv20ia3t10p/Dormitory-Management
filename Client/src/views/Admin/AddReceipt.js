@@ -13,7 +13,7 @@ import { Autocomplete, TextField } from "@mui/material";
 import InputField from "../InputField";
 import { url } from "./HandleObject";
 
-const getRooms = async (setRooms) => {
+export const getRooms = async (setRooms) => {
   await fetch(url + "Rooms")
     .then((e) => e.ok && e.json())
     .then((e) => {

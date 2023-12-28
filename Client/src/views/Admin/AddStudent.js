@@ -1,4 +1,11 @@
-import { InputLabel, MenuItem, FormControl, Select } from "@mui/material";
+import {
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select,
+  Autocomplete,
+  TextField,
+} from "@mui/material";
 import React, { useState } from "react";
 import {
   Form,
@@ -14,7 +21,25 @@ import {
   Label,
 } from "reactstrap";
 
+const uniInit = [
+  { id: 1, name: "Trường Đại Học Công Nghệ Thông Tin" },
+  {
+    id: 2,
+    name: "Trường Đại Học Bách Khoa",
+  },
+  {
+    id: 3,
+    name: "Trường Đại Học Khoa Học Tự Nhiên",
+  },
+  {
+    id: 4,
+    name: "Trường Đại Học Kinh Tế Luật",
+  },
+];
+
 function Addstudent(props) {
+  const [universities, setUniversities] = useState(uniInit);
+  const [currentUni, setCurrentUni] = useState(uniInit[0]);
   const [state, setState] = useState({
     lastName: "",
     firstName: "",
@@ -273,13 +298,36 @@ function Addstudent(props) {
               />
             </FormGroup>
             <FormGroup>
-              <Label for="universityId">Mã trường</Label>
+              {/* <Label for="universityId">Mã trường</Label>
               <Input
                 id="universityId"
                 name="universityId"
                 onChange={(event) => handleOnchangeInput(event, "universityId")}
                 value={state.universityId}
-              />
+              /> */}
+              {universities && (
+                <Autocomplete
+                  options={universities}
+                  getOptionLabel={(r) => r.name}
+                  value={currentUni}
+                  id="univeristyId"
+                  label="Mã trường"
+                  style={{ paddingBottom: "2vh" }}
+                  onChange={(e, newVal) => {
+                    setState(() => {
+                      return { ...state, universityId: newVal.id };
+                    });
+                    setCurrentUni(newVal);
+                  }}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Tìm kiếm trường"
+                      variant="standard"
+                    />
+                  )}
+                />
+              )}
             </FormGroup>
             <div className="modalConfirmationControlButtons">
               <Button color="secondary" onClick={props.toggle}>
