@@ -99,28 +99,28 @@ function AddReceipt(props) {
             )}
             <InputField
               id="electricNew"
-              label="electricNew"
+              label="Tiêu thụ điện đầu"
               type="number"
               value={state.electricNew}
               onChange={handleOnchangeInput}
             />
             <InputField
               id="electricOld"
-              label="electricOld"
+              label="Tiêu thụ điện cuối"
               type="number"
               value={state.electricOld}
               onChange={handleOnchangeInput}
             />
             <InputField
               id="waterNew"
-              label="waterNew"
+              label="Tiêu thụ nước đầu"
               type="number"
               value={state.waterNew}
               onChange={handleOnchangeInput}
             />
             <InputField
               id="waterOld"
-              label="waterOld"
+              label="Tiêu thụ nước cuối"
               type="number"
               value={state.waterOld}
               onChange={handleOnchangeInput}
@@ -185,14 +185,13 @@ function AddReceipt(props) {
                             />
                         </FormGroup> */}
             <div className="modalConfirmationControlButtons">
-              <Button color="primary" onClick={handleAddReceipt}>
-                Thêm
-              </Button>
               <Button color="secondary" onClick={props.toggle}>
                 Quay lại
               </Button>
+              <Button color="primary" onClick={handleAddReceipt}>
+                Thêm
+              </Button>
             </div>
-
           </Form>
         </ModalBody>
         {/* Nút tắt phần modal */}

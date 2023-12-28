@@ -82,11 +82,11 @@ function UpdateReceipt(props) {
     <div>
       {state.id && (
         <Modal isOpen={props.modal} fade={false} toggle={props.toggle}>
-          <ModalHeader>Update Receipt</ModalHeader>
+          <ModalHeader>Cập nhật thông tin hóa đơn</ModalHeader>
           <ModalBody>
             <Form>
               <FormGroup>
-                <Label for="electricNew">electricNew</Label>
+                <Label for="electricNew">Tiêu thụ điện đầu</Label>
                 <Input
                   id="electricNew"
                   name="electricNew"
@@ -97,7 +97,7 @@ function UpdateReceipt(props) {
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="electricOld">electricOld</Label>
+                <Label for="electricOld">Tiêu thụ điện cuối</Label>
                 <Input
                   id="electricOld"
                   name="electricOld"
@@ -108,7 +108,7 @@ function UpdateReceipt(props) {
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="waterNew">waterNew</Label>
+                <Label for="waterNew">Tiêu thụ nước đầu</Label>
                 <Input
                   id="waterNew"
                   name="waterNew"
@@ -117,7 +117,7 @@ function UpdateReceipt(props) {
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="waterOld">waterOld</Label>
+                <Label for="waterOld">Tiêu thụ nước cuối</Label>
                 <Input
                   id="waterOld"
                   name="waterOld"
@@ -174,12 +174,14 @@ function UpdateReceipt(props) {
                   value={state.RoomId}
                 />
               </FormGroup>
-              <Button color="primary" onClick={() => handleUpdateReceipt()}>
-                Update
-              </Button>{" "}
-              <Button color="secondary" onClick={props.toggle}>
-                Cancel
-              </Button>
+              <div className="modalConfirmationControlButtons">
+                <Button color="secondary" onClick={props.toggle}>
+                  Cancel
+                </Button>
+                <Button color="primary" onClick={() => handleUpdateReceipt()}>
+                  Update
+                </Button>
+              </div>
             </Form>
           </ModalBody>
         </Modal>
