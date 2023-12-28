@@ -26,6 +26,8 @@ import Login from "./Login/Login";
 import NotFound from "./NotFound";
 
 import { useState } from "react";
+import Header from "./Sidebar/Header";
+import SidebarAdmin from "./Sidebar/SidebarAdmin";
 
 const App = () => {
   const [state, setState] = useState({
@@ -38,104 +40,117 @@ const App = () => {
     localStorage.setItem("account", state.token);
   };
 
-  const PrivateRoute = ({ component: Component, roles, ...rest }) => (
-    <Route
-      {...rest}
-      render={(props) => {
-        const userRole = localStorage.getItem(localStorage.getItem("account"));
-        if (roles.includes(userRole)) {
-          return <Component {...props} />;
-        } else {
-          return <Redirect to="/Login" />;
-        }
-      }}
-    />
-  );
+  // const PrivateRoute = ({ component: Component, roles, ...rest }) => (
+  //   <Route
+  //     {...rest}
+  //     render={(props) => {
+  //       const userRole = localStorage.getItem(localStorage.getItem("account"));
+  //       if (roles.includes(userRole)) {
+  //         return <Component {...props} />;
+  //       } else {
+  //         return <Redirect to="/Login" />;
+  //       }
+  //     }}
+  //   />
+  // );
 
   return (
     <Router>
       <BotChat />
       <div className="App">
-        <header className="App-header">
-          <ToastContainer />
-          <Switch>
-            <Route path="/" exact>
-              {localStorage.getItem("accessToken") === "user" ? (
-                <Home />
-              ) : (
-                <Redirect to="/Login" />
-              )}
-            </Route>
+        <ToastContainer />
+        <Switch>
+          <Route path="/" exact>
+            {localStorage.getItem("accessToken") === "user" ? (
+              <Home />
+            ) : (
+              <Redirect to="/Login" />
+            )}
+          </Route>
 
-            <PrivateRoute path="/admin" component={Admin} roles={["Admin"]} />
-            <PrivateRoute
-              path="/room"
-              component={Room}
-              roles={["Admin", "Manager"]}
-            />
-            <PrivateRoute
-              path="/registerRoom"
-              component={ManageRegisterRoom}
-              roles={["Admin", "Manager"]}
-            />
-            <PrivateRoute
-              path="/ManageStudent"
-              component={ManageStudent}
-              roles={["Admin", "Manager"]}
-            />
-            <PrivateRoute
-              path="/ManageReceipt"
-              component={ManageReceipt}
-              roles={["Admin", "Manager"]}
-            />
-            <PrivateRoute
-              path="/statistical"
-              component={Statistical}
-              roles={["Admin", "Manager"]}
-            />
-            <PrivateRoute
-              path="/botchat"
-              component={BotChat}
-              roles={["Admin", "Manager", "Student"]}
-            />
-            <PrivateRoute
-              path="/student"
-              component={Student}
-              roles={["Student"]}
-            />
-            <PrivateRoute
-              path="/payElicWar"
-              component={PayElicWar}
-              roles={["Student"]}
-            />
-            <PrivateRoute
-              path="/accommodation"
-              component={Accommodation}
-              roles={["Student"]}
-            />
-            <PrivateRoute
-              path="/Invoice"
-              component={Invoice}
-              roles={["Student"]}
-            />
-            {/* <PrivateRoute path="/s" component={ManageStudent} roles={['Manager']} /> */}
-            <PrivateRoute
-              path="/DetailManager/:id"
-              component={DetailStaff}
-              roles={["Admin", "Manager"]}
-            />
-            <PrivateRoute
-              path="/DetailStudent/:id"
-              component={DetailStudent}
-              roles={["Admin", "Manager"]}
-            />
+          <Route path="/admin">
+            <Header />
+            <div className="adminContentWrapper">
+              <SidebarAdmin />
+              <Route path="" exact elements={<Admin />} />
+              <Route path="room" elements={<Room />} />
+              <Route
+                path="/registerRoom"
+                component={ManageRegisterRoom}
+                // roles={["Admin", "Manager"]}
+              />
+              <Route
+                path="/ManageStudent"
+                component={ManageStudent}
+                // roles={["Admin", "Manager"]}
+              />
+              <Route
+                path="/ManageReceipt"
+                component={ManageReceipt}
+                // roles={["Admin", "Manager"]}
+              />
+              <Route
+                path="/statistical"
+                component={Statistical}
+                // roles={["Admin", "Manager"]}
+              />
+            </div>
+          </Route>
+          <Route path="/room" component={Room} roles={["Admin", "Manager"]} />
+          <Route
+            path="/registerRoom"
+            component={ManageRegisterRoom}
+            roles={["Admin", "Manager"]}
+          />
+          <Route
+            path="/ManageStudent"
+            component={ManageStudent}
+            roles={["Admin", "Manager"]}
+          />
+          <Route
+            path="/ManageReceipt"
+            component={ManageReceipt}
+            roles={["Admin", "Manager"]}
+          />
+          <Route
+            path="/statistical"
+            component={Statistical}
+            roles={["Admin", "Manager"]}
+          />
+          <Route
+            path="/botchat"
+            component={BotChat}
+            roles={["Admin", "Manager", "Student"]}
+          />
+          <Route path="/student" component={Student} roles={["Student"]} />
+          <Route
+            path="/payElicWar"
+            component={PayElicWar}
+            roles={["Student"]}
+          />
+          <Route
+            path="/accommodation"
+            component={Accommodation}
+            roles={["Student"]}
+          />
+          <Route path="/Invoice" component={Invoice} roles={["Student"]} />
+          {/* <Route path="/s" component={ManageStudent} roles={['Manager']} /> */}
+          <Route
+            path="/DetailManager/:id"
+            component={DetailStaff}
+            roles={["Admin", "Manager"]}
+          />
+          <Route
+            path="/DetailStudent/:id"
+            component={DetailStudent}
+            roles={["Admin", "Manager"]}
+          />
 
-            <Route path="/Login">
-              <Login Token={check} />
-            </Route>
-            <Route path="*" component={NotFound} />
-          </Switch>
-        </header>
+          <Route path="/Login">
+            <Login Token={check} />
+          </Route>
+          <Route path="*" component={NotFound} />
+        </Switch>
       </div>
     </Router>
   );

@@ -11,7 +11,7 @@ const ManageReceipt = (props)  => {
 
     return (
         <>
-            <SidebarAdmin />
+            {/* <SidebarAdmin /> */}
             <HandleObject
                 title="Quản lý Hóa đơn Điện Nước"
                 addButtonTitle="Thêm hóa đơn"

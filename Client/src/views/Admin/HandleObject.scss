@@ -1,5 +1,13 @@
 .section {
-    padding: 0 80px;
+    // margin-left: 12svw !important;
+    padding-top: 12svh;
+    width: max-content !important;
+    padding: 12svh 5svw !important;
+    overflow-x:hidden;
+    position: sticky;
+    display: inline-flex;
+    // margin-top: 10svh;
+    // padding: 0 5svw;
     nav {
         padding: 0;
 
@@ -9,7 +17,7 @@
     }
 
     h3 {
-        padding: 22px;
+        // padding: 22px;
         text-align: center;
     }
 

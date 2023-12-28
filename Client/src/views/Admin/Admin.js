@@ -22,8 +22,7 @@ const Admin = (props) => {
 
   return (
     <>
-      <SidebarAdmin />
-
+      {/* <SidebarAdmin /> */}
       <HandleObject
         title="Quản lý Nhân Viên"
         addButtonTitle="Thêm Nhân Viên"

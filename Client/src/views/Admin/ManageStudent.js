@@ -9,25 +9,32 @@ import RowStudent from "./RowStudent";
 import HandleObject from "./HandleObject";
 
 const ManageStudent = (props) => {
-  const listHeaderCols = ["Họ và Tên", "Giới tính", "Email", "Trường", "Số điện thoại", "Trạng thái", "Sửa"]
+  const listHeaderCols = [
+    "Họ và Tên",
+    "Giới tính",
+    "Email",
+    "Trường",
+    "Số điện thoại",
+    "Trạng thái",
+    "Sửa",
+  ];
   return (
     <>
       {/* <NavStudent /> */}
-      <SidebarAdmin />
-      
+      {/* <SidebarAdmin /> */}
       <HandleObject
         title="Quản lý Sinh Viên"
         addButtonTitle="Thêm Sinh Viên"
         listHeaderCols={listHeaderCols}
-        object='Student'
+        object="Student"
         addModalComponent={Addstudent}
         editModalComponent={UpdateStudent}
         rowComponent={RowStudent}
       />
-      
+
       <div className="clear-fix"></div>
     </>
   );
-}
+};
 
 export default ManageStudent;
