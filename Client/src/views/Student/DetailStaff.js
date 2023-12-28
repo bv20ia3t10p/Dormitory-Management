@@ -2,6 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom"
 import axios from 'axios';
 import './DetailStaff.scss';
+import { url } from "../Admin/HandleObject";
 
 
 class DetailStaff extends React.Component {
@@ -11,7 +12,7 @@ class DetailStaff extends React.Component {
     async componentDidMount() {
         if (this.props.match && this.props.match.params) {
             let id = this.props.match.params.id;
-            let res = await axios.get(`https://localhost:7184/api/Manager/${id}`);
+            let res = await axios.get(url + `api/Manager/${id}`);
             this.setState({
                 staff: res.data ? res.data : []
             })

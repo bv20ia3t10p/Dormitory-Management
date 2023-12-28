@@ -3,6 +3,7 @@ import { Form, Button, Modal, ModalHeader, ModalBody, Input } from "reactstrap"
 import axios from "axios"
 import { toast } from "react-toastify"
 import InputField from "../InputField"
+import { url } from "../Admin/HandleObject"
 
 const ChangePass = (props) => {
     const [state, setState] = useState({
@@ -35,7 +36,7 @@ const ChangePass = (props) => {
         try {
             if (checkValidInput()) {
                 const response = await axios.put(
-                    "https://localhost:7184/Account/ChangePassword",
+                    url + "Account/ChangePassword",
                     state
                 )
 

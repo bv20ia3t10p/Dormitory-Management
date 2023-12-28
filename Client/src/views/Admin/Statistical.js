@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { url } from "./HandleObject";
 function Statistical(props) {
     let totalFeeRoom = 0;
     let countStudent = 0;
@@ -19,9 +20,9 @@ function Statistical(props) {
 
     useEffect(() => {
         async function fetchMyAPI() {
-            let res = await axios.get(`https://localhost:7184/api/RegisterRoom`);
-            let res1 = await axios.get(`https://localhost:7184/Rooms`);
-            let res2 = await axios.get(`https://localhost:7184/api/ElectricWaterLog`);
+            let res = await axios.get(url + `api/RegisterRoom`);
+            let res1 = await axios.get(url + `Rooms`);
+            let res2 = await axios.get(url + `api/ElectricWaterLog`);
             setRegisterRoom(
                 res.data ? res.data : []
             )

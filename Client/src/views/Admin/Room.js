@@ -9,6 +9,7 @@ import axios from "axios";
 import moment from "moment";
 import { toast } from "react-toastify";
 import { inline } from "@floating-ui/core";
+import { url } from "./HandleObject";
 function Room(props) {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
@@ -19,7 +20,7 @@ function Room(props) {
   const [room, SetRoom] = useState({});
   useEffect(() => {
     async function fetchMyAPI() {
-      let res = await axios.get(`https://localhost:7184/Rooms`);
+      let res = await axios.get(url + `Rooms`);
       setState({
         ListRooms: res.data ? res.data : [],
       });
@@ -44,18 +45,18 @@ function Room(props) {
   const handleSearchListRoom = async (data) => {
     document.getElementById(storeId).setAttribute("class", "text-primary");
     if (data == 0) {
-      let res = await axios.get(`https://localhost:7184/Rooms`);
+      let res = await axios.get(url + `Rooms`);
       setState({
         ListRooms: res.data ? res.data : [],
       });
     } else if (data == 1) {
-      let res = await axios.get(`https://localhost:7184/Rooms/${1}/Block`);
+      let res = await axios.get(url + `Rooms/${1}/Block`);
       setState({
         ListRooms: res.data ? res.data : [],
       });
       setStoreId(1);
     } else {
-      let res = await axios.get(`https://localhost:7184/Rooms/${2}/Block`);
+      let res = await axios.get(url + `Rooms/${2}/Block`);
       setState({
         ListRooms: res.data ? res.data : [],
       });
@@ -77,10 +78,10 @@ function Room(props) {
     }
 
     let res = await axios.get(
-      `https://localhost:7184/api/RegisterRoom/${id}/room`
+      url + `api/RegisterRoom/${id}/room`
     );
     setStudent(res.data);
-    let rooms = await axios.get(`https://localhost:7184/RoomType/${id}`);
+    let rooms = await axios.get(url + `RoomType/${id}`);
     SetRoom(rooms.data);
     console.log("check room: ", room);
   };
@@ -90,7 +91,7 @@ function Room(props) {
   const updateTypeRoom = async (data) => {
     console.log("check data from parent: ", data);
     try {
-      await axios.put(`https://localhost:7184/RoomType/${data.id}`, data);
+      await axios.put(url + `RoomType/${data.id}`, data);
       toast.success("Cập nhật thành công");
       toggle();
     } catch (error) {
