@@ -184,12 +184,15 @@ function AddReceipt(props) {
                                 value={state.waterOld}
                             />
                         </FormGroup> */}
-            <Button color="primary" onClick={handleAddReceipt}>
-              Thêm
-            </Button>
-            <Button color="secondary" onClick={props.toggle}>
-              Quay lại
-            </Button>
+            <div className="modalConfirmationControlButtons">
+              <Button color="primary" onClick={handleAddReceipt}>
+                Thêm
+              </Button>
+              <Button color="secondary" onClick={props.toggle}>
+                Quay lại
+              </Button>
+            </div>
+
           </Form>
         </ModalBody>
         {/* Nút tắt phần modal */}
