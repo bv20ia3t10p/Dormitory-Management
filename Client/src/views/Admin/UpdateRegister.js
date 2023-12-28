@@ -80,7 +80,7 @@ function UpdateRegister(props) {
   return (
     <div>
       <Modal isOpen={props.modal} fade={false} toggle={props.toggle}>
-        <ModalHeader>Update RegisterRoom</ModalHeader>
+        <ModalHeader>Cập nhật trạng thái đăng ký phòng</ModalHeader>
         <ModalBody>
           <Form>
             <FormGroup>
