@@ -91,10 +91,10 @@ function Room(props) {
     console.log("check data from parent: ", data);
     try {
       await axios.put(`https://localhost:7184/RoomType/${data.id}`, data);
-      toast.success("Cap nhat thanh cong");
+      toast.success("Cập nhật thành công");
       toggle();
     } catch (error) {
-      toast.error("Cap nhat that bai");
+      toast.error("Cập nhật thất bại");
     }
   };
   return (
@@ -112,7 +112,12 @@ function Room(props) {
       <div class="section">
         <h3 class="">Quản lý phòng</h3>
         <FormControl
-          style={{ paddingLeft: "0.5svw", width: "15%", maxWidth: "unset" }}
+          style={{
+            marginLeft: "0.5svw",
+            width: "15%",
+            maxWidth: "unset",
+            paddingBottom: "2vh",
+          }}
         >
           <InputLabel>Tìm kiếm theo tòa</InputLabel>
           <Select
