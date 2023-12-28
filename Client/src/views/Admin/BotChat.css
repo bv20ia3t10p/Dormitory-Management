@@ -31,15 +31,12 @@ body {
 /* CHATBOX
 =============== */
 
-.chatbox {
+/* CONTENT IS CLOSE */
+.chatbox__support {
   position: absolute;
   top: 30svh;
   left: 46svw;
   z-index: 20;
-}
-
-/* CONTENT IS CLOSE */
-.chatbox__support {
   display: flex;
   flex-direction: column;
   background: #eee;
@@ -53,12 +50,15 @@ body {
 /* CONTENT ISOPEN */
 .chatbox--active {
   transform: translateY(-40px);
-  z-index: 123456;
+  z-index: 10;
   opacity: 1;
 }
 .chatbox--inactive {
   opacity: 0;
-  z-index: -1000;
+  z-index: -10;
+  /* display: none; */
+  transform: scale(0%);
+  /* transform:translateX(20svw); */
 }
 
 /* BUTTON */
@@ -223,7 +223,8 @@ body {
 }
 
 .fab-container {
-  position: absolute;
+  position: fixed;
   left: 95svw;
   top:92svh ;
+  z-index: 10;
 }
