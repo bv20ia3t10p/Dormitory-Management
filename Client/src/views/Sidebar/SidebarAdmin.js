@@ -25,7 +25,7 @@ class SidebarAdmin extends React.Component {
                 <Header adminActions={adminActions} />
 
                 <div className="main" >
-                    <aside >
+                    <aside>
                         <div className="sidebar left" >
                             <ListSidebar menuItems={menuItems}/>
                         </div>
