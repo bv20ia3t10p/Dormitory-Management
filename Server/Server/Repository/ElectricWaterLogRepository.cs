@@ -19,9 +19,9 @@ namespace Server.Repository
         }
         public void CreateElectricWaterLog(CreateElectricWaterLog model)
         {
-            var room = _context.Rooms.Find(model.Room.Id) ?? throw new KeyNotFoundException("room not exist");
-            Console.WriteLine("ROOM: ", room);
-            var roomDTO = _mapper.Map<RoomDTO>(room);
+            var room = _context.Rooms.Find(model.RoomId) ?? throw new KeyNotFoundException("room not exist");
+            //Console.WriteLine("ROOM: ", room);
+            //var roomDTO = _mapper.Map<RoomDTO>(room);
 
             model.LogDate = DateTime.Today;
 
@@ -36,7 +36,6 @@ namespace Server.Repository
             model.WaterFee = 800 * model.WaterUse;
             model.TotalFee = model.ElectricFee+ model.WaterFee;
             model.FeeStatus = false;
-            model.Room = room;
             var EWLMap = _mapper.Map<ElectricWaterlog>(model);
 
             _context.ElectricWaterlogs.Add(EWLMap);

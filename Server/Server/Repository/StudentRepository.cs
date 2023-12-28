@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Server.Data;
+using Server.Helpers;
 using Server.Interface;
 using Server.Models;
 using System.Text.RegularExpressions;
@@ -47,6 +48,17 @@ namespace Server.Repository
             {
                 throw new KeyNotFoundException("Student not found");
             }
+
+            var room = _context.RegisterRooms.Where(r => r.StudentId == studentId).FirstOrDefault();
+            if (room != null && room.DomitoryFeeStatus == false)
+            {
+                throw new AppException("student are not complete payment");
+            }
+            if (room != null && room.Status == true)
+            {
+                throw new AppException("Student still in domitory");
+            }
+
             if (student.Status == false) {
                 var account = _context.Accounts.Where(a => a.Id == student.Account.Id).FirstOrDefault();
                 if (account != null)
