@@ -8,3 +8,11 @@
   font-size: calc(10px + 2vmin);
   color: rgb(6, 4, 4);
 }
+.modalConfirmationControlButtons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  // padding:0
+  gap: 1em;
+  justify-content: center;
+  align-items: center;
+}
