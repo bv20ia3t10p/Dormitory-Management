@@ -82,10 +82,11 @@ function AddReceipt(props) {
                 getOptionLabel={(r) => r.name}
                 value={state.room}
                 id="roomId"
+                noOptionsText="Không có lựa chọn"
                 label="Tìm kiếm phòng"
                 style={{ paddingBottom: "2vh" }}
                 onChange={(e, newVal) =>
-                  setState({ ...state, roomId: newVal.id })
+                  newVal.id && setState({ ...state, roomId: newVal.id })
                 }
                 renderInput={(params) => (
                   <TextField
