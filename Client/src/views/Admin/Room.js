@@ -159,13 +159,15 @@ function Room(props) {
             }}
           >
             <div class="col text-primary ml-2 d-flex align-items-center justify-content-center">
-              <i class="fa fa-home fa-xl mr-2" aria-hidden="true"></i>Phòng còn trống
+              <i class="fa fa-home fa-xl mr-2" aria-hidden="true"></i>Phòng còn
+              trống
             </div>
             <div class="col  text-danger d-flex align-items-center justify-content-center">
               <i class="fa fa-home fa-xl mr-2" aria-hidden="true"></i>Phòng đầy
             </div>
             <div class="col  text-success d-flex align-items-center justify-content-center">
-              <i class="fa fa-home fa-xl mr-2" aria-hidden="true"></i>Phòng đang chọn
+              <i class="fa fa-home fa-xl mr-2" aria-hidden="true"></i>Phòng đang
+              chọn
             </div>
             {localStorage.getItem(localStorage.getItem("account")) ==
             "Admin" ? (
@@ -174,6 +176,7 @@ function Room(props) {
                   type="button"
                   class="btn btn-primary"
                   value="Cập nhật loại phòng"
+                  style={{ position: "absolute", left: "75vw", top: "-10vh" }}
                   onClick={() => handleOnclickUpdate()}
                 />
               </div>
