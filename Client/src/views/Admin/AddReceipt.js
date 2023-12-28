@@ -83,7 +83,7 @@ function AddReceipt(props) {
                 value={state.room}
                 id="roomId"
                 label="Tìm kiếm phòng"
-                style={{'paddingBottom':'2vh'}}
+                style={{ paddingBottom: "2vh" }}
                 onChange={(e, newVal) =>
                   setState({ ...state, roomId: newVal.id })
                 }
