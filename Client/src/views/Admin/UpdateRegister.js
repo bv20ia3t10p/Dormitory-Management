@@ -99,11 +99,12 @@ function UpdateRegister(props) {
                 getOptionLabel={(r) => r.name}
                 value={selectedRoom}
                 id="roomId"
+                noOptionsText="Không có lựa chọn"
                 label="Tìm kiếm phòng"
                 style={{ paddingBottom: "2vh" }}
                 onChange={(e, newVal) => {
                   setSelectedRoom(() => newVal);
-                  setState({ ...state, roomId: newVal.id });
+                  if (newVal.id) setState({ ...state, roomId: newVal.id });
                 }}
                 renderInput={(params) => (
                   <TextField

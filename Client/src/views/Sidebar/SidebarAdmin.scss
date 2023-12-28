@@ -32,11 +32,12 @@ header {
             background-color: white;
             position: sticky;
             top: 0;
-            width: 100%;
+            min-width: 100%;
+            min-height: 100vh;
 
             ul {
                 border-radius: 0px 0px 8px 0px;
-
+                height: 100vh;
                 li a:hover {
                     background-color: #418fc8 !important;
                 }

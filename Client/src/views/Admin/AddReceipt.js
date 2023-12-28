@@ -82,10 +82,11 @@ function AddReceipt(props) {
                 getOptionLabel={(r) => r.name}
                 value={state.room}
                 id="roomId"
+                noOptionsText="Không có lựa chọn"
                 label="Tìm kiếm phòng"
                 style={{ paddingBottom: "2vh" }}
                 onChange={(e, newVal) =>
-                  setState({ ...state, roomId: newVal.id })
+                  newVal.id && setState({ ...state, roomId: newVal.id })
                 }
                 renderInput={(params) => (
                   <TextField
@@ -183,12 +184,15 @@ function AddReceipt(props) {
                                 value={state.waterOld}
                             />
                         </FormGroup> */}
-            <Button color="primary" onClick={handleAddReceipt}>
-              Thêm
-            </Button>
-            <Button color="secondary" onClick={props.toggle}>
-              Quay lại
-            </Button>
+            <div className="modalConfirmationControlButtons">
+              <Button color="primary" onClick={handleAddReceipt}>
+                Thêm
+              </Button>
+              <Button color="secondary" onClick={props.toggle}>
+                Quay lại
+              </Button>
+            </div>
+
           </Form>
         </ModalBody>
         {/* Nút tắt phần modal */}

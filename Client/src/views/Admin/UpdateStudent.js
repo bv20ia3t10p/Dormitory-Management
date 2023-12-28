@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { InputLabel, MenuItem, FormControl, Select } from "@mui/material";
+import {
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select,
+  Autocomplete,
+  TextField,
+} from "@mui/material";
 import {
   Form,
   Row,
@@ -13,8 +20,12 @@ import {
   ModalFooter,
   Label,
 } from "reactstrap";
+import { uniInit } from "./AddStudent";
 
 function UpdateStudent(props) {
+  const [universities, setUniversities] = useState(uniInit);
+  console.log(props.currentObject.ObjectEdit.universityName);
+  const [currentUni, setCurrentUni] = useState(uniInit[0]);
   let student = props.currentObject;
   console.log("check student: ", student);
   const [state, setState] = useState({
@@ -38,7 +49,8 @@ function UpdateStudent(props) {
     relatedPersonName: student.ObjectEdit.relatedPersonName,
     relatedPersonPhoneNumber: student.ObjectEdit.relatedPersonPhoneNumber,
     status: student.ObjectEdit.status,
-    universityId: student.ObjectEdit.universityId,
+    // universityId: student.ObjectEdit.universityId,
+    universityId: 1,
   });
   const handleOnchangeInput = (event, item) => {
     let copyState = { ...state };
@@ -280,15 +292,31 @@ function UpdateStudent(props) {
                 value={state.relatedPersonPhoneNumber}
               />
             </FormGroup>
-            <FormGroup>
-              <Label for="universityId">Mã trường</Label>
-              <Input
-                id="universityId"
-                name="universityId"
-                onChange={(event) => handleOnchangeInput(event, "universityId")}
-                value={state.universityId}
+            {universities && (
+              <Autocomplete
+                options={universities}
+                getOptionLabel={(r) => r.name}
+                value={currentUni}
+                id="univeristyId"
+                noOptionsText="Không có lựa chọn"
+                label="Mã trường"
+                style={{ paddingBottom: "2vh" }}
+                onChange={(e, newVal) => {
+                  if (newVal && typeof newVal.id)
+                    setState(() => {
+                      return { ...state, universityId: newVal.id };
+                    });
+                  setCurrentUni(newVal);
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Tìm kiếm trường"
+                    variant="standard"
+                  />
+                )}
               />
-            </FormGroup>
+            )}
             <FormGroup>
               <FormControl style={{ width: "100%", maxWidth: "unset" }}>
                 <Label>Tình trạng đăng ký</Label>
