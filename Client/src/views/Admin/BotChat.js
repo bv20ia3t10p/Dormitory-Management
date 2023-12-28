@@ -54,6 +54,7 @@ const BotChat = () => {
       },
       ...chats,
     ];
+    setCurrentMessage(() => "");
     setIsGettingRespose(true);
     setChats(() => newChats);
     createNewChat(
