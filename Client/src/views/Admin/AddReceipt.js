@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import {
-    Form, FormGroup, Input, Button, Modal, ModalHeader, ModalBody, Label
+    Form, FormGroup, Input, Button, Modal, ModalHeader, ModalBody, Label,Row,Col,Table
 } from 'reactstrap';
 import InputField from '../InputField';
 
 function AddReceipt(props) {
+    const [searchRoom,setSearchRoom] = useState()
+    const [roomInfor,setRoomInfor] = useState([])
     const [state, setState] = useState({
         roomId: '',
         electricNew: '',
@@ -18,6 +20,22 @@ function AddReceipt(props) {
             [item]: item === 'gender' ? event.target.value === 'true' : event.target.value,
         });
     };
+    useEffect(()=>{
+        fetchSearcRoomhResults(searchRoom)
+    },[searchRoom])
+
+    const fetchSearcRoomhResults = async (searchQuery) => {
+        try {
+          // Replace 'YOUR_API_ENDPOINT' with the actual endpoint of your search API
+          const response = await fetch(`https://localhost:7184/Rooms/Search?search=${searchQuery}`);
+          const data = await response.json();
+       
+          // Assuming the API response has an array of results under a 'data' key
+          setRoomInfor(data)
+        } catch (error) {
+          console.error('Error fetching data from the API:', error);
+        }
+      };
 
     const checkValidInput = () => {
         const requiredFields = ['roomId', 'electricNew', 'electricOld', 'waterOld', 'waterNew'];
@@ -35,11 +53,60 @@ function AddReceipt(props) {
             console.log("data modal: ", state);
         }
     }
+
+    const handleRoomRowClick = (roomId) => {
+        // Update the state with the clicked studentId
+        setState((prevState) => ({
+          ...prevState,
+          roomId: roomId
+        }));
+      };
     return (
         <div>
             <Modal isOpen={props.modal} fade={false} toggle={props.toggle}>
                 <ModalHeader >Thêm tiền điện, tiền nước</ModalHeader>
                 <ModalBody>
+                <Row> 
+                    <Col className="bg-light border" md={8} > 
+                            <Label for="Room Infor">
+                               Tìm phòng
+                            </Label>
+                            <Input
+                                onChange={(e)=>setSearchRoom(e.target.value)}
+                            />
+                    </Col>
+                </Row>
+                <Row>
+                <Table hover size='sm'>
+                                <thead>
+                                    <tr>
+                                    <th>
+                                        Id Phòng
+                                    </th>
+                                    <th>
+                                        Tên Phòng
+                                    </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {roomInfor.map((item)=>{
+                                    
+                                    return(
+                                        <tr
+                                        id="roomId"
+                                        name="roomId"
+                                        scope="row"
+                                        onClick={()=>handleRoomRowClick(item.id)}
+                                        >
+                                        <th>{item.id}</th>
+                                        <th>{item.name}</th>
+                                                                    
+                                        </tr>)
+                                    })}
+
+                                </tbody>
+                                </Table>
+                </Row>
                     <Form >
                         <InputField id="roomId" label="roomId" type="number" value={state.roomId} onChange={handleOnchangeInput} />
                         <InputField id="electricNew" label="electricNew" type="number" value={state.electricNew} onChange={handleOnchangeInput} />
