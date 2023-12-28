@@ -24,6 +24,7 @@ import { uniInit } from "./AddStudent";
 
 function UpdateStudent(props) {
   const [universities, setUniversities] = useState(uniInit);
+  console.log(props.currentObject.ObjectEdit.universityName);
   const [currentUni, setCurrentUni] = useState(uniInit[0]);
   let student = props.currentObject;
   console.log("check student: ", student);
@@ -48,6 +49,7 @@ function UpdateStudent(props) {
     relatedPersonName: student.ObjectEdit.relatedPersonName,
     relatedPersonPhoneNumber: student.ObjectEdit.relatedPersonPhoneNumber,
     status: student.ObjectEdit.status,
+    // universityId: student.ObjectEdit.universityId,
     universityId: 1,
   });
   const handleOnchangeInput = (event, item) => {
