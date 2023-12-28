@@ -16,7 +16,7 @@ class SidebarAdmin extends React.Component {
             { to: "/registerRoom", icon: "fa fa-laptop", label:"Quản lý đăng ký"},
             { to: "/ManageReceipt", icon: "fa fa-money", label:"Hóa đơn điện nước"},
             { to: "/statistical", icon: "fa fa-signal", label:"Thống kê"},
-            { to: "/botchat", icon: "fa fa-signal", label:"Botchat"},
+            // { to: "/botchat", icon: "fa fa-signal", label:"Botchat"},
             { to: '/Login', icon: 'fa fa-sign-out', label: 'Log out' },
         ];
 

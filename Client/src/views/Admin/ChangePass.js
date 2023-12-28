@@ -81,12 +81,14 @@ const ChangePass = (props) => {
                             }
                         />
 
-                        <Button color='primary' onClick={handleChangePassWord}>
-                            Đổi mật khẩu
-                        </Button>
-                        <Button color='secondary' onClick={props.toggle}>
-                            Quay lại
-                        </Button>
+                        <div className="modalConfirmationControlButtons">
+                            <Button color='primary' onClick={handleChangePassWord}>
+                                Đổi mật khẩu
+                            </Button>
+                            <Button color='secondary' onClick={props.toggle}>
+                                Quay lại
+                            </Button>
+                        </div>
                     </Form>
                 </ModalBody>
             </Modal>
