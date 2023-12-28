@@ -21,7 +21,7 @@ import {
   Label,
 } from "reactstrap";
 
-const uniInit = [
+export const uniInit = [
   { id: 1, name: "Trường Đại Học Công Nghệ Thông Tin" },
   {
     id: 2,
@@ -311,12 +311,14 @@ function Addstudent(props) {
                   getOptionLabel={(r) => r.name}
                   value={currentUni}
                   id="univeristyId"
+                  noOptionsText="Không có lựa chọn"
                   label="Mã trường"
                   style={{ paddingBottom: "2vh" }}
                   onChange={(e, newVal) => {
-                    setState(() => {
-                      return { ...state, universityId: newVal.id };
-                    });
+                    if (newVal && typeof newVal.id)
+                      setState(() => {
+                        return { ...state, universityId: newVal.id };
+                      });
                     setCurrentUni(newVal);
                   }}
                   renderInput={(params) => (

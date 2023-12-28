@@ -89,10 +89,12 @@ function UpdateTypeRoom(props) {
                 value={selectedRoom}
                 id="roomId"
                 label="Tìm kiếm phòng"
+                noOptionsText="Không có lựa chọn"
                 style={{ paddingBottom: "2vh" }}
                 onChange={(e, newVal) => {
                   setSelectedRoom(() => newVal);
-                  setState({ ...state, id: newVal.id });
+                  if (newVal && typeof newVal.id)
+                    setState({ ...state, id: newVal.id });
                 }}
                 renderInput={(params) => (
                   <TextField
