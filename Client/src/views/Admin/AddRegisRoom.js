@@ -37,7 +37,7 @@ function AddregisRoom(props) {
     try {
       // Replace 'YOUR_API_ENDPOINT' with the actual endpoint of your search API
       const response = await fetch(
-        url+`api/Student/searchAllContent?search=${searchQuery}`
+        url + `api/Student/searchAllContent?search=${searchQuery}`
       );
       const data = await response.json();
 
