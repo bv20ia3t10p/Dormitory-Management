@@ -39,13 +39,14 @@ def index_get():
 #     message = {"answer": chatbot_response}
 #     return jsonify(message)
 
-@app.route("/sessions/<string:sessionId>/<string:msg>",methods=['GET'])
+@app.route("/sessions/<string:sessionId>/",methods=['POST'])
 @cross_origin()
-def chat_with_bot(sessionId, msg):
+def chat_with_bot(sessionId):
+    msg = request.form['msg']
     chatbot_response = get_response(msg)
-    insert_new_chat(sessionId,msg,"user")
-    insert_new_chat(sessionId,chatbot_response,"bot")
-    return jsonify(chatbot_response)
+    user = insert_new_chat(sessionId,msg,"user")
+    bot = insert_new_chat(sessionId,chatbot_response,"bot")
+    return jsonify({"user":user,"bot":bot})
 
 
 @app.route("/sessions/new/<string:userId>", methods=['GET'])
@@ -66,12 +67,19 @@ def controller_get_history_for_session(sessionId):
 
 # Chatbot ID = "chatbot"
 def insert_new_chat(sessionId, message, msgType ):
-    seperated_collection.insert_one({
+    newSequence = seperated_collection.find_one({'sessionId':sessionId},sort=[("sequenceInSession", -1)])
+    newInsertId = seperated_collection.insert_one({
+        "sequenceInSession":int(newSequence['sequenceInSession']) + 1 if newSequence else 0,
         "sessionId":sessionId,
         "message":message,
         "timestamp": int(datetime.timestamp(datetime.now())),
         "type":msgType
-    })
+    }).inserted_id
+    returnChat = seperated_collection.find_one({"_id":newInsertId})
+    returnChat['_id'] = str(returnChat['_id'])
+    print(returnChat)
+    return returnChat
+
 
 def insert_new_sesion(userId):
     return session_collection.insert_one({

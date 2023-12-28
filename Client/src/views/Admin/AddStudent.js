@@ -64,7 +64,7 @@ function Addstudent(props) {
     return (
         <div>
             <Modal isOpen={props.modal} fade={false} toggle={props.toggle}>
-                <ModalHeader >Thêm Sinh Viênt</ModalHeader>
+                <ModalHeader >Thêm Sinh Viên</ModalHeader>
                 <ModalBody>
                     <Form >
                         <FormGroup>
