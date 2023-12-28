@@ -32,15 +32,15 @@
       "responses": ["Happy to help!", "Any time!", "My pleasure"]
     },
     {
-      "tag": "items",
+      "tag": "rooms",
       "patterns": [
-        "Which items do you have?",
-        "What kinds of items are there?",
-        "What do you sell?"
+        "Which room do you have?",
+        "What kinds of room are there?",
+        "Give me room information"
       ],
       "responses": [
-        "We sell coffee and tea",
-        "We have coffee and tea"
+        "We have room for 4 stuent and room for 6 student",
+        "We have room have furniture and not have funiture"
       ]
     },
     {
@@ -49,35 +49,36 @@
         "Do you take credit cards?",
         "Do you accept Mastercard?",
         "Can I pay with Paypal?",
-        "Are you cash only?"
+        "Are you cash only?",
+        "How can i payment?"
       ],
       "responses": [
         "We accept VISA, Mastercard and Paypal",
-        "We accept most major credit cards, and Paypal"
+        "We accept most major credit cards, and Paypal",
+        "We accept pay by cash"
       ]
     },
     {
-      "tag": "delivery",
+      "tag": "room",
       "patterns": [
-        "How long does delivery take?",
-        "How long does shipping take?",
-        "When do I get my delivery?"
+        "How i register room?",
+        "Can i resgieter room?" 
       ],
       "responses": [
-        "Delivery takes 2-4 days",
-        "Shipping takes 2-4 days"
+        "Please contact employee for register room, Thanks you",
+        "Please send your information to Email ktx@gmail.com, we will help you"
       ]
     },
     {
-      "tag": "funny",
+      "tag": "Cost",
       "patterns": [
-        "Tell me a joke!",
-        "Tell me something funny!",
-        "Do you know a joke?"
+        "How much cost of room 4 stuent ?",
+        "How much cost of room 6 stuent ?",
+        "How much cost of room have furniture?"
       ],
       "responses": [
-        "Why did the hipster burn his mouth? He drank the coffee before it was cool.",
-        "What did the buffalo say when his son left for college? Bison."
+        "Cost for room 4 student is 140000 with no furniture and 1100000 for room with furniture",
+        "Cost for room 6 student is 8000."
       ]
     }
   ]
