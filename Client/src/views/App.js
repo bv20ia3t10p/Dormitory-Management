@@ -59,7 +59,7 @@ const App = () => {
         <Router>
             <BotChat />
             <div className='App'>
-                <header className='App-header'>
+                <div className='App-header'>
                     <ToastContainer />
                     <Switch>
                         <Route path='/' exact>
@@ -141,7 +141,7 @@ const App = () => {
                         </Route>
                         <Route path='*' component={NotFound} />
                     </Switch>
-                </header>
+                </div>
             </div>
         </Router>
     )
