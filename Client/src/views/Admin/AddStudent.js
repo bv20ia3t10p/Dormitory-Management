@@ -59,7 +59,7 @@ function Addstudent(props) {
     schoolYear: "",
     relatedPersonName: "",
     relatedPersonPhoneNumber: "",
-    universityId: "",
+    universityId: 1,
   });
   const handleOnchangeInput = (event, item) => {
     let copyState = { ...state };

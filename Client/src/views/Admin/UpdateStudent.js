@@ -48,7 +48,7 @@ function UpdateStudent(props) {
     relatedPersonName: student.ObjectEdit.relatedPersonName,
     relatedPersonPhoneNumber: student.ObjectEdit.relatedPersonPhoneNumber,
     status: student.ObjectEdit.status,
-    universityId: student.ObjectEdit.universityId,
+    universityId: 1,
   });
   const handleOnchangeInput = (event, item) => {
     let copyState = { ...state };
