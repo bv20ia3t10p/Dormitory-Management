@@ -24,7 +24,13 @@ namespace Server.Controllers
             var response = _accountService.Authenticate(model);
             return Ok(response);
         }
-
+        [AllowAnonymous]
+        [HttpPut("ChangePassword")]
+        public IActionResult ChangePassword(ChangePasswordRequest model)
+        {
+            _accountService.ChangePassword(model);
+            return NoContent();
+        }
 
         [Authorize(Roles = "Admin")]
         [HttpGet]

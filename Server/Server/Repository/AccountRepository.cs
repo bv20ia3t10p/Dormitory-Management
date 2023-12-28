@@ -60,5 +60,20 @@ namespace Server.Repository
         {
             throw new NotImplementedException();
         }
+
+        public void ChangePassword(ChangePasswordRequest model)
+        {
+            var account = _context.Accounts.SingleOrDefault(y => y.UserName == model.UserName);
+
+            if(account == null || !BCrypt.Net.BCrypt.Verify(model.OldPassWord, account.PasswordHash))
+                throw new AppException("Username or password is incorrect");
+
+            account.PasswordHash = BCrypt.Net.BCrypt.HashPassword(model.NewPassword);
+            _context.Accounts.Update(account);
+            _context.SaveChanges();
+
+
+            
+        }
     }
 }

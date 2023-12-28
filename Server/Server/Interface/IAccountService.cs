@@ -7,6 +7,8 @@ namespace Server.Interface
         AuthenticateResponse Authenticate(AuthenticateRequest model);
         IEnumerable<Account> GetAll();
         Account GetById(int id);
+
+        void ChangePassword(ChangePasswordRequest model);
         
         //bool CreateAccount (Account account);
 
