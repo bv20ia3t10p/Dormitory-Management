@@ -15,7 +15,7 @@ import {
 import { url } from "./HandleObject";
 
 function AddregisRoom(props) {
-  const [searcStudent, setSearchStudent] = useState();
+  const [searchStudents, setSearchStudent] = useState();
   const [studentInfor, setStudentInfor] = useState([]);
   const [searchRoom, setSearchRoom] = useState();
   const [roomInfor, setRoomInfor] = useState([]);
@@ -26,18 +26,18 @@ function AddregisRoom(props) {
   });
 
   useEffect(() => {
-    fetchSearcStudenthResults(searcStudent);
-  }, [searcStudent]);
+    fetchSearchStudentsResults(searchStudents);
+  }, [searchStudents]);
 
   useEffect(() => {
-    fetchSearcRoomhResults(searchRoom);
+    fetchSearchRoomResults(searchRoom);
   }, [searchRoom]);
 
-  const fetchSearcStudenthResults = async (searchQuery) => {
+  const fetchSearchStudentsResults = async (searchQuery) => {
     try {
       // Replace 'YOUR_API_ENDPOINT' with the actual endpoint of your search API
       const response = await fetch(
-        url`api/Student/searchAllContent?search=${searchQuery}`
+        url+`api/Student/searchAllContent?search=${searchQuery}`
       );
       const data = await response.json();
 
@@ -47,7 +47,7 @@ function AddregisRoom(props) {
       console.error("Error fetching data from the API:", error);
     }
   };
-  const fetchSearcRoomhResults = async (searchQuery) => {
+  const fetchSearchRoomResults = async (searchQuery) => {
     try {
       // Replace 'YOUR_API_ENDPOINT' with the actual endpoint of your search API
       const response = await fetch(url + `Rooms/Search?search=${searchQuery}`);
