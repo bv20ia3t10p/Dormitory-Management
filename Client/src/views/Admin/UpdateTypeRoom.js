@@ -137,12 +137,14 @@ function UpdateTypeRoom(props) {
                 value={state.domitoryFee}
               />
             </FormGroup>
-            <Button color="primary" onClick={() => handleUpdateTypeRoom()}>
-              Cập nhật
-            </Button>
-            <Button color="secondary" onClick={props.toggle}>
-              Hủy
-            </Button>
+            <div className="modalConfirmationControlButtons">
+              <Button color="secondary" onClick={props.toggle}>
+                Hủy
+              </Button>
+              <Button color="primary" onClick={() => handleUpdateTypeRoom()}>
+                Cập nhật
+              </Button>
+            </div>
           </Form>
         </ModalBody>
       </Modal>
