@@ -9,12 +9,15 @@ import {
   Typography,
   Box,
   Button,
+  Skeleton,
+  Fab,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import RateReviewIcon from "@mui/icons-material/RateReview";
 import { max } from "moment";
 import { FitScreen } from "@mui/icons-material";
 import dayjs from "dayjs";
+import LiveHelpIcon from "@mui/icons-material/LiveHelp";
 
 const initCurrentUser = {
   id: 2,
@@ -31,6 +34,7 @@ const BotChat = () => {
   const [isChatBotAvailable, setIsChatBotAvailable] = useState(false);
   const [currentUser, setCurrentUser] = useState(initCurrentUser);
   const [chats, setChats] = useState([]);
+  const [isChatting, setIsChatting] = useState(false);
 
   useEffect(() => {
     pingChatbot(setIsChatBotAvailable);
@@ -50,6 +54,7 @@ const BotChat = () => {
       },
       ...chats,
     ];
+    setIsGettingRespose(true);
     setChats(() => newChats);
     createNewChat(
       currentUser,
@@ -62,11 +67,23 @@ const BotChat = () => {
     );
   };
   return (
-    <div>
-      {/* <SidebarAdmin /> */}
-      <div className="container">
+    <>
+      <div className="fab-container">
+        <Fab
+          color="info"
+          onClick={() => setIsChatting(() => !isChatting)}
+          aria-label="Chat"
+        >
+          <LiveHelpIcon />
+        </Fab>
+      </div>
+      <div className="chatboxContainer">
         <div className="chatbox">
-          <div className="chatbox__support chatbox--active">
+          <div
+            className={`chatbox__support ${
+              isChatting ? "chatbox--active" : "chatbox--inactive"
+            }`}
+          >
             <div className="chatbox__header">
               <div className="chatbox__image--header">
                 <img
@@ -82,6 +99,11 @@ const BotChat = () => {
               </div>
             </div>
             <div className="chatbox__messages">
+              {isGettingRespponse && (
+                <div className="messages__item--visitor">
+                  <Skeleton width={"20vw"} height={"8vh"} />
+                </div>
+              )}
               {chats &&
                 chats.map((chat, index) => (
                   <div key={index}>
@@ -128,14 +150,9 @@ const BotChat = () => {
             </form>
             {/* </div> */}
           </div>
-          <div className="chatbox__button">
-            <button>
-              <img src="./images/chatbox-icon.svg" />
-            </button>
-          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
