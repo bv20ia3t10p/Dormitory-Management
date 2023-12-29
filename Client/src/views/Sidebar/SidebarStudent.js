@@ -33,9 +33,10 @@ class SidebarStudent extends React.Component {
 
                                         <li><Link to="/Invoice" activeClassName="active" exact={true} ><i class="fa fa-money"></i>Hóa đơn lưu trú</Link></li>
                                         <li><Link to="/payElicWar" activeClassName="active" exact={true}> <i class="fa fa-money"></i>Hóa đơn tiền điện</Link></li>
-                                <li><Link to="/student" activeClassName="active" exact={true}><i class="fa fa-files-o"></i> <span class="nav-label">Khảo sát</span></Link> </li>
-                                <li><Link to="/student" activeClassName="active" exact={true}><i class="fa fa-bell"></i> <span class="nav-label">Thông báo</span></Link> </li>
+                                {/* <li><Link to="/student" activeClassName="active" exact={true}><i class="fa fa-files-o"></i> <span class="nav-label">Khảo sát</span></Link> </li> */}
+                                {/* <li><Link to="/student" activeClassName="active" exact={true}><i class="fa fa-bell"></i> <span class="nav-label">Thông báo</span></Link> </li> */}
                                 <li><Link to="/Login" activeClassName="active" exact={true}><i class="fa fa-sign-out"></i> <span class="nav-label">Log out</span></Link> </li>
+                                {/* <li class="text-info" ><div>.</div></li>
                                 <li class="text-info" ><div>.</div></li>
                                 <li class="text-info" ><div>.</div></li>
                                 <li class="text-info" ><div>.</div></li>
@@ -44,8 +45,7 @@ class SidebarStudent extends React.Component {
                                 <li class="text-info" ><div>.</div></li>
                                 <li class="text-info" ><div>.</div></li>
                                 <li class="text-info" ><div>.</div></li>
-                                <li class="text-info" ><div>.</div></li>
-                                <li class="text-info" ><div>.</div></li>
+                                <li class="text-info" ><div>.</div></li> */}
                             </ul>
 
                         </div>
