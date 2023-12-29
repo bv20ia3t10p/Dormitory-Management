@@ -26,7 +26,7 @@ const roomTypesInit = {
 }
 
 const getRoomTypes = async (setRoomTypes) => {
-  await fetch(url + "/RoomType").then((e) => {
+  await fetch(url + "RoomType").then((e) => {
     if (e.ok) return e.json()
     else throw new Error("Failed to get roomtypes");
   }).then(e => setRoomTypes(() => e.map((t) => ({ ...t, name: roomTypesInit[t.id] })))).catch(e => alert(e))
@@ -103,7 +103,7 @@ function UpdateTypeRoom(props) {
         <ModalHeader>Cập nhật thông tin loại phòng</ModalHeader>
         <ModalBody>
           <Form>
-            {roomTypes && (
+            {(roomTypes && roomTypes.length) && (
               <Autocomplete
                 options={roomTypes}
                 getOptionLabel={(r) => r.name}
