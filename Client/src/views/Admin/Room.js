@@ -86,7 +86,7 @@ function Room(props) {
       setStoreId(id);
     }
 
-    let res = await axios.get(apiUrl + `RegisterRoom/${id}/room`);
+    let res = await axios.get(apiUrl + `api/RegisterRoom/${id}/room`);
     setStudent(res.data);
     let rooms = await axios.get(apiUrl + `RoomType/${id}`);
     SetRoom(rooms.data);
