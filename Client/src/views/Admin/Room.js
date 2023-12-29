@@ -205,7 +205,7 @@ function Room(props) {
                     key={item.id}
                     style={{ width: "14%" }}
                   >
-                    {item.slotRemain != 0 ? (
+                    {item.slotRemain > 0 ? (
                       <div
                         class=" text-primary room"
                         id={item.id}
