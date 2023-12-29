@@ -10,8 +10,8 @@ import "./HandleObject.scss"
 import { InputAdornment, TextField } from "@mui/material"
 import SearchIcon from "@mui/icons-material/Search"
 
-// export const url = "https://localhost:7184/"
-export const url ="https://se310dormitorymanagement.azurewebsites.net/"
+export const url = "https://localhost:7184/"
+// export const url ="https://se310dormitorymanagement.azurewebsites.net/"
 
 const HandleObject = (props) => {
     const [state, setState] = useState({ ListUsers: [] })

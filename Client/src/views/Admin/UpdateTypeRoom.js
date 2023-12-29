@@ -79,7 +79,7 @@ function UpdateTypeRoom(props) {
   return (
     <div>
       <Modal isOpen={props.modal} fade={false} toggle={props.toggle}>
-        <ModalHeader>Update Receipt</ModalHeader>
+        <ModalHeader>Update Type Room</ModalHeader>
         <ModalBody>
           <Form>
             {rooms && (
