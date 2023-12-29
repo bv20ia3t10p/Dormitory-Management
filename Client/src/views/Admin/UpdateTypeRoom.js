@@ -103,7 +103,7 @@ function UpdateTypeRoom(props) {
         <ModalHeader>Cập nhật thông tin loại phòng</ModalHeader>
         <ModalBody>
           <Form>
-            {roomTypes && (
+            {(roomTypes && roomTypes.length) && (
               <Autocomplete
                 options={roomTypes}
                 getOptionLabel={(r) => r.name}

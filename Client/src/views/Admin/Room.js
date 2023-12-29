@@ -25,9 +25,10 @@ function Room(props) {
   const toggle = () => setModal(!modal);
   const [state, setState] = useState({ ListRooms: [] });
   const [student, setStudent] = useState([]);
-  const [storeId, setStoreId] = useState(1);
+  // const [storeId, setStoreId] = useState(1);
   const [roles, setRoles] = useState("primary");
   const [room, SetRoom] = useState({});
+  const [selectedRoomId, setSelectedRoomId] = useState(1);
   useEffect(() => {
     async function fetchMyAPI() {
       let res = await axios.get(apiUrl + `Rooms`);
@@ -73,26 +74,28 @@ function Room(props) {
       setStoreId(5);
     }
   };
-  const handleListStudent = async (id, role) => {
-    if (role == "danger") {
-      document.getElementById(storeId).setAttribute("class", "text-primary");
-    }
-    if (role == "primary") {
-      document.getElementById(id).setAttribute("class", "text-success");
-    }
-    console.log("storeId: ", storeId);
+  useEffect(() => {
+    const handleListStudent = async () => {
+      // if (role == "danger") {
+      //   document.getElementById(storeId).setAttribute("class", "text-primary");
+      // }
+      // if (role == "primary") {
+      //   document.getElementById(id).setAttribute("class", "text-success");
+      // }
+      // console.log("storeId: ", storeId);
 
-    if (id != storeId && role == "primary" && roles == "primary") {
-      document.getElementById(storeId).setAttribute("class", "text-primary");
-      setStoreId(id);
-    }
+      // if (id != storeId && role == "primary" && roles == "primary") {
+      //   document.getElementById(storeId).setAttribute("class", "text-primary");
+      //   setStoreId(id);
+      // }
 
-    let res = await axios.get(apiUrl + `api/RegisterRoom/${id}/room`);
-    setStudent(res.data);
-    let rooms = await axios.get(apiUrl + `RoomType/${id}`);
-    SetRoom(rooms.data);
-    console.log("check room: ", room);
-  };
+      let res = await axios.get(apiUrl + `api/RegisterRoom/${selectedRoomId}/room`);
+      setStudent(res.data);
+      let rooms = await axios.get(apiUrl + `RoomType/${selectedRoomId}`);
+      SetRoom(rooms.data);
+    }
+    handleListStudent();
+  }, [selectedRoomId])
   const handleOnclickUpdate = () => {
     toggle();
   };
@@ -192,12 +195,21 @@ function Room(props) {
                     key={item.id}
                     style={{ width: "14%" }}
                   >
-                    {item.slotRemain > 0 ? (
+                    <div
+                      className={`${item.slotRemain < 0 ? "text-danger" : item.id === selectedRoomId ? "text-success" : "text-primary"}`}
+                      id={item.id}
+                      style={{ padding: "1px" }}
+                      onClick={() => setSelectedRoomId(() => item.id)}
+                    >
+                      <i className="fa fa-home fa-2x mr-2" aria-hidden="true"></i>
+                      {item.name}
+                    </div>
+                    {/* {item.slotRemain > 0 ? (
                       <div
                         className=" text-primary room"
                         id={item.id}
                         style={{ padding: "1px" }}
-                        onClick={() => handleListStudent(item.id, "primary")}
+                        onClick={() => setSelectedRoomId(() => item.id)}
                       >
                         <i className="fa fa-home fa-2x mr-2" aria-hidden="true"></i>
                         {item.name}
@@ -207,12 +219,12 @@ function Room(props) {
                         className="col text-danger room"
                         id={item.id}
                         style={{ padding: "1px" }}
-                        onClick={() => handleListStudent(item.id, "danger")}
+                        onClick={() => setSelectedRoomId(() => item.id)}
                       >
                         <i className="fa fa-home fa-2x mr-2" aria-hidden="true"></i>
                         {item.name}
                       </div>
-                    )}
+                    )} */}
                   </div>
                 );
                 // </div>
