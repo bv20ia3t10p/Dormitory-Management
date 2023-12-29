@@ -363,5 +363,5 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
-.appsetting.json
-# .github/workflows/azure-static-web-apps-polite-pond-013ccfb00.yml
+.appsettings.json
+.github/workflows/azure-static-web-apps-polite-pond-013ccfb00.yml

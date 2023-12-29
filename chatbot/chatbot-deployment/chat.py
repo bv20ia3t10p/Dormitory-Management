@@ -12,7 +12,7 @@ with open("intents.json", "r", encoding="utf-8") as json_data:
     intents = json.load(json_data)
 
 FILE = "data.pth"
-data = torch.load(FILE)
+data = torch.load(FILE,map_location=torch.device('cpu'))
 
 input_size = data["input_size"]
 hidden_size = data["hidden_size"]
