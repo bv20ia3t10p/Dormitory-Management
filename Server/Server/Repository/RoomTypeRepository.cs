@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Server.Data;
+using Server.Helpers;
 using Server.Interface;
 using Server.Models;
 
@@ -42,8 +43,11 @@ namespace Server.Repository
 
             listRoom.ForEach(room =>
             {
+                
                 room.SlotRemain += model.NumberOfSLot - roomType.NumberOfSLot;
-                _context.Rooms.Update(room);
+                if(room.SlotRemain<0)
+                    throw new AppException("Can not update number of slot");              
+              _context.Rooms.Update(room);
             });
 
             if (roomType == null)
