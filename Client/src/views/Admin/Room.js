@@ -15,6 +15,10 @@ import axios from "axios";
 import moment from "moment";
 import { toast } from "react-toastify";
 import { inline } from "@floating-ui/core";
+import { url } from "./HandleObject";
+
+const apiUrl = url;
+
 
 function Room(props) {
   const [modal, setModal] = useState(false);
@@ -24,9 +28,6 @@ function Room(props) {
   const [storeId, setStoreId] = useState(1);
   const [roles, setRoles] = useState("primary");
   const [room, SetRoom] = useState({});
-
-  const apiUrl = "https://localhost:7184/"
-
   useEffect(() => {
     async function fetchMyAPI() {
       let res = await axios.get(apiUrl + `Rooms`);

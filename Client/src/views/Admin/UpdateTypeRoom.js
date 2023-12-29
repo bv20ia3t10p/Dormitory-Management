@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Autocomplete, MenuItem, Select, TextField } from "@mui/material";
-
 import {
   Form,
   Row,
@@ -16,6 +15,23 @@ import {
 } from "reactstrap";
 import { getRooms } from "./AddReceipt";
 import { FormControl } from "@mui/base";
+import { url } from "./HandleObject";
+
+
+const roomTypesInit = {
+  1: 'Phòng kiểu A',
+  2: 'Phòng kiểu B',
+  3: 'Phòng kiểu C',
+  4: 'Phòng kiểu D'
+}
+
+const getRoomTypes = async (setRoomTypes) => {
+  await fetch(url + "/RoomType").then((e) => {
+    if (e.ok) return e.json()
+    else throw new Error("Failed to get roomtypes");
+  }).then(e => setRoomTypes(() => e.map((t) => ({ ...t, name: roomTypesInit[t.id] })))).catch(e => alert(e))
+}
+
 
 function UpdateTypeRoom(props) {
   // let Receipt = props.CurrentReceipt;
@@ -28,17 +44,23 @@ function UpdateTypeRoom(props) {
   // // "waterOld": 0,
   // // "waterNew": 0,
   // // "feeStatus": true
-  const [state, setState] = useState({
-    id: 0,
-    numberOfSLot: "",
-    furniture: true,
-    domitoryFee: "",
-  });
-  const [rooms, setRooms] = useState([]);
+  const [state, setState] = useState(
+    {
+      id: 0,
+      numberOfSLot: "",
+      furniture: true,
+      domitoryFee: "",
+    }
+  );
+  const [roomTypes, setRoomTypes] = useState(roomTypesInit);
+  const [currentRoomTypeDetail, setCurrentRoomTypeDetail] = useState();
+  // const [rooms, setRooms] = useState([]);
   useEffect(() => {
-    getRooms(setRooms);
+    getRoomTypes(setRoomTypes);
   }, []);
-  const [selectedRoom, setSelectedRoom] = useState();
+  useEffect(() => {
+    setState(() => ({ ...state, ...currentRoomTypeDetail }))
+  }, [currentRoomTypeDetail])
   // console.log("check state in children: ", state);
   const handleOnchangeInput = (event, item) => {
     let copyState = { ...state };
@@ -79,27 +101,27 @@ function UpdateTypeRoom(props) {
   return (
     <div>
       <Modal isOpen={props.modal} fade={false} toggle={props.toggle}>
-        <ModalHeader>Update Type Room</ModalHeader>
+        <ModalHeader>Cập nhật thông tin loại phòng</ModalHeader>
         <ModalBody>
           <Form>
-            {rooms && (
+            {roomTypes && (
               <Autocomplete
-                options={rooms}
+                options={roomTypes}
                 getOptionLabel={(r) => r.name}
-                value={selectedRoom}
-                id="roomId"
-                label="Tìm kiếm phòng"
+                value={currentRoomTypeDetail}
+                id="roomTypeId"
+                label="Chọn loại phòng"
                 noOptionsText="Không có lựa chọn"
                 style={{ paddingBottom: "2vh" }}
                 onChange={(e, newVal) => {
-                  setSelectedRoom(() => newVal);
+                  setCurrentRoomTypeDetail(() => newVal);
                   if (newVal && typeof newVal.id)
                     setState({ ...state, id: newVal.id });
                 }}
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    label="Tìm kiếm phòng"
+                    label="Tìm kiếm mã loại phòng"
                     variant="standard"
                   />
                 )}
