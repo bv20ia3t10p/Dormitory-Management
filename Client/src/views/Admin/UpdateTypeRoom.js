@@ -90,7 +90,6 @@ function UpdateTypeRoom(props) {
     return isValid;
   };
   const handleUpdateTypeRoom = () => {
-    // alert("ngia")
     let isValid = checkValideInput();
     if (isValid === true) {
       props.updateTypeRoom(state);
