@@ -16,6 +16,7 @@ import {
 } from "reactstrap";
 import { getRooms } from "./AddReceipt";
 import { FormControl } from "@mui/base";
+import { url } from "./HandleObject";
 
 function UpdateTypeRoom(props) {
   // let Receipt = props.CurrentReceipt;
@@ -68,7 +69,6 @@ function UpdateTypeRoom(props) {
     return isValid;
   };
   const handleUpdateTypeRoom = () => {
-    // alert("ngia")
     let isValid = checkValideInput();
     if (isValid === true) {
       props.updateTypeRoom(state);
@@ -79,10 +79,10 @@ function UpdateTypeRoom(props) {
   return (
     <div>
       <Modal isOpen={props.modal} fade={false} toggle={props.toggle}>
-        <ModalHeader>Update Type Room</ModalHeader>
+        <ModalHeader>Update Receipt</ModalHeader>
         <ModalBody>
           <Form>
-            {rooms && (
+            {(rooms && rooms.length) &&(
               <Autocomplete
                 options={rooms}
                 getOptionLabel={(r) => r.name}
