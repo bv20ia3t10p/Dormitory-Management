@@ -25,9 +25,6 @@ function UpdateRegister(props) {
   let RegisterRoom = props.currentObject;
   console.log("check prop registerroom: ", RegisterRoom);
   const [rooms, setRooms] = useState([]);
-  useEffect(() => {
-    getRooms(setRooms);
-  }, []);
   const [selectedRoom, setSelectedRoom] = useState();
   const [state, setState] = useState({
     id: RegisterRoom.ObjectEdit.id,
@@ -57,6 +54,14 @@ function UpdateRegister(props) {
       ...copyState,
     });
   };
+  useEffect(() => {
+    getRooms(setRooms);
+  }, []);
+  useEffect(() => {
+    if (rooms && !selectedRoom && state.roomId)
+      setSelectedRoom(() => rooms.filter((n) => n.id === state.roomId)[0]);
+    else return;
+  }, [rooms, selectedRoom, state]);
   const checkValideInput = () => {
     let isValid = true;
     let arrInput = ["studentId", "roomId", "dateBegin", "numberOfMonth"];
@@ -93,11 +98,12 @@ function UpdateRegister(props) {
                 value={state.studentId}
               />
             </FormGroup>
-            {rooms && (
+            {false && (
               <Autocomplete
+                disabled
                 options={rooms}
                 getOptionLabel={(r) => r.name}
-                value={selectedRoom}
+                value={rooms.filter((n) => n.id === state.roomId)[0]}
                 id="roomId"
                 noOptionsText="Không có lựa chọn"
                 label="Tìm kiếm phòng"
