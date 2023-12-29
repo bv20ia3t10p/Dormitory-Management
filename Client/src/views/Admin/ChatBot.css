@@ -33,7 +33,7 @@ body {
 
 /* CONTENT IS CLOSE */
 .chatbox__support {
-  position: absolute;
+  position: fixed;
   top: 30svh;
   left: 46svw;
   z-index: 20;
