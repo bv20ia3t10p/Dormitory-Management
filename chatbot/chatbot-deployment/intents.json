@@ -1,84 +1,96 @@
 {
-  "intents": [
-    {
-      "tag": "greeting",
-      "patterns": [
-        "Hi",
-        "Hey",
-        "How are you",
-        "Is anyone there?",
-        "Hello",
-        "Good day"
-      ],
-      "responses": [
-        "Hey :-)",
-        "Hello, thanks for visiting",
-        "Hi there, what can I do for you?",
-        "Hi there, how can I help?"
-      ]
-    },
-    {
-      "tag": "goodbye",
-      "patterns": ["Bye", "See you later", "Goodbye"],
-      "responses": [
-        "See you later, thanks for visiting",
-        "Have a nice day",
-        "Bye! Come back again soon."
-      ]
-    },
-    {
-      "tag": "thanks",
-      "patterns": ["Thanks", "Thank you", "That's helpful", "Thank's a lot!"],
-      "responses": ["Happy to help!", "Any time!", "My pleasure"]
-    },
-    {
-      "tag": "items",
-      "patterns": [
-        "Which items do you have?",
-        "What kinds of items are there?",
-        "What do you sell?"
-      ],
-      "responses": [
-        "We sell coffee and tea",
-        "We have coffee and tea"
-      ]
-    },
-    {
-      "tag": "payments",
-      "patterns": [
-        "Do you take credit cards?",
-        "Do you accept Mastercard?",
-        "Can I pay with Paypal?",
-        "Are you cash only?"
-      ],
-      "responses": [
-        "We accept VISA, Mastercard and Paypal",
-        "We accept most major credit cards, and Paypal"
-      ]
-    },
-    {
-      "tag": "delivery",
-      "patterns": [
-        "How long does delivery take?",
-        "How long does shipping take?",
-        "When do I get my delivery?"
-      ],
-      "responses": [
-        "Delivery takes 2-4 days",
-        "Shipping takes 2-4 days"
-      ]
-    },
-    {
-      "tag": "funny",
-      "patterns": [
-        "Tell me a joke!",
-        "Tell me something funny!",
-        "Do you know a joke?"
-      ],
-      "responses": [
-        "Why did the hipster burn his mouth? He drank the coffee before it was cool.",
-        "What did the buffalo say when his son left for college? Bison."
-      ]
-    }
-  ]
+    "intents": [
+        {
+            "tag": "greeting",
+            "patterns": [
+                "Chào",
+                "Xin chào",
+                "Bạn khỏe không?",
+                "Có ai ở đây không?",
+                "Xin chào",
+                "Chào buổi sáng"
+            ],
+            "responses": [
+                "Chào bạn! Chào mừng đến với Bot Quản lý Ký túc xá.",
+                "Xin chào! Làm thế nào tôi có thể giúp bạn hôm nay?",
+                "Chào bạn! Tôi có thể giúp gì cho bạn?",
+                "Xin chào bạn! Tôi có thể giúp gì cho bạn trong quản lý ký túc xá?"
+            ]
+        },
+        {
+            "tag": "goodbye",
+            "patterns": ["Tạm biệt", "Hẹn gặp lại", "Tạm biệt"],
+            "responses": [
+                "Tạm biệt! Nếu bạn có thêm câu hỏi, đừng ngần ngại hỏi.",
+                "Hẹn gặp lại! Chúc bạn một ngày tốt lành.",
+                "Tạm biệt! Đừng ngần ngại quay lại nếu bạn cần sự giúp đỡ thêm."
+            ]
+        },
+        {
+            "tag": "thanks",
+            "patterns": [
+                "Cảm ơn",
+                "Xin cảm ơn",
+                "Rất hữu ích",
+                "Cảm ơn nhiều!"
+            ],
+            "responses": [
+                "Không có gì!",
+                "Rất vui được giúp bạn!",
+                "Bất cứ lúc nào!"
+            ]
+        },
+        {
+            "tag": "register",
+            "patterns": [
+                "Làm thế nào để đăng ký ký túc xá?",
+                "Quy trình đăng ký như thế nào?",
+                "Tôi muốn đăng ký ký túc xá."
+            ],
+            "responses": [
+                "Để đăng ký ký túc xá, vui lòng truy cập trang web của chúng tôi và điền vào mẫu đăng ký.",
+                "Bạn có thể đăng ký ký túc xá bằng cách điền vào mẫu đăng ký trên trang web của chúng tôi.",
+                "Để bắt đầu quá trình đăng ký, hãy truy cập trang web của chúng tôi và làm theo hướng dẫn được cung cấp."
+            ]
+        },
+        {
+            "tag": "payment",
+            "patterns": [
+                "Làm thế nào để thanh toán phí ký túc xá?",
+                "Phương thức thanh toán nào được chấp nhận cho việc thanh toán ký túc xá?",
+                "Hãy nói về các phương thức thanh toán ký túc xá."
+            ],
+            "responses": [
+                "Chúng tôi chấp nhận thanh toán qua thẻ tín dụng và ngân hàng trực tuyến cho phí ký túc xá.",
+                "Bạn có thể thanh toán phí ký túc xá bằng thẻ tín dụng, chuyển khoản ngân hàng hoặc các phương thức thanh toán trực tuyến khác.",
+                "Phí ký túc xá có thể thanh toán bằng nhiều cách, bao gồm thẻ tín dụng và chuyển khoản trực tuyến."
+            ]
+        },
+        {
+            "tag": "due_date",
+            "patterns": [
+                "Khi nào là hạn chót thanh toán phí ký túc xá?",
+                "Hãy nói về ngày đáo hạn thanh toán ký túc xá.",
+                "Tôi cần thanh toán phí ký túc xá khi nào?"
+            ],
+            "responses": [
+                "Hạn chót thanh toán phí ký túc xá là [ngày đáo hạn]. Vui lòng đảm bảo thanh toán đúng hạn.",
+                "Phí ký túc xá phải được thanh toán trước ngày [ngày đáo hạn]. Thanh toán muộn có thể phải chịu phí bổ sung.",
+                "Ngày đáo hạn thanh toán phí ký túc xá là [ngày đáo hạn]. Hãy đảm bảo thanh toán đúng hạn."
+            ]
+        },
+        {
+            "tag": "services",
+            "patterns": [
+                "Các dịch vụ nào được cung cấp tại ký túc xá?",
+                "Hãy nói về tiện ích trong ký túc xá.",
+                "Liệt kê các dịch vụ và tiện ích của ký túc xá."
+            ],
+            "responses": [
+                "Ký túc xá của chúng tôi cung cấp một loạt các dịch vụ, bao gồm tiện nghi giặt là, phòng chung, và bảo vệ 24/7.",
+                "Các tiện ích trong ký túc xá bao gồm Wi-Fi, khu vực học, và không gian giải trí cho sinh viên.",
+                "Các dịch vụ của ký túc xá bao gồm [danh sách dịch vụ]. Hãy yên tâm hỏi nếu bạn cần thêm thông tin về bất kỳ dịch vụ cụ thể nào."
+            ]
+        }
+    ]
 }
