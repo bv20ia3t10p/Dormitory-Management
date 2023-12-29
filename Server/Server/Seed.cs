@@ -185,6 +185,33 @@ namespace Server
                             PasswordHash =BCryptNet.HashPassword("123456"),
                             Role= Role.Student
                         }
+                    },    
+                    new Student() {
+                        LastName ="Phuc",
+                        FirstName="Pham",
+                        BirthDate = new DateTime(2002,08,09),
+                        Gender = true,
+                        Ethnic = "Kinh",
+                        Nationnality = "Việt Nam",
+                        PhoneNumber = "023456890",
+                        HomeAddress = "Thủ Đức, Hồ Chí Minh",
+                        MainAddress = "Thủ Đức, Hồ Chí Minh",
+                        Email = "phucsv@gmail.com",
+                        Avartar = Convert.FromBase64String("test"),
+                        IdentifyCardNumber = "000234568",
+                        UniversitysutdentId ="20521771",
+                        Faculty = "Information system",
+                        Major = "Information system",
+                        SchoolYear = "2020-2024",
+                        RelatedPersonName = "Ba",
+                        RelatedPersonPhoneNumber = "1234567",
+                        Status = true,
+                        University = dataContext.Universities.Where(u=>u.Id==1).FirstOrDefault(),
+                        Account = new Account{
+                            UserName ="phucsv@gmail.com",
+                            PasswordHash =BCryptNet.HashPassword("123456"),
+                            Role= Role.Student
+                        }
                     },
                      new Student() {
                         LastName ="Dang",
@@ -760,7 +787,7 @@ namespace Server
                 dataContext.RegisterRooms.AddRange(registerRooms);
                 dataContext.SaveChanges();
             }
-        
+
             if (!dataContext.ElectricWaterlogs.Any())
             {
                 var electricWaterlogs = new List<ElectricWaterlog>

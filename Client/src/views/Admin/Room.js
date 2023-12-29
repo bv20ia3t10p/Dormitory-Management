@@ -1,8 +1,8 @@
-import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState } from "react";
 import SidebarAdmin from "../Sidebar/SidebarAdmin";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import "./Room.scss"
 import {
   InputLabel,
   MenuItem,
@@ -15,7 +15,7 @@ import axios from "axios";
 import moment from "moment";
 import { toast } from "react-toastify";
 import { inline } from "@floating-ui/core";
-import { url } from "./HandleObject";
+
 function Room(props) {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
@@ -24,9 +24,12 @@ function Room(props) {
   const [storeId, setStoreId] = useState(1);
   const [roles, setRoles] = useState("primary");
   const [room, SetRoom] = useState({});
+
+  const apiUrl = "https://localhost:7184/"
+
   useEffect(() => {
     async function fetchMyAPI() {
-      let res = await axios.get(url + `Rooms`);
+      let res = await axios.get(apiUrl + `Rooms`);
       setState({
         ListRooms: res.data ? res.data : [],
       });
@@ -51,18 +54,18 @@ function Room(props) {
   const handleSearchListRoom = async (data) => {
     document.getElementById(storeId).setAttribute("class", "text-primary");
     if (data == 0) {
-      let res = await axios.get(url + `Rooms`);
+      let res = await axios.get(apiUrl + `Rooms`);
       setState({
         ListRooms: res.data ? res.data : [],
       });
     } else if (data == 1) {
-      let res = await axios.get(url + `Rooms/${1}/Block`);
+      let res = await axios.get(apiUrl + `Rooms/${1}/Block`);
       setState({
         ListRooms: res.data ? res.data : [],
       });
       setStoreId(1);
     } else {
-      let res = await axios.get(url + `Rooms/${2}/Block`);
+      let res = await axios.get(apiUrl + `Rooms/${2}/Block`);
       setState({
         ListRooms: res.data ? res.data : [],
       });
@@ -83,9 +86,9 @@ function Room(props) {
       setStoreId(id);
     }
 
-    let res = await axios.get(url + `api/RegisterRoom/${id}/room`);
+    let res = await axios.get(apiUrl + `api/RegisterRoom/${id}/room`);
     setStudent(res.data);
-    let rooms = await axios.get(url + `RoomType/${id}`);
+    let rooms = await axios.get(apiUrl + `RoomType/${id}`);
     SetRoom(rooms.data);
     console.log("check room: ", room);
   };
@@ -95,7 +98,7 @@ function Room(props) {
   const updateTypeRoom = async (data) => {
     console.log("check data from parent: ", data);
     try {
-      await axios.put(url + `RoomType/${data.id}`, data);
+      await axios.put(apiUrl + `RoomType/${data.id}`, data);
       toast.success("Cập nhật thành công");
       toggle();
     } catch (error) {
@@ -110,92 +113,75 @@ function Room(props) {
           modal={modal}
           toggle={toggle}
           // currentTypeRoom={editstaff}
+
           updateTypeRoom={updateTypeRoom}
         />
       )}
-      <div class="roomManagementContainer">
-        <div class="section">
-          <h3 class="">Quản lý phòng</h3>
-          <FormControl
-            style={{
-              marginLeft: "0.5svw",
-              width: "15%",
-              maxWidth: "unset",
-              paddingBottom: "2vh",
-              position: "absolute",
-            }}
-          >
-            <InputLabel>Tìm kiếm theo tòa</InputLabel>
-            <Select
-              name={"block"}
-              id="block"
-              value={state.status}
-              label="Tìm kiếm theo"
-              style={{ width: "100%", maxWidth: "unset", display: "inline" }}
-              onChange={(event) => handleSearchListRoom(event.target.value)}
-            >
-              <MenuItem value={0}>Tất cả</MenuItem>
-              <MenuItem value={1}>Tòa A1</MenuItem>
-              <MenuItem value={2}>Tòa A2</MenuItem>
-            </Select>
-          </FormControl>
-          <Typography
-            variant="h6"
-            style={{
-              paddingBottom: "3svh",
-              textAlign: "center",
-            }}
-          >
-            Các trạng thái phòng
-          </Typography>
+      <div className="section row black">
+        <div>
+          <h3 className="">Quản lý phòng</h3>
+          <div className="d-flex functions-container">
+            <FormControl className="form-control">
+              <InputLabel>Tìm kiếm theo tòa</InputLabel>
+              <Select
+                name={"block"}
+                id="block"
+                value={state.status}
+                label="Tìm kiếm theo"
+                style={{ width: "100%", maxWidth: "unset", display: "inline" }}
+                onChange={(event) => handleSearchListRoom(event.target.value)}
+              >
+                <MenuItem value={0}>Tất cả</MenuItem>
+                <MenuItem value={1}>Tòa A1</MenuItem>
+                <MenuItem value={2}>Tòa A2</MenuItem>
+              </Select>
+            </FormControl>
+            <input
+              type="button"
+              className="btn btn-primary"
+              value="Cập nhật"
+              onClick={() => handleOnclickUpdate()}
+            />
+          </div>
+
+
           <div
-            class="row"
+            className="row pt-4"
             style={{
               paddingTop: "2svh",
-              display: "grid",
               gridTemplateColumns: "repeat(3,1fr)",
-              justifyContent: "center",
               alignItems: "center",
             }}
           >
-            <div class="col text-primary ml-2 d-flex align-items-center justify-content-center">
-              <i class="fa fa-home fa-xl mr-2" aria-hidden="true"></i>Phòng còn
+            <h5>Các trạng thái phòng</h5>
+
+
+            <div className="room-status-item col text-primary d-flex align-items-center justify-content-center">
+              <i className="fa fa-home fa-xl mr-2" aria-hidden="true"></i>Phòng còn
               trống
             </div>
-            <div class="col  text-danger d-flex align-items-center justify-content-center">
-              <i class="fa fa-home fa-xl mr-2" aria-hidden="true"></i>Phòng đầy
+            <div className="room-status-item col  text-danger d-flex align-items-center justify-content-center">
+              <i className="fa fa-home fa-xl mr-2" aria-hidden="true"></i>Phòng đầy
             </div>
-            <div class="col  text-success d-flex align-items-center justify-content-center">
-              <i class="fa fa-home fa-xl mr-2" aria-hidden="true"></i>Phòng đang
+            <div className="room-status-item col  text-success d-flex align-items-center justify-content-center">
+              <i className="fa fa-home fa-xl mr-2" aria-hidden="true"></i>Phòng đang
               chọn
             </div>
-            {localStorage.getItem(localStorage.getItem("account")) ==
-            "Admin" ? (
-              <div class="col">
-                <input
-                  type="button"
-                  class="btn btn-primary"
-                  value="Cập nhật loại phòng"
-                  style={{ position: "absolute", left: "75vw", top: "-10vh" }}
-                  onClick={() => handleOnclickUpdate()}
-                />
-              </div>
-            ) : (
-              <></>
-            )}
           </div>
+
           <Typography
             style={{
               textAlign: "center",
               color: "var(--primary)",
               borderBottom: "0.5svh solid var(--primary)",
             }}
-            className="pb-4 pt-4"
+            className="pb-4 pt-5"
             variant="h6"
           >
             Danh sách các phòng
           </Typography>
-          <div class="row mt-4 d-flex align-items-center justify-content-center">
+
+          <div className="row mt-4 d-flex align-items-center justify-content-center">
             {state.ListRooms &&
               state.ListRooms.length > 0 &&
               state.ListRooms.map((item, index) => {
@@ -205,24 +191,24 @@ function Room(props) {
                     key={item.id}
                     style={{ width: "14%" }}
                   >
-                    {item.slotRemain != 0 ? (
+                    {item.slotRemain > 0 ? (
                       <div
-                        class=" text-primary room"
+                        className=" text-primary room"
                         id={item.id}
                         style={{ padding: "1px" }}
                         onClick={() => handleListStudent(item.id, "primary")}
                       >
-                        <i class="fa fa-home fa-2x mr-2" aria-hidden="true"></i>
+                        <i className="fa fa-home fa-2x mr-2" aria-hidden="true"></i>
                         {item.name}
                       </div>
                     ) : (
                       <div
-                        class="col text-danger room"
+                        className="col text-danger room"
                         id={item.id}
                         style={{ padding: "1px" }}
                         onClick={() => handleListStudent(item.id, "danger")}
                       >
-                        <i class="fa fa-home fa-2x mr-2" aria-hidden="true"></i>
+                        <i className="fa fa-home fa-2x mr-2" aria-hidden="true"></i>
                         {item.name}
                       </div>
                     )}
@@ -232,16 +218,16 @@ function Room(props) {
               })}
           </div>
         </div>
-        <div class="row">
-          <h4 class=" text-center mt-3" style={{ width: "67%" }}>
+        <div className="row">
+          <h4 className=" text-center mt-3" style={{ width: "67%" }}>
             Sinh viên trong phòng
           </h4>
-          <h4 class=" text-center mt-3" style={{ width: "30%" }}>
+          <h4 className=" text-center mt-3" style={{ width: "30%" }}>
             Thông tin phòng
           </h4>
-          <table class="table table-hover mt-2 shadow" style={{ width: "67%" }}>
-            <thead class="bg-info text-white ">
-              <tr class="border ">
+          <table className="table table-hover mt-2 shadow" style={{ width: "67%" }}>
+            <thead className="bg-info text-white ">
+              <tr className="border ">
                 <td style={{ "font-size": "16px" }}>Mã sinh viên</td>
                 <td style={{ "font-size": "16px" }}>Ngày bắt đầu</td>
                 <td style={{ "font-size": "16px" }}>Ngày kết thúc</td>
@@ -258,7 +244,7 @@ function Room(props) {
                   return (
                     <>
                       {item.status ? (
-                        <tr key={item.id} class="border">
+                        <tr key={item.id} className="border">
                           <td style={{ "font-size": "16px" }}>
                             {item.studentId}
                           </td>
@@ -277,14 +263,14 @@ function Room(props) {
                           <td style={{ "font-size": "16px" }}>
                             {item.domitoryFeeStatus ? (
                               <div
-                                class="text-success"
+                                className="text-success"
                                 style={{ "font-size": "16px" }}
                               >
                                 Đã thanh toán
                               </div>
                             ) : (
                               <div
-                                class="text-danger"
+                                className="text-danger"
                                 style={{ "font-size": "16px" }}
                               >
                                 Chưa thanh toán
@@ -294,14 +280,14 @@ function Room(props) {
                           <td style={{ "font-size": "16px" }}>
                             {item.status ? (
                               <div
-                                class="text-success"
+                                className="text-success"
                                 style={{ "font-size": "16px" }}
                               >
                                 Còn hạn
                               </div>
                             ) : (
                               <div
-                                class="text-danger"
+                                className="text-danger"
                                 style={{ "font-size": "16px" }}
                               >
                                 Hết hạn
@@ -317,8 +303,9 @@ function Room(props) {
                 })}
             </tbody>
           </table>
-          <table class="table table-hover shadow mt-2" style={{ width: "30%" }}>
-            <thead class="bg-info text-white">
+
+          <table className="table table-hover shadow mt-2" style={{ width: "30%" }}>
+            <thead className="bg-info text-white">
               <tr>
                 <td style={{ "font-size": "16px" }}>Mã loại phòng</td>
                 <td style={{ "font-size": "16px" }}>Số chỗ</td>
@@ -327,19 +314,19 @@ function Room(props) {
               </tr>
             </thead>
             <tbody>
-              <tr class="border">
+              <tr className="border">
                 <td style={{ "font-size": "16px" }}>{room.id}</td>
                 <td style={{ "font-size": "16px" }}>{room.numberOfSLot}</td>
                 <td style={{ "font-size": "16px" }}>
                   {room.furniture ? (
-                    <div class="text-success" style={{ "font-size": "16px" }}>
+                    <div className="text-success" style={{ "font-size": "16px" }}>
                       Còn
                     </div>
                   ) : (
                     <>
                       {room.furniture == false ? (
                         <div
-                          class="text-danger"
+                          className="text-danger"
                           style={{ "font-size": "16px" }}
                         >
                           Không
@@ -357,7 +344,7 @@ function Room(props) {
         </div>
       </div>
 
-      <div class="clear-fix"></div>
+      <div className="clear-fix"></div>
     </>
   );
 }

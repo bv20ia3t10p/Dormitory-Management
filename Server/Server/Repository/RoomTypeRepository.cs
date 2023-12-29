@@ -9,7 +9,7 @@ namespace Server.Repository
     {
         private readonly DataContext _context;
         private readonly IMapper _mapper;
-        public RoomTypeRepository(DataContext context , IMapper mapper
+        public RoomTypeRepository(DataContext context, IMapper mapper
             )
         {
             _context = context;
@@ -20,7 +20,7 @@ namespace Server.Repository
         {
             var roomTypes = _context.RoomTypes.ToList();
             return _mapper.Map<List<RoomTypeDTO>>(roomTypes);
-            
+
         }
 
         public RoomType GetRoomType(int roomId)
@@ -33,15 +33,27 @@ namespace Server.Repository
         {
             var roomType = _context.RoomTypes.Find(roomTypeId);
 
-            if (roomType == null) {
+            var listRoom = _context.Rooms.Where(r => r.RoomType.Id == roomTypeId).ToList();
+
+            if (listRoom == null)
+            {
+                throw new KeyNotFoundException("List room not found");
+            }
+
+            listRoom.ForEach(room =>
+            {
+                room.SlotRemain += model.NumberOfSLot - roomType.NumberOfSLot;
+                _context.Rooms.Update(room);
+            });
+
+            if (roomType == null)
+            {
                 throw new KeyNotFoundException("room not found");
             }
             _mapper.Map(model, roomType);
+
             _context.Update(roomType);
             _context.SaveChanges();
-
-          
-
         }
     }
 }
